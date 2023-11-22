@@ -8,7 +8,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from './usuario/not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http'; // Para las peticiones http
 import { ToastrModule } from 'ngx-toastr';
-import { NavbarComponent } from './docente/navbar/navbar.component';
 
 
 
@@ -16,8 +15,7 @@ import { NavbarComponent } from './docente/navbar/navbar.component';
   declarations: [
     AppComponent,
     InicioSesionComponent,
-    NotFoundComponent,
-    NavbarComponent
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
