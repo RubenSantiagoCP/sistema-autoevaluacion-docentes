@@ -7,6 +7,7 @@ import { NotFoundComponent } from './usuario/not-found/not-found.component';
 const routes: Routes = [
   {path: '', component: InicioSesionComponent},
   {path: 'coordinador', loadChildren: () => import('./coordinador/coordinador.module').then(m=>m.CoordinadorModule)},
+  {path: 'docente', loadChildren: () => import('./docente/docente.module').then(m=>m.DocenteModule)},
   {path: '**', component: NotFoundComponent}
 ];
 

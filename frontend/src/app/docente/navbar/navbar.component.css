@@ -1,0 +1,99 @@
+:root {
+    --mi-color: #002b75; /* Definir una variable de color en el elemento raíz (:root) */
+  }
+  
+
+nav{
+    background: transparent;
+    height: 80px;
+}
+
+div{
+    color: white;
+}
+a {
+    position: relative;
+    text-decoration: none;
+    color: #ffffff; /* Color del texto normal */
+  }
+
+a:hover {
+    color: #532dff; /* Cambia el color del texto al pasar el ratón */
+  }
+  
+  a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px; /* Altura del subrayado */
+    background: linear-gradient(to right, #010005, #0800a5); /* Degradado de colores */
+    transform: scaleX(0); /* Inicialmente, el subrayado está oculto */
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out; /* Agrega una transición suave */
+  }
+  
+  a:hover::after {
+    transform: scaleX(1); 
+    transform-origin: bottom left ;
+  }
+
+  .navbar-brand img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0px 20px;
+  }
+
+  .container{
+    background: rgba(255, 255, 255, 0.9);
+    color: black;
+    width: 30%;
+    position: absolute;
+    right: 0;
+    border-radius: 13px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 1; /* Empieza con opacidad cero para ocultar el contenedor */
+
+    transition: opacity 0.5s ease; /* Transición de opacidad durante 0.5 segundos con función de temporización ease */
+
+  }
+
+  .container.show {
+    opacity: 1; /* Cuando se agrega la clase 'show', la opacidad es 1, mostrando el contenedor */
+  }
+
+  .container div{
+    color: black;
+  }
+
+  .icon-perfil img{
+    width: 70%;
+    border-radius: 50%;
+  }
+
+  .container .contenido{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    justify-content: center;
+    align-items: center;
+    padding: 7px;
+    border-radius: 13px;
+  }
+
+  .not-fecha{
+    display: inline-block;
+    color: #002b75;
+    margin: 0;
+  }
+
+  .container .contenido:hover{
+    background-color: rgb(208, 208, 208);
+  }
