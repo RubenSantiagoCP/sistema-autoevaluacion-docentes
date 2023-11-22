@@ -19,7 +19,6 @@ export class InicioSesionComponent {
   }
 
   ngOnInit(): void {
-    this.iniciarSesion();
   }
 
   iniciarSesion() {
@@ -37,7 +36,7 @@ export class InicioSesionComponent {
         this.rutaDestino = '/coordinador';
       },
       (error) => {
-        console.log('Usuario o contraseña incorrectosss');
+        console.log('Usuario o contraseña incorrectos');
       }
     );
   }

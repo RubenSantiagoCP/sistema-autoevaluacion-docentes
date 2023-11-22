@@ -24,8 +24,20 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const usuario = yield usuario_1.default.findOne({ where: { USU_CORREO: correo } });
         // Verificar si el usuario existe y si la contraseña es correcta
         if (usuario && usuario.USU_CLAVE && bcrypt_1.default.compareSync(contrasena, usuario.USU_CLAVE)) {
-            // Generar un token JWT
-            const token = jsonwebtoken_1.default.sign({ id: usuario.USU_ID }, 'tu_secreto_secreto', { expiresIn: '1h' });
+            // Generar un token JWT con información adicional del usuario
+            const token = jsonwebtoken_1.default.sign({
+                id: usuario.USU_ID,
+                identificacion: usuario.USR_IDENTIFICACION,
+                nombre: usuario.USU_NOMBRE,
+                apellido: usuario.USU_APELLIDO,
+                genero: usuario.USU_GENERO,
+                estudio: usuario.USU_ESTUDIO,
+                tipoId: usuario.USU_TIPOID,
+                foto: usuario.USU_FOTO,
+                correo: usuario.USU_CORREO,
+                estado: usuario.USU_ESTADO,
+                rolId: usuario.USU_ROLID,
+            }, 'tu_secreto_secreto', { expiresIn: '1h' });
             // Enviar el token como respuesta
             res.json({ token });
         }

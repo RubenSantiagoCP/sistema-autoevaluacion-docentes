@@ -14,9 +14,6 @@ export class SesionService {
 
   login(username: string, password: string): Observable<Sesion> {
     const credentials = { correo: username, contrasena: password };
-
-    // Agrega un log para imprimir las credenciales en la consola
-    console.log('Credenciales enviadas:', credentials);
     
     return this.http.post<Sesion>(`${this.myAppUrl}${this.myApiUrl}`, credentials);
   }
