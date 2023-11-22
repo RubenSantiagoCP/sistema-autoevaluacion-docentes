@@ -1,0 +1,47 @@
+:root {
+    --mi-color: #002b75; /* Definir una variable de color en el elemento raíz (:root) */
+  }
+  
+
+nav{
+    background: transparent;
+    height: 80px;
+}
+
+div{
+    color: white;
+}
+a {
+    position: relative;
+    text-decoration: none;
+    color: #ffffff; /* Color del texto normal */
+  }
+
+a:hover {
+    color: #532dff; /* Cambia el color del texto al pasar el ratón */
+  }
+  
+  a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px; /* Altura del subrayado */
+    background: linear-gradient(to right, #010005, #0800a5); /* Degradado de colores */
+    transform: scaleX(0); /* Inicialmente, el subrayado está oculto */
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out; /* Agrega una transición suave */
+  }
+  
+  a:hover::after {
+    transform: scaleX(1); 
+    transform-origin: bottom left ;
+  }
+
+  .navbar-brand img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0px 20px;
+  }

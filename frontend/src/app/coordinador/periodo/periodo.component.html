@@ -1,0 +1,60 @@
+<app-navbar></app-navbar>
+
+<section>
+    <div class="form-box">
+        <div class="form-value">
+            <form [formGroup]="form" action="">
+                <h2>Crear Periodo</h2>
+
+                <div class="col-md-6 mb-2 pb-2">
+                    <div class="form-outline inputbox">
+                        <input type="text" class="form-control-sm" formControlName="nombre" required>
+                        <label for="">Nombre</label>
+                    </div>
+
+                    <span *ngIf="form.get('nombre')?.hasError('required') && form.get('nombre')?.touched">
+                        Campo requerido
+                    </span>
+                </div>
+
+                <div class="col-md-6 mb-4 pb-2">
+                    <div class="form-outline inputbox">
+                        <input type="number" class="form-control-sm" formControlName="anio" required>
+                        <label for="">Año</label>
+                    </div>
+
+                    <span *ngIf="form.get('anio')?.hasError('required') && form.get('anio')?.touched">
+                        Campo requerido
+                    </span>
+                </div>
+
+                <div class="col-md-6 mb-4 mt-6 pb-2">
+                    <div class="form-outline inputbox">
+                        <input type="date" class="fechas" formControlName="fechaInicio">
+                        <label for="">Fecha de Inicio</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4s pb-2">
+                    <div class="form-outline inputbox">
+                        <input type="date" class="fechas" formControlName="fechaFin">
+                        <label for="">Fecha de Fin</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4 pb-2">
+                    <div class="form-outline inputbox">
+                        <input type="text" class="form-control-sm" formControlName="semestre" required>
+                        <label for="">Semestre</label>
+    
+                    </div>
+                    <span *ngIf="form.get('semestre')?.hasError('required') && form.get('semestre')?.touched">
+                        Campo requerido
+                    </span>
+                </div>
+
+                <button>Crear</button>
+            </form>
+        </div>
+    </div>
+</section>

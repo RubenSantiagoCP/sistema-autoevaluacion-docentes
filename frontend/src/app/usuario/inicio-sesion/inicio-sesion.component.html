@@ -1,0 +1,27 @@
+<section>
+    <div class="form-box">
+      <div class="form-value">
+        <form [formGroup]="form" (ngSubmit)="iniciarSesion()">
+          <div class="header">
+            <p class="separador"></p>
+            <p class="title">
+              Sistema de gestión de <br>autoevaluación docentes
+            </p>
+          </div><br>
+          <h2>Iniciar Sesión</h2>
+          <div class="inputbox">
+            <i class="bi bi-envelope"></i>
+            <input type="email" formControlName="user" required>
+            <label for="user">Correo</label>
+          </div>
+          <div class="inputbox">
+            <i class="bi bi-lock"></i>
+            <input type="password" formControlName="password" required>
+            <label for="password">Contraseña</label>
+          </div>
+          <button type="submit">Ingresar</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  

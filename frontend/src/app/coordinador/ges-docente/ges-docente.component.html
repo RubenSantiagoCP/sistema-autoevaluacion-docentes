@@ -1,0 +1,55 @@
+<app-navbar></app-navbar>
+<section>
+    <div class="container form-box">
+        <div class="title">
+            <h1>Gestion de docentes</h1>
+            <button routerLink="/coordinador/docentes/registrar" type="button" class="btn ">
+                Registrar docente
+            </button>
+        </div>
+
+        <form class="form-inline">
+            <div class="container-search">
+                <i class="bi bi-search"></i>
+                <input type="text" name="campo-busqueda" class="form-control mb-2 mr-sm-2" id="busqueda"
+                    placeholder="Ingrese el nombre del docente" [(ngModel)]="filtroNombre">
+            </div>
+
+        </form>
+
+        <table class="table" *ngIf="listDocentes.length > 0">
+            <thead class="titulosT">
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">N° Identificación</th>
+                    <th scope="col">Tipo de docente</th>
+                    <th scope="col"><i class="bi bi-person-dash-fill"></i> Inactivar</th>
+                    <th scope="col"><i class="bi bi-tools"></i> Operaciones</th>
+                </tr>
+            </thead>
+            <tbody class="cuerpoT">
+                <tr *ngFor="let docente of listDocentes | filterByNombre:filtroNombre">
+                    <td>{{docente.nombre}}</td>
+                    <td>{{docente.identificacion}}</td>
+                    <td>{{docente.rol}}</td>
+                    <td>
+                        <button (click)="inactivarDoc(docente.id)" type="button" class="btn inactivar"> inactivar
+                        </button>
+                    </td>
+                    <td>
+                        <div class="operaciones">
+                            <button type="button" class="btn btn-sm" routerLink="/consultar/{{docente.id}}">
+                                <i class="bi bi-search"></i>
+                            </button>
+                            <button routerLink="/coordinador/docentes/edit/{{docente.id}}" type="button"
+                                class="btn">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h4 *ngIf="listDocentes.length == 0">No se han registrado docentes</h4>
+    </div>
+</section>
