@@ -1,0 +1,38 @@
+<app-navbar class="componente-superior"></app-navbar>
+
+<section>
+  <div class="container">
+    <div class="form-box">
+      <div class="titulo">
+        <h2>Reporte de autoevaluaciones</h2>
+        <hr>
+      </div>
+      
+      <!-- Selector de estado -->
+      <div class="mb-4 pb-2">
+        <select class="select" id="filtroEstado" [(ngModel)]="filtroEstado" (change)="filtrarDocentes()">
+          <option value="todos">Todos</option>
+          <option value="Completado">Completado</option>
+          <option value="Incompleto">Incompleto</option>
+        </select>
+      </div>
+
+      <table class="table table-sm">
+        <thead class="titulosT">
+          <tr>
+            <th>Nombre docente</th>
+            <th>Estado</th>
+            <th>Completitud de respuestas</th>
+          </tr>
+        </thead>
+        <tbody class="cuerpoT">
+          <tr *ngFor="let docente of docentesFiltrados">
+            <td>{{ docente.nombre }}</td>
+            <td>{{ docente.estado }}</td>
+            <td>{{ docente.completitud }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

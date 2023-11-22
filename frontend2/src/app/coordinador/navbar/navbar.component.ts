@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+  notificaciones_active: boolean = false; 
 
+  setNotificaciones(){
+    this.notificaciones_active = !this.notificaciones_active; 
+  }
 }

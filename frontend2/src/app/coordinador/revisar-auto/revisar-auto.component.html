@@ -1,0 +1,47 @@
+<app-navbar class="componente-superior"></app-navbar>
+<section>
+    <div class="container form-box">
+        <h1 class="title">
+            Revisar autoevaluaciones
+        </h1>
+        <div class="botones">
+            <button class="btn" (click)="onButtonClick(1)">
+                Evaluaciones terminadas
+            </button>
+            <button class="btn" (click)="onButtonClick(2)">
+                Evaluaciones no terminadas
+            </button>
+            <button class="btn">
+                Enviar notificaciones
+            </button>
+        </div>
+
+        <div class="contenido">
+            <table class="table" *ngIf="listDocentes.length > 0">
+                <thead class="titulosT">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Tipo de docente</th>
+                        <th scope="col">Detalles</th>
+                    </tr>
+                </thead>
+                <tbody class="cuerpoT">
+                    <tr *ngFor="let docente of lstDocentesMostrados">
+                        <td>{{docente.identificacion}}</td>
+                        <td>{{docente.nombre}}</td>
+                        <td>{{docente.rol}}</td>
+                        <td>
+                            <div class="operaciones">
+                                <button routerLink="/coordinador/revisar/items" type="button" class="btn">
+                                    <i class="bi bi-plus-circle"></i>
+
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

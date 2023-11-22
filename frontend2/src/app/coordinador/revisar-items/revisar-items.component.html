@@ -25,10 +25,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="d-flex flex-column align-items-md-end">
-
                         <button type="button" class="btn btn-secondary mb-4" (click)="ocultarTodo()">Ocultar Detalles</button>
-                        <button type="button" class="btn btn-success mb-4" routerLink="/coordinador/modulo/docente/items/add">Agregar Item</button>
-                        <button type="button" class="btn btn-primary" routerLink="/coordinador/modulo/docente/">Volver</button>
+                        <button type="button" class="btn btn-primary" routerLink="/coordinador/revisar">Volver</button>
                     </div>
                 </div>
             </div>
@@ -49,13 +47,16 @@
                 <tr *ngFor="let item of laboresDocente; let i = index">
                     <td class="infoPrincipal">{{i+1}}</td>
                     <td class="infoPrincipal">{{ item.name}}</td>
-                    <td class="infoPrincipal">{{ item.estado}}</td>
+                    <td class="infoPrincipal">
+                        <select class="select-estado" id="estado" name="estado" [(ngModel)]="item.estado">
+                          <option value="en-ejecucion">En Ejecución</option>
+                          <option value="terminada">Terminada</option>
+                          <option value="cerrada">Cerrada</option>
+                        </select>
+                      </td>
                     <td>
                         <button type="button" class="btn" (click)="mostrarTablas(i)">
                             <i class="bi bi-plus-circle"></i>
-                        </button>
-                        <button routerLink="/coordinador/modulo/docente/items" type="button" class="btn" (click)="eliminarItem()">
-                            <i class="bi bi-trash3-fill"></i>
                         </button>
                     </td>
                     <!--Inico de tabla desplegable-->
@@ -101,13 +102,15 @@
                                 </tr>
                             </table>
                         </div>
+                        <div class="observaciones">
+                            <input type="text" placeholder="Agregue alguna observacion">
+                            <button class="btn">Agregra observacion</button>
+                        </div>
                         <button type="button" class="btn btn-secondary" (click)="ocultarTablas(i)">Ocultar</button>
                     </div>
                 </tr>
             </tbody>
         </table>
-    
-        
     </div>
 </section>
 

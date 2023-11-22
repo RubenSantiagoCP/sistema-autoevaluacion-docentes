@@ -9,3 +9,9 @@ body{
     background-position: center;
     background-size: cover;
 }
+
+.componente-superior {
+  position: relative;
+  z-index: 9999; /* Un valor alto para asegurarse de que está por encima de otros componentes */
+  /* Otros estilos según sea necesario */
+}
