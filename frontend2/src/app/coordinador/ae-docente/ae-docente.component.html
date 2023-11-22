@@ -1,0 +1,141 @@
+<app-navbar></app-navbar>
+<section class="h-100 h-custom gradient-custom-2">
+    <div class="container h-100" id="principal"> <!--Se borro class container no se vio necesaria-->
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12">
+                <div class="card card-registration card-registration-2 form-box">
+                    <div class="card-body p-0">
+                        <form [formGroup]="form" (ngSubmit)="crearDocente()">
+                            <div class="row g-0">
+                                <div class="titulo"><h2>{{operacion}} docente</h2></div>
+                                <div class="col-lg-6">
+                                    <div class="p-5">
+                                        <h4 class="fw-normal mb-4" style="color: rgb(255, 255, 255);">Informacion
+                                            personal
+                                        </h4>
+
+                                        <div class="mb-4 pb-2">
+                                            <select class="select">
+                                                <option value="1">Tipo identificacion</option>
+                                                <option value="2">C.C</option>
+                                                <option value="3">T.I</option>
+                                                <option value="4">C.E</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-6 mb-4 pb-2">
+                                            <div class="form-outline inputbox">
+                                                <input type="number" class="form-control-sm" formControlName="identificacion" required>
+                                                <label for="">identificacion</label>
+                                            </div>
+
+                                            <span *ngIf="form.get('identificacion')?.hasError('required') && form.get('identificacion')?.touched">
+                                                Campo requerido
+                                            </span>
+                                        </div>
+
+                                        <div class="col-md-6 mb-4 pb-2">
+                                            <div class="form-outline inputbox">
+                                                <input type="text" class="form-control-sm" formControlName="nombre"
+                                                    required>
+                                                <label for="">Nombres</label>
+                                            </div>
+
+                                            <span *ngIf="form.get('nombre')?.hasError('required') && form.get('nombre')?.touched">
+                                                Campo requerido
+                                            </span>
+                                        </div>
+
+                                        <div class="col-md-6 mb-4 pb-2">
+                                            <div class="form-outline inputbox">
+                                                <input type="text" class="form-control-sm" formControlName="apellido"
+                                                    required>
+                                                <label for="">Apellidos</label>
+                                            </div>
+
+                                            <span *ngIf="form.get('apellido')?.hasError('required') && form.get('apellido')?.touched">
+                                                Campo requerido
+                                            </span>
+                                        </div>
+
+                                        <div class="mb-4 pb-2">
+                                            <select formControlName="genero" class="select">
+                                                <option value="1">Genero</option>
+                                                <option value="2">Masculino</option>
+                                                <option value="3">Femenino</option>
+                                                <option value="4">Otro</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 bg-indigo text-white">
+                                    <div class="p-5">
+                                        <h4 class="fw-normal mb-4">Información academica</h4>
+
+                                        <div class="mb-4 pb-2">
+                                            <select class="select" formControlName="tipoDoc">
+                                                <option value="1">Tipo de docente</option>
+                                                <option value="2">Docencia</option>
+                                                <option value="3">Trabajos docencia</option>
+                                                <option value="4">Proyectos investigacion</option>
+                                                <option value="5">Trabajos investigacion</option>
+                                                <option value="6">Administracion</option>
+                                                <option value="7">Asesoria</option>
+                                                <option value="8">Servicios</option>
+                                                <option value="9">Extension</option>
+                                                <option value="10">Capacitacion</option>
+                                                <option value="11">Otros servicios</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-4 pb-2">
+                                            <div class="form-outline inputbox">
+                                                <input type="email" class="form-control-sm" formControlName="correo"
+                                                    required>
+                                                <label for="">Correo electronico</label>
+                                            </div>
+
+                                            <span *ngIf="form.get('correo')?.hasError('required') && form.get('correo')?.touched">
+                                                Campo requerido
+                                            </span>
+                                        </div>
+
+                                        <div class="col-md-6 mb-4 pb-2">
+                                            <div class="form-outline inputbox">
+                                                <input type="text" class="form-control-sm" formControlName="ultimoEst"
+                                                    required>
+                                                <label for="">Ultimo estudio</label>
+                                            </div>
+
+                                            <span *ngIf="form.get('ultimoEst')?.hasError('required') && form.get('ultimoEst')?.touched">
+                                                Campo requerido
+                                            </span>
+                                        </div>
+
+                                        <div class="col-md-6 mb-4 pb-2">
+                                            <div class="form-outline inputbox">
+                                                <input type="password" class="form-control-sm"
+                                                    formControlName="contraseña" required>
+                                                <label for="">Contraseña</label>
+                                            </div>
+
+                                            <span *ngIf="form.get('contraseña')?.hasError('required') && form.get('contraseña')?.touched">
+                                                Campo requerido
+                                            </span>
+                                        </div>
+
+                                        <div class="botones">
+                                            <button [disabled]="form.invalid" type="submit"
+                                                class="btn btn-light btn-lg registrar">Registrar</button>
+                                            <button routerLink="/coordinador/docentes" type="button"
+                                                class="btn btn-light btn-lg cancelar">Cancelar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

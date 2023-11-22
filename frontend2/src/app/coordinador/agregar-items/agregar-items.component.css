@@ -1,0 +1,120 @@
+.title {
+  display: flex;
+  place-items: center;
+  margin: 20px 30px;
+  justify-content: space-between;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+}
+
+.container{
+  margin-top: 20px;
+  padding: 30px;
+}
+
+section{
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background: transparent;
+}
+
+.form-box{
+  position: flex;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  backdrop-filter: blur(20px);
+  justify-content: center;
+  align-items: center;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.titulosT th {
+  background-color: transparent;
+  color: white;
+}
+
+.cuerpoT td{
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  color: white;
+}
+
+.cuerpoT i{
+  color: rgb(255, 255, 255); 
+  justify-content: center;
+  font-size: 15px;
+}
+
+.title .btn{
+  background-color: #001C4D;
+  color: white;
+}
+
+.form-inline{
+  margin: 30px 0px;
+}
+
+.form-inline input{
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #333;
+}
+
+input::placeholder {
+  color: #ffffff; 
+}
+
+input{
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  padding:0 35px 0 5px;
+  color: white;
+}
+
+.container-search{
+  display: flex;
+}
+
+.container-search i{
+  font-size: 20px;
+  color: white;
+  margin: 20px;
+}
+
+.form-control{
+  color: white;
+}
+
+.tituloD{
+  color: aqua;
+}
+
+.columna{
+  display: flex;
+  width: 500px;
+}
+
+.columna label{
+  width: 200px;
+  padding: 20px;
+}
+
+.columna input {
+  border: none;
+  border-bottom: 1px solid #ccc; /* Añade una línea en la parte inferior */
+  margin-bottom: -10px; /* Agrega un espacio para la línea */
+}
+
+.checkbox{
+  width: 20px;
+}

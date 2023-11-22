@@ -1,0 +1,34 @@
+
+<app-navbar></app-navbar>
+
+<section>
+  <div class="container form-box">
+    <button type="button" class="btn btn-secondary" routerLink="/coordinador/modulo">Volver</button>
+    <h1 class="title">Seleccione el docente</h1>
+    <form class="form-inline">
+      <input type="text" name="campo-busqueda" class="form-control mb-2 mr-sm-2" id="busqueda" placeholder="Ingrese el nombre del docente" [(ngModel)]="filtroNombre">
+    </form>
+  
+    <table class="table">
+      <!-- Encabezado de la tabla -->
+      <thead class="titulosT">
+        <tr>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>Tipo docente</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="cuerpoT">
+        <!-- Fila de la tabla con filtrado -->
+        <tr *ngFor="let item of lstDocentes | filterByNombre:filtroNombre">
+          <td>{{ item.identificacion }}</td>
+          <td>{{ item.nombre}}</td>
+          <td>{{ item.rol}}</td>
+          <td>
+            <button routerLink="/coordinador/modulo/docente/items" type="button" class="btn btn-primary">Seleccionar</button>
+          </td>
+        </tr>
+      </tbody>
+
+

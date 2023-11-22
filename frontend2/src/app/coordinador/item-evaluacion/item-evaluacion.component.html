@@ -1,0 +1,113 @@
+<app-navbar></app-navbar>
+<section>
+    <div class="container form-box">
+        <div class="mt-4 mb-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td class="columnaTD">Periodo</td>
+                            <td class="infoPrincipal">2023-2</td>
+                        </tr>
+                        <tr>
+                            <td class="columnaTD">Docente</td>
+                            <td class="infoPrincipal">Francisco Obando</td>
+                        </tr>
+                        <tr>
+                            <td class="columnaTD">Identificación</td>
+                            <td class="infoPrincipal">100762532</td>
+                        </tr>
+                        <tr>
+                            <td class="columnaTD">Total de horas</td>
+                            <td class="infoPrincipal">210</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex flex-column align-items-md-end">
+
+                        <button type="button" class="btn btn-secondary mb-4" (click)="ocultarTodo()">Ocultar Detalles</button>
+                        <button type="button" class="btn btn-success mb-4" routerLink="/coordinador/modulo/docente/items/add">Agregar Item</button>
+                        <button type="button" class="btn btn-primary" routerLink="/coordinador/modulo/docente/">Volver</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <table class="table table-bordered">
+            <!-- Encabezado de la tabla -->
+            <thead class="titulosT">
+                <tr>
+                    <th>N°</th>
+                    <th>Nombre de Labor</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="cuerpoT">
+                <!-- Fila de la tabla con filtrado -->
+                <tr *ngFor="let item of laboresDocente; let i = index">
+                    <td class="infoPrincipal">{{i+1}}</td>
+                    <td class="infoPrincipal">{{ item.name}}</td>
+                    <td class="infoPrincipal">{{ item.estado}}</td>
+                    <td>
+                        <button type="button" class="btn" (click)="mostrarTablas(i)">
+                            <i class="bi bi-plus-circle"></i>
+                        </button>
+                        <button routerLink="/coordinador/modulo/docente/items" type="button" class="btn" (click)="eliminarItem()">
+                            <i class="bi bi-trash3-fill"></i>
+                        </button>
+                    </td>
+                    <!--Inico de tabla desplegable-->
+                    <div *ngIf="tablasVisibles[i]" class="row">
+                        <!-- Contenido de las dos tablas -->
+                        <div class="tabla col-md-6">
+                            <table class="table table-datos-adicionales">
+                                <tr>
+                                    <td class="columnaTD">Tipo labor</td>
+                                    <td class="infoPrincipal">{{item.tipo}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="columnaTD">Horas</td>
+                                    <td class="infoPrincipal">{{item.horas}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="columnaTD">Descripción</td>
+                                    <td class="infoPrincipal">{{item.Descripcion}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="columnaTD">Acto</td>
+                                    <td class="infoPrincipal">{{item.acto}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="tabla col-md-6">
+                            <table class="table table-datos-adicionales">
+                                <tr>
+                                    <td class="columnaTD">Fecha de Inicio</td>
+                                    <td class="infoPrincipal">{{item.FechaInicio}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="columnaTD">Fecha Fin</td>
+                                    <td class="infoPrincipal">{{item.fechaFin}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="columnaTD">Resultados</td>
+                                    <td class="infoPrincipal">{{item.Resultados}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="columnaTD">Evaluación</td>
+                                    <td class="infoPrincipal">{{item.Evaluacion}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-secondary" (click)="ocultarTablas(i)">Ocultar</button>
+                    </div>
+                </tr>
+            </tbody>
+        </table>
+    
+        
+    </div>
+</section>
+
