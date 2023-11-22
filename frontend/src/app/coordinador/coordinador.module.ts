@@ -15,8 +15,10 @@ import { FormsModule } from '@angular/forms';
 import { ItemEvaluacionComponent } from './item-evaluacion/item-evaluacion.component';
 import { InfoPersonalComponent } from './info-personal/info-personal.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
-
+import { RevisarAutoComponent } from './revisar-auto/revisar-auto.component';
+import { RevisarItemsComponent } from './revisar-items/revisar-items.component';
+import { AppModule } from '../app.module';
+import { ReporteComponent } from './reporte/reporte.component';
 @NgModule({
   declarations: [
     PrincipalComponent,
@@ -29,7 +31,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     PeriodoComponent,
     FilterByNombrePipe,
     ItemEvaluacionComponent,
-    InfoPersonalComponent
+    InfoPersonalComponent,
+    RevisarAutoComponent,
+    RevisarItemsComponent,
+    ReporteComponent
   ],
   imports: [
     CommonModule,

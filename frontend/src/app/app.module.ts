@@ -5,9 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InicioSesionComponent } from './usuario/inicio-sesion/inicio-sesion.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'; // Para las peticiones http
 import { NotFoundComponent } from './usuario/not-found/not-found.component';
+import { HttpClientModule } from '@angular/common/http'; // Para las peticiones http
 import { ToastrModule } from 'ngx-toastr';
+import { NavbarComponent } from './docente/navbar/navbar.component';
 
 
 
@@ -15,7 +16,8 @@ import { ToastrModule } from 'ngx-toastr';
   declarations: [
     AppComponent,
     InicioSesionComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +30,7 @@ import { ToastrModule } from 'ngx-toastr';
       //preventDuplicates: true, colocarla si se quiere que se muestre un unico mensaje por muchos docentes desactivados
     })
   ],
+
   providers: [
     provideClientHydration()
   ],

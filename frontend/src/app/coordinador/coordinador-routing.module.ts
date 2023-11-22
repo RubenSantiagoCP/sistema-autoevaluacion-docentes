@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { AgregarItemsComponent } from './agregar-items/agregar-items.component';
 import { ItemEvaluacionComponent } from './item-evaluacion/item-evaluacion.component';
 import { InfoPersonalComponent } from './info-personal/info-personal.component';
+import { RevisarAutoComponent } from './revisar-auto/revisar-auto.component';
+import { RevisarItemsComponent } from './revisar-items/revisar-items.component';
+import { ReporteComponent } from './reporte/reporte.component';
 
 const routes: Routes = [
   {path: '', component: PrincipalComponent},
@@ -22,8 +25,9 @@ const routes: Routes = [
   {path: 'docentes/edit/:id', component: AeDocenteComponent},
   {path: 'docentes/registrar', component: AeDocenteComponent},
   {path: 'periodo', component: PeriodoComponent},
-  {path: 'reporte', component: ModuloAutoevComponent},
-  {path: 'revisar', component: ModuloAutoevComponent},
+  {path: 'reporte', component: ReporteComponent},
+  {path: 'revisar', component: RevisarAutoComponent},
+  {path: 'revisar/items', component: RevisarItemsComponent}
 ];
 
 @NgModule({
