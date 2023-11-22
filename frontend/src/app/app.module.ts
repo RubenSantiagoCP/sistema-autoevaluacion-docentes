@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
+ 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InicioSesionComponent } from './usuario/inicio-sesion/inicio-sesion.component';
@@ -8,10 +8,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from './usuario/not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http'; // Para las peticiones http
 import { ToastrModule } from 'ngx-toastr';
+import { SesionService } from './services/sesion.service';
 
 
 
-@NgModule({
+@NgModule({ 
   declarations: [
     AppComponent,
     InicioSesionComponent,
@@ -30,8 +31,9 @@ import { ToastrModule } from 'ngx-toastr';
   ],
 
   providers: [
-    provideClientHydration()
+    provideClientHydration() ,
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { } 
+ 

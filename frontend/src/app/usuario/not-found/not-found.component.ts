@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-@Component({
+@Component({ 
   selector: 'app-not-found',
   templateUrl: './not-found.component.html',
   styleUrl: './not-found.component.css'

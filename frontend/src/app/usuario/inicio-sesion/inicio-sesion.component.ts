@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SesionService } from '../../services/sesion.service';
+import { Usuario } from '../../../interfaces/sesion';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -10,8 +12,9 @@ import { SesionService } from '../../services/sesion.service';
 export class InicioSesionComponent {
   rutaDestino: string = '';
   form: FormGroup;
+  token?: string;
 
-  constructor(private fb: FormBuilder, private _sesionService: SesionService ) {
+  constructor(private fb: FormBuilder, private _sesionService: SesionService, private router:Router ) {
     this.form = this.fb.group({
       user: ['', [Validators.maxLength(30), Validators.required]],
       password: ['', [Validators.maxLength(30), Validators.required]],
@@ -22,6 +25,7 @@ export class InicioSesionComponent {
   }
 
   iniciarSesion() {
+    
     const username = this.form.get('user')?.value;
     const password = this.form.get('password')?.value;
 
@@ -29,15 +33,34 @@ export class InicioSesionComponent {
     console.log('Contraseña:', password);
 
     // Llamar al servicio de autenticación
-    this._sesionService.login(username, password).subscribe(
-      (response) => {
-        console.log('Inicio de sesión exitoso:', response);
-        // Aquí puedes manejar el token, redireccionar, etc.
-        this.rutaDestino = '/coordinador';
+    this._sesionService.login(username, password).subscribe({
+      next: (userData) =>{
+        console.log(userData);
+        this.token = this.decodeToken(userData); 
+        console.log(this.token);
       },
-      (error) => {
-        console.log('Usuario o contraseña incorrectos');
-      }
+      error:(errorData) =>{
+        console.error(errorData);
+      },
+      complete: () =>{
+        if(1){
+        
+          this.router.navigateByUrl("/coordinador");
+        }
+      }  
+    }
+
     );
+  }
+
+  decodeToken(token: string): any {
+    const tokenParts = token.split('.');
+    if (tokenParts.length !== 3) {
+      console.error('Token no válido. No tiene el formato esperado.');
+      return null;
+    }
+
+    const payload = atob(tokenParts[1]);
+    return JSON.parse(payload);
   }
 }
