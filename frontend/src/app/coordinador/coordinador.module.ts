@@ -19,6 +19,7 @@ import { RevisarAutoComponent } from './revisar-auto/revisar-auto.component';
 import { RevisarItemsComponent } from './revisar-items/revisar-items.component';
 import { AppModule } from '../app.module';
 import { ReporteComponent } from './reporte/reporte.component';
+import { FilterByNombreLabor } from './agregar-items/FilterByNameLabor';
 @NgModule({
   declarations: [
     PrincipalComponent,
@@ -34,7 +35,8 @@ import { ReporteComponent } from './reporte/reporte.component';
     InfoPersonalComponent,
     RevisarAutoComponent,
     RevisarItemsComponent,
-    ReporteComponent
+    ReporteComponent,
+    FilterByNombreLabor
   ],
   imports: [
     CommonModule,

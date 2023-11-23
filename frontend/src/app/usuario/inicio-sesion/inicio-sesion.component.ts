@@ -41,8 +41,7 @@ export class InicioSesionComponent {
         console.error(errorData);
       },
       complete: () =>{
-        if(this.userData1?.id===1){
-        
+        if(this.userData1?.tipoUsu===1){
           this.router.navigateByUrl("/coordinador");
         }
       }  

@@ -1,35 +1,21 @@
-import { Injectable, PLATFORM_ID  } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { isPlatformBrowser } from '@angular/common'; 
-import { Usuario } from '../../interfaces/sesion';
+
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-  myApiUrl:string = "api/usuarios/";
+export class RolService {
 
+  myApiUrl:string = "api/roles/";
   constructor(private http:HttpClient) { }
 
-  getUser(id:number):Observable<any>{
-    return this.http.get<any>(environment.myAppUrl+this.myApiUrl+id).pipe(
-      catchError(this.handleError)
-    )
-  }
-
-  getUsuarios():Observable<any>{
+  getRoles():Observable<any>{
     return this.http.get<any>(environment.myAppUrl+this.myApiUrl).pipe(
       catchError(this.handleError)
     )
   }
-
-  addUsuario(usuario:Usuario){
-    return this.http.post(environment.myAppUrl+this.myApiUrl, usuario).pipe(
-      catchError(this.handleError)
-    )
-  }
-
   private handleError(error:HttpErrorResponse){
     if(error.status===0){
       console.log("Se ha producido un error", error.error);

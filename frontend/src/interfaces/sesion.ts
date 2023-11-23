@@ -1,6 +1,6 @@
 // Define el tipo Usuario con las propiedades que deseas
 export interface Usuario {
-    USU_ID: number;
+    USU_ID?: number;
     USR_IDENTIFICACION: number;
     USU_NOMBRE: string;
     USU_APELLIDO: string;
@@ -12,6 +12,7 @@ export interface Usuario {
     USU_CORREO: string;
     USU_ESTADO: number;
     USU_ROLID: number;
+    USU_TIPOUSUARIO: number;
   }
   
   // Define el tipo Sesion con la propiedad 'token' y 'usuario'

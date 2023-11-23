@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Docente } from '../../../interfaces/docente';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../../services/user.service';
+import { Usuario } from '../../../interfaces/sesion';
+import { RolService } from '../../services/rol.service';
+import { Rol } from '../../../interfaces/rol';
 
 @Component({
   selector: 'app-ae-docente',
@@ -13,18 +17,19 @@ export class AeDocenteComponent {
   form: FormGroup;
   id: number;
   operacion: string = 'Agregar ';
+  lstRoles:Rol[] = [];
 
-  constructor(private fb: FormBuilder, private router: Router, private toastr: ToastrService, private aRouter: ActivatedRoute){ //falta la inyeccion de dependencias del servicio
+  constructor(private fb: FormBuilder, private router: Router, private toastr: ToastrService, private aRouter: ActivatedRoute, private usuarioService:UserService, private rolServicio:RolService){ //falta la inyeccion de dependencias del servicio
     this.form = this.fb.group(this.validaciones()),
 
     //Obtener el parametro (0 agregar, diferente editar)
     this.id = Number(aRouter.snapshot.paramMap.get('id'))
+    this.obtenerRoles();
   }
 
   ngOnInit(): void{
     if(this.id != 0){
-      this.operacion = 'Editar',
-      this.getDocente(this.id)
+      this.operacion = 'Editar'
     }
   }
 
@@ -38,33 +43,43 @@ export class AeDocenteComponent {
       tipoDoc: ['1', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
       ultimoEst: ['', Validators.required],
-      contraseña: ['', Validators.required]
+      contrasena: ['', Validators.required]
     }
   }
 
-  getDocente(id: number){
-    //llamado al metodo de obtener producto del service 
+  obtenerRoles(){
+    this.rolServicio.getRoles().subscribe({
+      next: (rolData) => {
+          this.lstRoles = rolData;
+      },
+    });
   }
 
-  //Funcion para recuperar los valores ingresados
-  crearDocente(){
-    //Como se maneja el id?
-    const docente: Docente = {
-      id: 3,
-      //tipoId: this.form.value.tipoId,
-      identificacion: this.form.value.identificacion,
-      nombre: this.form.value.nombre,
-      apellido: this.form.value.apellido,
-      genero: this.form.value.genero,
-      rol: this.form.value.tipoDoc,
-      correo: this.form.value.correo,
-      estudio: this.form.value.ultimoEst,
-      estado: 1,
-      //contraseña: this.form.value.contraseña,
+
+
+  addUsuario(){
+    const usuario:Usuario = {
+      USU_TIPOID: this.form.value.tipoId,
+      USR_IDENTIFICACION: this.form.value.identificacion,
+      USU_NOMBRE: this.form.value.nombre,
+      USU_APELLIDO: this.form.value.apellido,
+      USU_GENERO: this.form.value.genero,
+      USU_ROLID: this.form.value.tipoDoc,
+      USU_CORREO: this.form.value.correo,
+      USU_ESTUDIO: this.form.value.ultimoEst,
+      USU_ESTADO: 1,
+      USU_CLAVE: this.form.value.contrasena,
+      USU_TIPOUSUARIO: 2,
+      USU_FOTO: ''
     }
-    console.log(docente);
+    this.usuarioService.addUsuario(usuario).subscribe({
+      next: ()=>{
+        this.form.reset();
+      }
+    })
+
     this.router.navigate(["coordinador/docentes"]);
     this.toastr.success('El docente fue registrado con exito')
-    
   }
+
 }

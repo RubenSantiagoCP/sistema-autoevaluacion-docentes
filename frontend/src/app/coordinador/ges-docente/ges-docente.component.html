@@ -29,9 +29,9 @@
             </thead>
             <tbody class="cuerpoT">
                 <tr *ngFor="let docente of listDocentes | filterByNombre:filtroNombre">
-                    <td>{{docente.nombre}}</td>
-                    <td>{{docente.identificacion}}</td>
-                    <td>{{docente.rol}}</td>
+                    <td>{{docente.USU_NOMBRE}}</td>
+                    <td>{{docente.USR_IDENTIFICACION}}</td>
+                    <td>{{rolUsuario(docente.USU_ROLID)}}</td>
                     <td>
                         <button (click)="inactivarDoc(docente.id)" type="button" class="btn inactivar"> inactivar
                         </button>

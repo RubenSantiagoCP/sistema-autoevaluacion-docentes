@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Labor } from '../../interfaces/labor';
+import { TipoLabor } from '../../interfaces/tipoLabor';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class LaborService {
-  lstlabores: Labor[] = [];
+export class TipoLaborService {
+
+  lstTipoLabores: TipoLabor[] = [];
   // private myAppUrl
-  myApiUrl: string = 'api/labores/';
+  myApiUrl: string = 'api/tipolabores/';
   constructor(private http: HttpClient) {}
 
-  getLabores(): Observable<any> {
+  getTipoLabores(): Observable<any> {
     return this.http
       .get<any>(environment.myAppUrl + this.myApiUrl)
       .pipe(catchError(this.handleError));

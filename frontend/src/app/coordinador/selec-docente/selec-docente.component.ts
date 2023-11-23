@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { Docente } from '../../../interfaces/docente';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../../services/user.service';
+import { RolService } from '../../services/rol.service';
+import { Rol } from '../../../interfaces/rol';
+import { Usuario } from '../../../interfaces/sesion';
 
 @Component({
   selector: 'app-selec-docente',
@@ -9,11 +13,43 @@ import { FormsModule } from '@angular/forms';
 })
 export class SelecDocenteComponent {
   filtroNombre: string = '';
-  lstDocentes:Docente[] = [
-    {id: 1, identificacion: 12345, nombre: "Juliana", apellido: "Obando", genero: "M",  estudio: "Maestria", correo: "fobando@unicauca.edu.co", estado: 1, rol: "Docencia"},
-    {id: 1, identificacion: 12345, nombre: "Francisco", apellido: "Obando", genero: "M",  estudio: "Maestria", correo: "fobando@unicauca.edu.co", estado: 1, rol: "Docencia"},
-    {id: 1, identificacion: 12345, nombre: "Francisco", apellido: "Obando", genero: "M",  estudio: "Maestria", correo: "fobando@unicauca.edu.co", estado: 1, rol: "Docencia"},
-    {id: 1, identificacion: 12345, nombre: "Francisco", apellido: "Obando", genero: "M",  estudio: "Maestria", correo: "fobando@unicauca.edu.co", estado: 1, rol: "Docencia"},
-    {id: 1, identificacion: 12345, nombre: "Francisco", apellido: "Obando", genero: "M",  estudio: "Maestria", correo: "fobando@unicauca.edu.co", estado: 1, rol: "Docencia"}
+  lstDocentes:Usuario[] = [
   ]
+  lstRoles:Rol[] = [];
+
+
+  constructor(private usuarioService:UserService, private rolServicio:RolService){
+    this.obtenerDocentes();
+    this.obtenerRoles();
+  }
+
+
+  
+  obtenerDocentes() {
+    this.usuarioService.getUsuarios().subscribe({
+      next: (docenteData) => {
+        this.lstDocentes = docenteData;
+      },
+    });
+  }
+
+  obtenerRoles(){
+    this.rolServicio.getRoles().subscribe({
+      next: (rolData) => {
+          this.lstRoles = rolData;
+      },
+    });
+  }
+
+  rolUsuario(id:string):any{
+    for(let item of this.lstRoles  ){
+        if(item.ROL_ID === parseInt(id)){
+          console.log(item.ROL_ID)
+          return item.ROL_DESCRIPCION;
+        }
+    }
+    return '';
+  }
+
+
 }

@@ -37,6 +37,8 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 correo: usuario.USU_CORREO,
                 estado: usuario.USU_ESTADO,
                 rolId: usuario.USU_ROLID,
+                tipoUsu: usuario.USU_TIPOUSUARIO,
+
             }, 'tu_secreto_secreto', { expiresIn: '1h' });
             // Enviar el token como respuesta
             res.json({ token });

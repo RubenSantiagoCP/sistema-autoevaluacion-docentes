@@ -5,7 +5,7 @@
             <div class="col-12">
                 <div class="card card-registration card-registration-2 form-box">
                     <div class="card-body p-0">
-                        <form [formGroup]="form" (ngSubmit)="crearDocente()">
+                        <form [formGroup]="form" (ngSubmit)="addUsuario()">
                             <div class="row g-0">
                                 <div class="titulo"><h2>{{operacion}} docente</h2></div>
                                 <div class="col-lg-6">
@@ -61,9 +61,9 @@
                                         <div class="mb-4 pb-2">
                                             <select formControlName="genero" class="select">
                                                 <option value="1">Genero</option>
-                                                <option value="2">Masculino</option>
-                                                <option value="3">Femenino</option>
-                                                <option value="4">Otro</option>
+                                                <option value="2">M</option>
+                                                <option value="3">F</option>
+                                                <option value="4">O</option>
                                             </select>
                                         </div>
                                     </div>
@@ -73,18 +73,8 @@
                                         <h4 class="fw-normal mb-4">Información academica</h4>
 
                                         <div class="mb-4 pb-2">
-                                            <select class="select" formControlName="tipoDoc">
-                                                <option value="1">Tipo de docente</option>
-                                                <option value="2">Docencia</option>
-                                                <option value="3">Trabajos docencia</option>
-                                                <option value="4">Proyectos investigacion</option>
-                                                <option value="5">Trabajos investigacion</option>
-                                                <option value="6">Administracion</option>
-                                                <option value="7">Asesoria</option>
-                                                <option value="8">Servicios</option>
-                                                <option value="9">Extension</option>
-                                                <option value="10">Capacitacion</option>
-                                                <option value="11">Otros servicios</option>
+                                            <select class="select" formControlName="tipoDoc" >
+                                                <option *ngFor="let item of lstRoles" value="1">{{item.ROL_DESCRIPCION}}</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 mb-4 pb-2">
@@ -114,18 +104,18 @@
                                         <div class="col-md-6 mb-4 pb-2">
                                             <div class="form-outline inputbox">
                                                 <input type="password" class="form-control-sm"
-                                                    formControlName="contraseña" required>
+                                                    formControlName="contrasena" required>
                                                 <label for="">Contraseña</label>
                                             </div>
 
-                                            <span *ngIf="form.get('contraseña')?.hasError('required') && form.get('contraseña')?.touched">
+                                            <span *ngIf="form.get('contrasena')?.hasError('required') && form.get('contrasena')?.touched">
                                                 Campo requerido
                                             </span>
                                         </div>
 
                                         <div class="botones">
                                             <button [disabled]="form.invalid" type="submit"
-                                                class="btn btn-light btn-lg registrar">Registrar</button>
+                                                class="btn btn-light btn-lg registrar">Guardar</button>
                                             <button routerLink="/coordinador/docentes" type="button"
                                                 class="btn btn-light btn-lg cancelar">Cancelar</button>
                                         </div>

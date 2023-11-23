@@ -3,7 +3,7 @@
 <section>
     <div class="form-box">
         <div class="form-value">
-            <form [formGroup]="form" action="">
+            <form [formGroup]="form" (ngSubmit)="guardarPeriodo()" >
                 <h2>Crear Periodo</h2>
 
                 <div class="col-md-6 mb-2 pb-2">
@@ -44,16 +44,18 @@
 
                 <div class="col-md-6 mb-4 pb-2">
                     <div class="form-outline inputbox">
-                        <input type="text" class="form-control-sm" formControlName="semestre" required>
-                        <label for="">Semestre</label>
-    
+                        <label for="semestre">Semestre</label>
+                        <select class="form-control-sm" formControlName="semestre" required>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                        </select>
                     </div>
                     <span *ngIf="form.get('semestre')?.hasError('required') && form.get('semestre')?.touched">
                         Campo requerido
                     </span>
                 </div>
 
-                <button>Crear</button>
+                <button type="submit">Crear</button>
             </form>
         </div>
     </div>

@@ -21,10 +21,10 @@
       </thead>
       <tbody class="cuerpoT">
         <!-- Fila de la tabla con filtrado -->
-        <tr *ngFor="let item of lstDocentes | filterByNombre:filtroNombre">
-          <td>{{ item.identificacion }}</td>
-          <td>{{ item.nombre}}</td>
-          <td>{{ item.rol}}</td>
+        <tr *ngFor="let docente of lstDocentes | filterByNombre:filtroNombre">
+          <td>{{docente.USU_NOMBRE}}</td>
+          <td>{{docente.USR_IDENTIFICACION}}</td>
+          <td>{{rolUsuario(docente.USU_ROLID)}}</td>
           <td>
             <button routerLink="/coordinador/modulo/docente/items" type="button" class="btn btn-primary">Seleccionar</button>
           </td>

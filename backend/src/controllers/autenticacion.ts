@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
-import Usuario from '../models/usuario'; // Asegúrate de importar tu modelo de usuario aquí
+import { Request, Response } from "express";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import Usuario from "../models/usuario"; // Asegúrate de importar tu modelo de usuario aquí
 
 export const login = async (req: Request, res: Response) => {
   try {
@@ -12,8 +12,11 @@ export const login = async (req: Request, res: Response) => {
     const usuario = await Usuario.findOne({ where: { USU_CORREO: correo } });
 
     // Verificar si el usuario existe y si la contraseña es correcta
-    if (usuario && usuario.USU_CLAVE && bcrypt.compareSync(contrasena, usuario.USU_CLAVE)) {
-
+    if (
+      usuario &&
+      usuario.USU_CLAVE &&
+      bcrypt.compareSync(contrasena, usuario.USU_CLAVE)
+    ) {
       // Generar un token JWT con información adicional del usuario
       const token = jwt.sign(
         {
@@ -28,19 +31,20 @@ export const login = async (req: Request, res: Response) => {
           correo: usuario.USU_CORREO,
           estado: usuario.USU_ESTADO,
           rolId: usuario.USU_ROLID,
+          tipoUsu: usuario.USU_TIPOUSUARIO,
         },
-        'tu_secreto_secreto',
-        { expiresIn: '1h' }
+        "tu_secreto_secreto",
+        { expiresIn: "1h" }
       );
 
       // Enviar el token como respuesta
       res.json({ token });
     } else {
       // Si las credenciales son incorrectas, devolver un mensaje de error
-      res.status(401).json({ message: 'Credenciales incorrectas' });
+      res.status(401).json({ message: "Credenciales incorrectas" });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error en el servidor' });
+    res.status(500).json({ message: "Error en el servidor" });
   }
 };
