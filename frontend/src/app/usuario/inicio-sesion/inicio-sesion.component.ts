@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class InicioSesionComponent {
   rutaDestino: string = '';
   form: FormGroup;
-  token?: string;
+  userData1: any; // Declarar userData aquí
 
   constructor(private fb: FormBuilder, private _sesionService: SesionService, private router:Router ) {
     this.form = this.fb.group({
@@ -25,7 +25,6 @@ export class InicioSesionComponent {
   }
 
   iniciarSesion() {
-    
     const username = this.form.get('user')?.value;
     const password = this.form.get('password')?.value;
 
@@ -36,14 +35,13 @@ export class InicioSesionComponent {
     this._sesionService.login(username, password).subscribe({
       next: (userData) =>{
         console.log(userData);
-        this.token = this.decodeToken(userData); 
-        console.log(this.token);
+        this.userData1= this.decodeToken(userData); 
       },
       error:(errorData) =>{
         console.error(errorData);
       },
       complete: () =>{
-        if(1){
+        if(this.userData1?.id===1){
         
           this.router.navigateByUrl("/coordinador");
         }

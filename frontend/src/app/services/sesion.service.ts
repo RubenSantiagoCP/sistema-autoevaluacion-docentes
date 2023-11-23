@@ -15,6 +15,7 @@ export class SesionService {
   private myApiUrl = 'api/autenticacion/login';
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean> (false);
   currentUserData: BehaviorSubject<string> = new BehaviorSubject<string> ("");
+  currentUserDataFull: BehaviorSubject<any> = new BehaviorSubject<any> ({});
   
   constructor(@Inject(PLATFORM_ID) private platformId: any, private http: HttpClient) {
     if (isPlatformBrowser(this.platformId)) {
@@ -23,12 +24,7 @@ export class SesionService {
       this.currentUserData = new BehaviorSubject<string>(sessionStorage.getItem("token") || "");
     }
   }
-/*
-  constructor(private http: HttpClient) {
-    this.currentUserLoginOn = new BehaviorSubject<boolean>(sessionStorage .getItem("token")!=null);
-    this.currentUserData = new BehaviorSubject<string>(sessionStorage .getItem("token") || "");
-  }
-*/
+
   login(username: string, password: string): Observable<any> {
     const credentials = { correo: username, contrasena: password };
     
@@ -57,5 +53,16 @@ export class SesionService {
     }
 
     return throwError(()=> new Error("Algo falló. Por favor intente nuevamente"));
+  }
+
+  decodeToken(token: string): any {
+    const tokenParts = token.split('.');
+    if (tokenParts.length !== 3) {
+      console.error('Token no válido. No tiene el formato esperado.');
+      return null;
+    }
+
+    const payload = atob(tokenParts[1]);
+    return JSON.parse(payload);
   }
 }
