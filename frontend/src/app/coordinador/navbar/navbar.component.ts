@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit{
   notificaciones_active: boolean = false; 
-  data_user?:any;
+  data_user?:any = '';
 
   constructor(private sesionService:SesionService, private router:Router){
 

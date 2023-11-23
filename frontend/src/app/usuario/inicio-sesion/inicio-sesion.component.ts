@@ -43,6 +43,8 @@ export class InicioSesionComponent {
       complete: () =>{
         if(this.userData1?.tipoUsu===1){
           this.router.navigateByUrl("/coordinador");
+        }else if(this.userData1?.tipoUsu===2){
+          this.router.navigateByUrl("/docente");
         }
       }  
     }

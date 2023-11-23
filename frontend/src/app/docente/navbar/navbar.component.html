@@ -9,7 +9,7 @@
         <a routerLink="/coordinador/info" class="navbar-brand">
   
           <img src="../../../assets/images/info-personal/francisco obando.jpg" alt="foto-perfil">
-          Sandra Roa
+          {{data_user.nombre}} {{data_user.apellido}}
   
         </a>
   
@@ -25,6 +25,12 @@
           <li class="nav-item">
             <a class="nav-link" (click)="setNotificaciones()">
               <i class="bi bi-bell-fill"></i>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" (click)="logout()" >
+              <i class="bi bi-box-arrow-left"></i>
+              <span class="btn-salir">Salir</span>
             </a>
           </li>
         </ul>

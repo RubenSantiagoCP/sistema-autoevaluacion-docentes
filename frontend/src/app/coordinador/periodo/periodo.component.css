@@ -89,3 +89,13 @@ form span{
 .fechas{
     color-scheme: dark;
 }
+
+.semestre-input{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.selector-semestre{
+    margin: 0px 100px;
+}

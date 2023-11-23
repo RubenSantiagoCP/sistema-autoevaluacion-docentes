@@ -9,23 +9,24 @@
             </div>
             <div class="col-md-8">
                 <div class="info-usuario">
-                    <h1>Francisco Obando Vidal</h1>
+                    <h1>{{user?.USU_NOMBRE}} {{ user?.USU_APELLIDO}}</h1>
+                    <hr>
                     <table class="table">
                         <tr>
                             <td>Identificación: </td>
-                            <td>11111111</td>
+                            <td>{{user?.USR_IDENTIFICACION}}</td>
                         </tr>
                         <tr>
                             <td>Género: </td>
-                            <td>M</td>
+                            <td>{{user?.USU_GENERO}}</td>
                         </tr>
                         <tr>
                             <td>Último estudio: </td>
-                            <td>Undefined</td>
+                            <td>{{user?.USU_ESTUDIO}}</td>
                         </tr>
                         <tr>
                             <td>Rol: </td>
-                            <td>Coordinador</td>
+                            <td>{{user?.USU_ROLID}}</td>
                         </tr>
                     </table>
                 </div>
