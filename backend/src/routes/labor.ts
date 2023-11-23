@@ -3,7 +3,7 @@ import { createLabor, deleteLabor, getLabor, getLabores, updateLabor } from "../
 
 const router = Router();
 
-// Se va a los metodos del controlador usuario.ts, 
+// Se va a los metodos del controlador labor.ts, 
 router.get('/', getLabores)
 router.get('/:id', getLabor)
 router.delete('/:id', deleteLabor)

@@ -18,6 +18,11 @@ const usuario_1 = __importDefault(require("../routes/usuario"));
 const evaluacion_1 = __importDefault(require("../routes/evaluacion"));
 const labor_1 = __importDefault(require("../routes/labor"));
 const autenticacion_1 = __importDefault(require("../routes/autenticacion"));
+const rol_1 = __importDefault(require("../routes/rol"));
+const tipoLabor_1 = __importDefault(require("../routes/tipoLabor"));
+const periodo_1 = __importDefault(require("../routes/periodo"));
+const notificacion_1 = __importDefault(require("../routes/notificacion"));
+const usunot_1 = __importDefault(require("../routes/usunot"));
 const connection_1 = __importDefault(require("../db/connection"));
 class Server {
     constructor() {
@@ -47,6 +52,11 @@ class Server {
         this.app.use('/api/evaluaciones', evaluacion_1.default);
         this.app.use('/api/labores', labor_1.default);
         this.app.use('/api/autenticacion', autenticacion_1.default);
+        this.app.use('/api/roles', rol_1.default);
+        this.app.use('/api/tipolabores', tipoLabor_1.default);
+        this.app.use('/api/periodos', periodo_1.default);
+        this.app.use('/api/notificaciones', notificacion_1.default);
+        this.app.use('/api/usunot', usunot_1.default);
     }
     //
     midlewares() {

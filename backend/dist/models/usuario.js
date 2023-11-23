@@ -47,6 +47,9 @@ const Usuario = connection_1.default.define('usuario', {
     },
     USU_ROLID: {
         type: sequelize_1.DataTypes.INTEGER
+    },
+    USU_TIPOUSUARIO: {
+        type: sequelize_1.DataTypes.INTEGER
     }
 }, {
     createdAt: false,

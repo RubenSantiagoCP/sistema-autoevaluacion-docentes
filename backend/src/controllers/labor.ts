@@ -6,7 +6,7 @@ export const getLabores = async (req: Request, res: Response) => {
     // se usa Labor para tomar del modelo sequalize el metodo findAll() y guarda las labores en la lista
     const listLabores = await Labor.findAll()
 
-    // Enviar en el json el listado de usuarios
+    // Enviar en el json el listado de labores
     res.json(listLabores)
 }
 

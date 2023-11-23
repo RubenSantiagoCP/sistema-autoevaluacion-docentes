@@ -16,6 +16,7 @@ class UsuarioModel extends Model {
     public USU_CORREO!: string;
     public USU_ESTADO!: number;
     public USU_ROLID!: number;
+    public USU_TIPOUSUARIO!: number; //
   }
 
 const Usuario = db.define<UsuarioModel>('usuario', {
@@ -56,6 +57,9 @@ const Usuario = db.define<UsuarioModel>('usuario', {
         type: DataTypes.INTEGER
     },
     USU_ROLID : {
+        type: DataTypes.INTEGER
+    },
+    USU_TIPOUSUARIO : {
         type: DataTypes.INTEGER
     } 
 }, {

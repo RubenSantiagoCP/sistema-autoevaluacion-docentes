@@ -4,6 +4,11 @@ import routesUsuario from '../routes/usuario';
 import routesEvaluacion from '../routes/evaluacion';
 import routesLabores from '../routes/labor';
 import routesAutenticacion from "../routes/autenticacion";
+import routesRoles from "../routes/rol";
+import routesTipoLabor from "../routes/tipoLabor";
+import routesPeriodo from "../routes/periodo";
+import routesNotificacion from "../routes/notificacion";
+import routesUsuNot from "../routes/usunot";
 import db from '../db/connection';
 
 class Server{
@@ -40,6 +45,11 @@ class Server{
         this.app.use('/api/evaluaciones', routesEvaluacion)
         this.app.use('/api/labores', routesLabores)
         this.app.use('/api/autenticacion', routesAutenticacion)
+        this.app.use('/api/roles', routesRoles)
+        this.app.use('/api/tipolabores', routesTipoLabor)
+        this.app.use('/api/periodos', routesPeriodo)
+        this.app.use('/api/notificaciones', routesNotificacion)
+        this.app.use('/api/usunot', routesUsuNot)
     }
 
     //

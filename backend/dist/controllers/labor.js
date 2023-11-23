@@ -18,7 +18,7 @@ const labor_1 = __importDefault(require("../models/labor"));
 const getLabores = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // se usa Labor para tomar del modelo sequalize el metodo findAll() y guarda las labores en la lista
     const listLabores = yield labor_1.default.findAll();
-    // Enviar en el json el listado de usuarios
+    // Enviar en el json el listado de labores
     res.json(listLabores);
 });
 exports.getLabores = getLabores;
