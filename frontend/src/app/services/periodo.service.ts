@@ -18,8 +18,20 @@ export class PeriodoService {
     )
   }
 
+  getPeriodoId(id:number):Observable<Periodo>{
+    return this.http.get<Periodo>(environment.myAppUrl+this.myApiUrl+id).pipe(
+      catchError(this.handleError)
+    )
+  }
+
   getPeriodos():Observable<any>{
     return this.http.get<any>(environment.myAppUrl+this.myApiUrl).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  updatePeriodo(id: number, periodo: Periodo): Observable<void>{
+    return this.http.put<void>(environment.myAppUrl+this.myApiUrl+id, periodo).pipe(
       catchError(this.handleError)
     )
   }

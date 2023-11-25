@@ -13,6 +13,7 @@ import { InfoPersonalComponent } from './info-personal/info-personal.component';
 import { RevisarAutoComponent } from './revisar-auto/revisar-auto.component';
 import { RevisarItemsComponent } from './revisar-items/revisar-items.component';
 import { ReporteComponent } from './reporte/reporte.component';
+import { GesPeriodoComponent } from './ges.periodo/ges.periodo.component';
 
 const routes: Routes = [
   {path: '', component: PrincipalComponent},
@@ -24,10 +25,12 @@ const routes: Routes = [
   {path: 'docentes', component: GesDocenteComponent},
   {path: 'docentes/edit/:id', component: AeDocenteComponent},
   {path: 'docentes/registrar', component: AeDocenteComponent},
-  {path: 'periodo', component: PeriodoComponent},
+  {path: 'periodos/periodo', component: PeriodoComponent},
+  {path: 'periodos/edit/:id', component: PeriodoComponent},
   {path: 'reporte', component: ReporteComponent},
   {path: 'revisar', component: RevisarAutoComponent},
-  {path: 'revisar/items', component: RevisarItemsComponent}
+  {path: 'revisar/items', component: RevisarItemsComponent},
+  {path: 'periodos', component: GesPeriodoComponent}
 ];
 
 @NgModule({
