@@ -7,33 +7,40 @@ import { UserService } from '../../services/user.service';
 import { Usuario } from '../../../interfaces/sesion';
 import { RolService } from '../../services/rol.service';
 import { Rol } from '../../../interfaces/rol';
+import { DocenteService } from '../../services/docente.service';
 
 @Component({
   selector: 'app-ae-docente',
   templateUrl: './ae-docente.component.html',
-  styleUrl: './ae-docente.component.css'
+  styleUrl: './ae-docente.component.css',
 })
 export class AeDocenteComponent {
   form: FormGroup;
-  id: number;
   operacion: string = 'Agregar ';
-  lstRoles:Rol[] = [];
+  lstRoles: Rol[] = [];
+  docenteSeleccionado?: Usuario;
 
-  constructor(private fb: FormBuilder, private router: Router, private toastr: ToastrService, private aRouter: ActivatedRoute, private usuarioService:UserService, private rolServicio:RolService){ //falta la inyeccion de dependencias del servicio
-    this.form = this.fb.group(this.validaciones()),
-
-    //Obtener el parametro (0 agregar, diferente editar)
-    this.id = Number(aRouter.snapshot.paramMap.get('id'))
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private toastr: ToastrService,
+    private aRouter: ActivatedRoute,
+    private usuarioService: UserService,
+    private rolServicio: RolService,
+    private docenteServicio: DocenteService
+  ) {
+    //falta la inyeccion de dependencias del servicio
+    (this.form = this.fb.group(this.validaciones())),
+      (this.operacion = this.obtenerOperacion(
+        this.docenteServicio.getOperacion()
+      ));
+    if (this.docenteServicio.getOperacion() === 2) {
+      this.docenteSeleccionado = this.docenteServicio.getDocenteSeleccionado();
+    }
     this.obtenerRoles();
   }
 
-  ngOnInit(): void{
-    if(this.id != 0){
-      this.operacion = 'Editar'
-    }
-  }
-
-  validaciones(){
+  validaciones() {
     return {
       //tipoId: ['', Validators.required],
       identificacion: [null, [Validators.required, Validators.maxLength(10)]],
@@ -43,22 +50,20 @@ export class AeDocenteComponent {
       tipoDoc: ['1', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
       ultimoEst: ['', Validators.required],
-      contrasena: ['', Validators.required]
-    }
+      contrasena: ['', Validators.required],
+    };
   }
 
-  obtenerRoles(){
+  obtenerRoles() {
     this.rolServicio.getRoles().subscribe({
       next: (rolData) => {
-          this.lstRoles = rolData;
+        this.lstRoles = rolData;
       },
     });
   }
 
-
-
-  addUsuario(){
-    const usuario:Usuario = {
+  addUsuario() {
+    const usuario: Usuario = {
       USU_TIPOID: this.form.value.tipoId,
       USR_IDENTIFICACION: this.form.value.identificacion,
       USU_NOMBRE: this.form.value.nombre,
@@ -70,16 +75,22 @@ export class AeDocenteComponent {
       USU_ESTADO: 1,
       USU_CLAVE: this.form.value.contrasena,
       USU_TIPOUSUARIO: 2,
-      USU_FOTO: ''
-    }
+      USU_FOTO: '',
+    };
     this.usuarioService.addUsuario(usuario).subscribe({
-      next: ()=>{
+      next: () => {
         this.form.reset();
-      }
-    })
+      },
+    });
 
-    this.router.navigate(["coordinador/docentes"]);
-    this.toastr.success('El docente fue registrado con exito')
+    this.toastr.success('El docente fue registrado con exito');
   }
 
+  obtenerOperacion(operacion?: number) {
+    if (operacion === 1) {
+      return 'Agregar';
+    } else {
+      return 'Editar';
+    }
+  }
 }

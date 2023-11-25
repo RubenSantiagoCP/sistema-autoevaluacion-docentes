@@ -20,6 +20,7 @@ import { RevisarItemsComponent } from './revisar-items/revisar-items.component';
 import { AppModule } from '../app.module';
 import { ReporteComponent } from './reporte/reporte.component';
 import { FilterByNombreLabor } from './agregar-items/FilterByNameLabor';
+import { InfoDocenteComponent } from './info-docente/info-docente.component';
 @NgModule({
   declarations: [
     PrincipalComponent,
@@ -36,7 +37,8 @@ import { FilterByNombreLabor } from './agregar-items/FilterByNameLabor';
     RevisarAutoComponent,
     RevisarItemsComponent,
     ReporteComponent,
-    FilterByNombreLabor
+    FilterByNombreLabor,
+    InfoDocenteComponent
   ],
   imports: [
     CommonModule,

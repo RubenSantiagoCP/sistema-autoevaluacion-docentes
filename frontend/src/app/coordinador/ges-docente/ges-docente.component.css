@@ -36,7 +36,7 @@ section{
 }
 
 .form-box{
-    position: absolute;
+    position: flex;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     backdrop-filter: blur(20px);

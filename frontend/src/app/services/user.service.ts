@@ -30,6 +30,12 @@ export class UserService {
     )
   }
 
+  editUsuario(usuario:Usuario){
+    return this.http.put(environment.myAppUrl+this.myApiUrl+usuario.USU_ID, usuario).pipe(
+      catchError(this.handleError)
+    )
+  }
+
   private handleError(error:HttpErrorResponse){
     if(error.status===0){
       console.log("Se ha producido un error", error.error);

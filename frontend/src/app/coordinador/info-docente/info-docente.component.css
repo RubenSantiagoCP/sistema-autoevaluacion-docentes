@@ -4,13 +4,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 100px;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+
+.boton-volver{
+    position: relative;
+    left: 0;
 }
 .container {
   margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   text-align: center;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 15px;
@@ -18,6 +26,7 @@
   max-width: 60%;
   max-height: 60vp;
   padding: 40px;
+  margin-bottom: 40px;
 }
 
 .image-perfil img {
@@ -44,24 +53,8 @@
   color: white;
 }
 
-:hover {
-  color: #532dff; /* Cambia el color del texto al pasar el ratón */
-}
+.title{
+    margin: 30px 0px;
+    color:  white;
+} 
 
-a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 3px; /* Altura del subrayado */
-  background: linear-gradient(to right, #010005, #0800a5); /* Degradado de colores */
-  transform: scaleX(0); /* Inicialmente, el subrayado está oculto */
-  transform-origin: bottom right;
-  transition: transform 0.3s ease-out; /* Agrega una transición suave */
-}
-
-a:hover::after {
-  transform: scaleX(1); 
-  transform-origin: bottom left ;
-}

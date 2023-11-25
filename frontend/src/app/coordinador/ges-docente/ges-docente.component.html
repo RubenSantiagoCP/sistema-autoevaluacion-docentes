@@ -3,7 +3,7 @@
     <div class="container form-box">
         <div class="title">
             <h1>Gestion de docentes</h1>
-            <button routerLink="/coordinador/docentes/registrar" type="button" class="btn ">
+            <button (click)="definirOperacion(1, -1)" routerLink="/coordinador/docentes/registrar" type="button" class="btn ">
                 Registrar docente
             </button>
         </div>
@@ -28,20 +28,20 @@
                 </tr>
             </thead>
             <tbody class="cuerpoT">
-                <tr *ngFor="let docente of listDocentes | filterByNombre:filtroNombre">
+                <tr *ngFor="let docente of listDocentes | filterByNombre:filtroNombre; let i = index">
                     <td>{{docente.USU_NOMBRE}}</td>
                     <td>{{docente.USR_IDENTIFICACION}}</td>
                     <td>{{rolUsuario(docente.USU_ROLID)}}</td>
                     <td>
-                        <button (click)="inactivarDoc(docente.id)" type="button" class="btn inactivar"> inactivar
+                        <button (click)="inactivarDoc(docente)" type="button" class="btn inactivar"> {{definirInactivar(docente.USU_ESTADO)}}
                         </button>
                     </td>
                     <td>
                         <div class="operaciones">
-                            <button type="button" class="btn btn-sm" routerLink="/consultar/{{docente.id}}">
+                            <button type="button" class="btn btn-sm" routerLink="/coordinador/docentes/informacion" (click)="setDocenteSeleccionado(i)">
                                 <i class="bi bi-search"></i>
                             </button>
-                            <button routerLink="/coordinador/docentes/edit/{{docente.id}}" type="button"
+                            <button (click)="definirOperacion(2, i)" routerLink="/coordinador/docentes/edit" type="button"
                                 class="btn">
                                 <i class="bi bi-pencil-square"></i>
                             </button>

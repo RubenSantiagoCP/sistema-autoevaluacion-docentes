@@ -13,21 +13,24 @@ import { InfoPersonalComponent } from './info-personal/info-personal.component';
 import { RevisarAutoComponent } from './revisar-auto/revisar-auto.component';
 import { RevisarItemsComponent } from './revisar-items/revisar-items.component';
 import { ReporteComponent } from './reporte/reporte.component';
+import { InfoDocenteComponent } from './info-docente/info-docente.component';
+import { VigilanteCoordGuard } from '../guards/vigilante-coord.guard';
 
 const routes: Routes = [
-  {path: '', component: PrincipalComponent},
-  {path: 'info', component: InfoPersonalComponent},
-  {path: 'modulo', component: ModuloAutoevComponent},
-  {path: 'modulo/docente', component: SelecDocenteComponent},
-  {path: 'modulo/docente/items', component: ItemEvaluacionComponent},
-  {path: 'modulo/docente/items/add', component: AgregarItemsComponent},
-  {path: 'docentes', component: GesDocenteComponent},
-  {path: 'docentes/edit/:id', component: AeDocenteComponent},
-  {path: 'docentes/registrar', component: AeDocenteComponent},
-  {path: 'periodo', component: PeriodoComponent},
-  {path: 'reporte', component: ReporteComponent},
-  {path: 'revisar', component: RevisarAutoComponent},
-  {path: 'revisar/items', component: RevisarItemsComponent}
+  {path: '', component: PrincipalComponent ,  canActivate:[VigilanteCoordGuard]},
+  {path: 'info', component: InfoPersonalComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'modulo', component: ModuloAutoevComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'modulo/docente', component: SelecDocenteComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'modulo/docente/items', component: ItemEvaluacionComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'modulo/docente/items/add', component: AgregarItemsComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'docentes', component: GesDocenteComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'docentes/informacion', component: InfoDocenteComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'docentes/edit', component: AeDocenteComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'docentes/registrar', component: AeDocenteComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'periodo', component: PeriodoComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'reporte', component: ReporteComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'revisar', component: RevisarAutoComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'revisar/items', component: RevisarItemsComponent,  canActivate:[VigilanteCoordGuard]}
 ];
 
 @NgModule({

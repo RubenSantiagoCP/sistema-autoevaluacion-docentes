@@ -9,6 +9,8 @@ import { NotFoundComponent } from './usuario/not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http'; // Para las peticiones http
 import { ToastrModule } from 'ngx-toastr';
 import { SesionService } from './services/sesion.service';
+import { FotoPerfilComponent } from './shared/foto-perfil/foto-perfil.component';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -16,7 +18,8 @@ import { SesionService } from './services/sesion.service';
   declarations: [
     AppComponent,
     InicioSesionComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    FotoPerfilComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +35,7 @@ import { SesionService } from './services/sesion.service';
 
   providers: [
     provideClientHydration() ,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
