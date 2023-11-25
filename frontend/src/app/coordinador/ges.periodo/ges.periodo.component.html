@@ -1,0 +1,36 @@
+<app-navbar class="componente-superior"></app-navbar>
+<section class="main">
+  <div class="container form-box">
+    <div class="title">
+        <h1>Gestion de periodos</h1>
+        <button routerLink="/coordinador/periodos/periodo" type="button" class="btn btnR">
+            Agregar periodo
+        </button>
+    </div>
+    <hr>
+    <table class="table">
+      <thead class="titulosT">
+        <tr class="fila-encab">
+          <th>Nombre</th>
+          <th>Fecha de Inicio</th>
+          <th>Fecha Fin</th>
+          <th>Editar</th>
+        </tr>
+      </thead>
+      <tbody class="cuerpoT">
+        <tr *ngFor="let item of lstPeriodos">
+          <td>{{ item.PER_NOMBRE }}</td>
+          <td>{{ item.PER_FECHAINICIO | date:'yyyy/MM/dd' | slice:0:10 }}</td>
+      <td>{{ item.PER_FECHAFIN | date:'yyyy/MM/dd' | slice:0:10 }}</td>
+          <td>
+            <div class="operaciones">
+                <button routerLink="/coordinador/periodos/edit/{{item.PER_ID}}" type="button" class="btn btnO">
+                    <i class="bi bi-pencil-square"></i>
+                </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>  
+</section>

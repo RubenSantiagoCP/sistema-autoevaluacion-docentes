@@ -15,6 +15,7 @@ import { RevisarItemsComponent } from './revisar-items/revisar-items.component';
 import { ReporteComponent } from './reporte/reporte.component';
 import { InfoDocenteComponent } from './info-docente/info-docente.component';
 import { VigilanteCoordGuard } from '../guards/vigilante-coord.guard';
+import { GesPeriodoComponent } from './ges.periodo/ges.periodo.component';
 
 const routes: Routes = [
   {path: '', component: PrincipalComponent ,  canActivate:[VigilanteCoordGuard]},
@@ -27,10 +28,12 @@ const routes: Routes = [
   {path: 'docentes/informacion', component: InfoDocenteComponent,  canActivate:[VigilanteCoordGuard]},
   {path: 'docentes/edit', component: AeDocenteComponent,  canActivate:[VigilanteCoordGuard]},
   {path: 'docentes/registrar', component: AeDocenteComponent,  canActivate:[VigilanteCoordGuard]},
-  {path: 'periodo', component: PeriodoComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'periodos/periodo', component: PeriodoComponent},
+  {path: 'periodos/edit/:id', component: PeriodoComponent},
   {path: 'reporte', component: ReporteComponent,  canActivate:[VigilanteCoordGuard]},
   {path: 'revisar', component: RevisarAutoComponent,  canActivate:[VigilanteCoordGuard]},
-  {path: 'revisar/items', component: RevisarItemsComponent,  canActivate:[VigilanteCoordGuard]}
+  {path: 'revisar/items', component: RevisarItemsComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'periodos', component: GesPeriodoComponent}
 ];
 
 @NgModule({

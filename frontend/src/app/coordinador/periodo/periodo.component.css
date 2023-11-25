@@ -99,3 +99,20 @@ form span{
 .selector-semestre{
     margin: 0px 100px;
 }
+
+.mb-4.pb-2 select {
+    background: transparent;
+    color: rgb(0, 195, 255);
+    border: none;
+    border-bottom: 2px solid #ffffff; /* Puedes ajustar el color del borde inferior según tus preferencias */
+    outline: none;
+    height: 50px;
+    width: 80%;
+    font-size: 1em;
+}
+
+/* Para estilizar el desplegable en navegadores específicos como Firefox */
+.mb-4.pb-2 select::-ms-expand {
+    display: none;
+    background: transparent;
+}
