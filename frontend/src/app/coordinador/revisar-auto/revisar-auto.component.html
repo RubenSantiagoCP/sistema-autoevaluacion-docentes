@@ -11,7 +11,7 @@
             <button class="btn" (click)="onButtonClick(2)">
                 Evaluaciones no terminadas
             </button>
-            <button class="btn">
+            <button class="btn" (click)="sendEmailsToDisplayedTeachers()">
                 Enviar notificaciones
             </button>
         </div>
@@ -28,9 +28,9 @@
                 </thead>
                 <tbody class="cuerpoT">
                     <tr *ngFor="let docente of lstDocentesMostrados">
-                        <td>{{docente.identificacion}}</td>
-                        <td>{{docente.nombre}}</td>
-                        <td>{{docente.rol}}</td>
+                        <td>{{docente.USR_IDENTIFICACION}}</td>
+                        <td>{{docente.USU_NOMBRE}}</td>
+                        <td>{{docente.USU_TIPOUSUARIO}}</td>
                         <td>
                             <div class="operaciones">
                                 <button routerLink="/coordinador/revisar/items" type="button" class="btn">

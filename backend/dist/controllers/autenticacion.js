@@ -23,7 +23,9 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // Buscar el usuario en la base de datos
         const usuario = yield usuario_1.default.findOne({ where: { USU_CORREO: correo } });
         // Verificar si el usuario existe y si la contraseña es correcta
-        if (usuario && usuario.USU_CLAVE && bcrypt_1.default.compareSync(contrasena, usuario.USU_CLAVE)) {
+        if (usuario &&
+            usuario.USU_CLAVE &&
+            bcrypt_1.default.compareSync(contrasena, usuario.USU_CLAVE)) {
             // Generar un token JWT con información adicional del usuario
             const token = jsonwebtoken_1.default.sign({
                 id: usuario.USU_ID,
@@ -38,19 +40,18 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 estado: usuario.USU_ESTADO,
                 rolId: usuario.USU_ROLID,
                 tipoUsu: usuario.USU_TIPOUSUARIO,
-
-            }, 'tu_secreto_secreto', { expiresIn: '1h' });
+            }, "tu_secreto_secreto", { expiresIn: "1h" });
             // Enviar el token como respuesta
             res.json({ token });
         }
         else {
             // Si las credenciales son incorrectas, devolver un mensaje de error
-            res.status(401).json({ message: 'Credenciales incorrectas' });
+            res.status(401).json({ message: "Credenciales incorrectas" });
         }
     }
     catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Error en el servidor' });
+        res.status(500).json({ message: "Error en el servidor" });
     }
 });
 exports.login = login;

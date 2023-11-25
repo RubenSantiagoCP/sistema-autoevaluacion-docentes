@@ -9,6 +9,7 @@ import routesTipoLabor from "../routes/tipoLabor";
 import routesPeriodo from "../routes/periodo";
 import routesNotificacion from "../routes/notificacion";
 import routesUsuNot from "../routes/usunot";
+import emailRoutes from '../routes/sendEmailRoutes';
 import db from '../db/connection';
 
 class Server{
@@ -50,6 +51,7 @@ class Server{
         this.app.use('/api/periodos', routesPeriodo)
         this.app.use('/api/notificaciones', routesNotificacion)
         this.app.use('/api/usunot', routesUsuNot)
+        this.app.use('/api/sendEmail', emailRoutes);
     }
 
     //
