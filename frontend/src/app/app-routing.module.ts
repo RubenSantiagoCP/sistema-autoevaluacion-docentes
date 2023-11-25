@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import path from 'path';
 import { InicioSesionComponent } from './usuario/inicio-sesion/inicio-sesion.component';
 import { NotFoundComponent } from './usuario/not-found/not-found.component';
+import { VigilanteCoordGuard } from './guards/vigilante-coord.guard';
+import { VigilanteDocenteGuard } from './guards/vigilante-doc.guard';
 
 const routes: Routes = [
   {path: '', component: InicioSesionComponent},
-  {path: 'coordinador', loadChildren: () => import('./coordinador/coordinador.module').then(m=>m.CoordinadorModule)},
-  {path: 'docente', loadChildren: () => import('./docente/docente.module').then(m=>m.DocenteModule)},
+  {path: 'coordinador', loadChildren: () => import('./coordinador/coordinador.module').then(m=>m.CoordinadorModule), canActivate:[VigilanteCoordGuard]},
+  {path: 'docente', loadChildren: () => import('./docente/docente.module').then(m=>m.DocenteModule), canActivate: [VigilanteDocenteGuard]},
   {path: '**', component: NotFoundComponent}
 ];
 

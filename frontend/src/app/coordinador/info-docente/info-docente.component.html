@@ -1,0 +1,54 @@
+<app-navbar class="componente-superior"></app-navbar>
+<section class="main">
+    <div class="boton-volver">
+        <button type="button" class="btn btn-primary" routerLink="/coordinador/docentes/">Volver</button>
+    </div>
+    <div class="container">
+        <h1 class="title">Información del docente</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="image-perfil text-center">
+                    <img src="../../../assets/images/info-personal/francisco obando.jpg" alt="" class="rounded-circle img-fluid">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="info-usuario">
+                    <table class="table">
+                        <tr>
+                            <td>Nombre: </td>
+                            <td>{{docente?.USU_NOMBRE}}</td>
+                        </tr>
+                        <tr>
+                            <td>Apellido: </td>
+                            <td>{{docente?.USU_APELLIDO}}</td>
+                        </tr>
+                        <tr>
+                            <td>Tipo de identificacion: </td>
+                            <td>{{docente?.USU_TIPOID}}</td>
+                        </tr>
+                        <tr>
+                            <td>Numero de identificación: </td>
+                            <td>{{docente?.USR_IDENTIFICACION}}</td>
+                        </tr>
+                        <tr>
+                            <td>Género: </td>
+                            <td>{{genero}}</td>
+                        </tr>
+                        <tr>
+                            <td>Último estudio: </td>
+                            <td>{{docente?.USU_ESTUDIO}}</td>
+                        </tr>
+                        <tr>
+                            <td>Correo: </td>
+                            <td>{{docente?.USU_CORREO}}</td>
+                        </tr>
+                        <tr>
+                            <td>Rol: </td>
+                            <td>{{rol}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

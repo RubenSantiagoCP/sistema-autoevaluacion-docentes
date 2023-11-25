@@ -37,4 +37,15 @@ export class InfoPersonalComponent implements OnInit{
       }
     })
   }
+
+  
+  diccionarioGenero(genero?:string){
+    if(genero=== "M"){
+      return "Masculino"
+    }else if(genero === "F"){
+      return "Femenino";
+    }else{
+      return "Otros";
+    }
+  }
 }

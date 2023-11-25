@@ -20,6 +20,7 @@ import { RevisarItemsComponent } from './revisar-items/revisar-items.component';
 import { AppModule } from '../app.module';
 import { ReporteComponent } from './reporte/reporte.component';
 import { FilterByNombreLabor } from './agregar-items/FilterByNameLabor';
+import { InfoDocenteComponent } from './info-docente/info-docente.component';
 import { GesPeriodoComponent } from './ges.periodo/ges.periodo.component';
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { GesPeriodoComponent } from './ges.periodo/ges.periodo.component';
     RevisarItemsComponent,
     ReporteComponent,
     FilterByNombreLabor,
+    InfoDocenteComponent,
     GesPeriodoComponent
   ],
   imports: [

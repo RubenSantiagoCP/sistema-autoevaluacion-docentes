@@ -20,6 +20,13 @@
   padding: 40px;
 }
 
+
+.image-perfil{
+  display: flex;
+  align-items:  center;
+  flex-direction: column;
+}
+
 .image-perfil img {
   width: 230px; /* Tamaño de la imagen */
 }
@@ -42,4 +49,33 @@
   padding: 10px;
   background: transparent;
   color: white;
+}
+
+.button-editar button{
+  color: white;
+  background-color: transparent;
+  border: none;
+  margin: 30px 0px;
+}
+
+.button-editar button:hover {
+  color: #532dff; /* Cambia el color del texto al pasar el ratón */
+}
+
+.button-editar button::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px; /* Altura del subrayado */
+  background: linear-gradient(to right, #010005, #0800a5); /* Degradado de colores */
+  transform: scaleX(0); /* Inicialmente, el subrayado está oculto */
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out; /* Agrega una transición suave */
+}
+
+.button-editar button:hover::after {
+  transform: scaleX(1); 
+  transform-origin: bottom left ;
 }

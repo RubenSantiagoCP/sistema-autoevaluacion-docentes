@@ -4,7 +4,9 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="image-perfil text-center">
-                    <img src="../../../assets/images/info-personal/francisco obando.jpg" alt="" class="rounded-circle img-fluid">
+                    <div class="image">
+                        <img src="../../../assets/images/info-personal/francisco obando.jpg" alt="" class="rounded-circle img-fluid">
+                    </div>
                 </div>
             </div>
             <div class="col-md-8">
@@ -18,15 +20,19 @@
                         </tr>
                         <tr>
                             <td>Género: </td>
-                            <td>{{user?.USU_GENERO}}</td>
+                            <td>{{diccionarioGenero(user?.USU_GENERO)}}</td>
                         </tr>
                         <tr>
                             <td>Último estudio: </td>
                             <td>{{user?.USU_ESTUDIO}}</td>
                         </tr>
                         <tr>
-                            <td>Rol: </td>
-                            <td>{{user?.USU_ROLID}}</td>
+                            <td>Tipo ID: </td>
+                            <td>{{user?.USU_TIPOID}}</td>
+                        </tr>
+                        <tr>
+                            <td>Correo: </td>
+                            <td>{{user?.USU_CORREO}}</td>
                         </tr>
                     </table>
                 </div>

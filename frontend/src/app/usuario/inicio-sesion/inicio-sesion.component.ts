@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SesionService } from '../../services/sesion.service';
 import { Usuario } from '../../../interfaces/sesion';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -14,7 +16,7 @@ export class InicioSesionComponent {
   form: FormGroup;
   userData1: any; // Declarar userData aquí
 
-  constructor(private fb: FormBuilder, private _sesionService: SesionService, private router:Router ) {
+  constructor(private fb: FormBuilder, private _sesionService: SesionService, private router:Router, private cookieService:CookieService ) {
     this.form = this.fb.group({
       user: ['', [Validators.maxLength(30), Validators.required]],
       password: ['', [Validators.maxLength(30), Validators.required]],
@@ -36,6 +38,9 @@ export class InicioSesionComponent {
       next: (userData) =>{
         console.log(userData);
         this.userData1= this.decodeToken(userData); 
+        this.cookieService.set('token_access', userData, 4, '/');
+        this.cookieService.set('token_user', this.userData1.USU_TIPOUSUARIO, 4, '/');
+        console.log(userData);
       },
       error:(errorData) =>{
         console.error(errorData);
@@ -43,6 +48,7 @@ export class InicioSesionComponent {
       complete: () =>{
         if(this.userData1?.tipoUsu===1){
           this.router.navigateByUrl("/coordinador");
+          console.log("entro");
         }else if(this.userData1?.tipoUsu===2){
           this.router.navigateByUrl("/docente");
         }
