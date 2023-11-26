@@ -1,19 +1,16 @@
 import { SentMessageInfo } from 'nodemailer';
 const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
-  host: "smtp.forwardemail.net",
-  port: 465,
-  secure: true,
+  service: 'gmail',
   auth: {
-    // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-    user: "autoevaluacionesunicauca@gmail.com",
-    pass: "pyzibcpuxesqpbba",
-  },
+      user: "autoevaluacionesunicauca@gmail.com",
+      pass: "pyzibcpuxesqpbba"
+    }
 });
 
 export const sendEmailToProfessor = async (user: any) => {
   let content: string = `<h1>Se encuentra activa la autoevaluación</h1><br><p>Para realizarla ingrese al siguiente link:</p><br><a href='${URL}autoevaluaciones/login'>Realizar autoevaluación</a>`;
-
+  console.log("Correo enviado: " + user.USU_CORREO);
   let mailOptions = {
     from: "autoevaluacionesunicauca@gmail.com",
     to: user.USU_CORREO,

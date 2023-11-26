@@ -13,13 +13,14 @@ exports.sendEmailToAllProfessors = void 0;
 const sendEmail_1 = require("../models/util/sendEmail"); // Reemplaza con la ruta correcta
 const sendEmailToAllProfessors = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const professors = req.body.professors;
+        const professors = req.body.users;
         for (let professor of professors) {
             yield (0, sendEmail_1.sendEmailToProfessor)(professor);
         }
         res.status(200).json({ message: 'Correos enviados con éxito' });
     }
     catch (error) {
+        //console.log(error);
         res.status(500).json({ error: 'Error al enviar correos' });
     }
 });

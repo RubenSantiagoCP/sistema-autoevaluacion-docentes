@@ -4,12 +4,13 @@ import { sendEmailToProfessor, sendEmailToCordinator, sendEmailToRector } from '
 
 export const sendEmailToAllProfessors = async (req: Request, res: Response): Promise<void> => {
     try {
-        const professors = req.body.professors as any[]; 
+        const professors = req.body.users;
         for (let professor of professors) {
             await sendEmailToProfessor(professor);
         }
         res.status(200).json({ message: 'Correos enviados con éxito' });
     } catch (error) {
+        //console.log(error);
         res.status(500).json({ error: 'Error al enviar correos' });
     }
 };
