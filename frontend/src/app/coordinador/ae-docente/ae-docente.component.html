@@ -7,7 +7,9 @@
                     <div class="card-body p-0">
                         <form [formGroup]="form" (ngSubmit)="addUsuario()">
                             <div class="row g-0">
-                                <div class="titulo"><h2>{{operacion}} docente</h2></div>
+                                <div class="titulo">
+                                    <h2>{{operacion}} docente</h2>
+                                </div>
                                 <div class="col-lg-6">
                                     <div class="p-5">
                                         <h4 class="fw-normal mb-4" style="color: rgb(255, 255, 255);">Informacion
@@ -25,38 +27,43 @@
 
                                         <div class="col-md-6 mb-4 pb-2">
                                             <div class="form-outline inputbox">
-                                                <input type="number" class="form-control-sm" formControlName="identificacion" required >
-                                                 <label for="">identificacion</label>
+                                                <input type="number" class="form-control-sm"
+                                                    formControlName="identificacion" required>
+                                                <label for="">identificacion</label>
                                             </div>
 
-                                            <span *ngIf="form.get('identificacion')?.hasError('required') && form.get('identificacion')?.touched">
+                                            <span
+                                                *ngIf="form.get('identificacion')?.hasError('required') && form.get('identificacion')?.touched">
                                                 Campo requerido
                                             </span>
                                         </div>
 
                                         <div class="col-md-6 mb-4 pb-2">
                                             <div class="form-outline inputbox">
-                                                <input type="text" class="form-control-sm" formControlName="nombre" 
+                                                <input type="text" class="form-control-sm" formControlName="nombre"
                                                     required>
                                                 <label for="">Nombres</label>
                                             </div>
 
-                                            <span *ngIf="form.get('nombre')?.hasError('required') && form.get('nombre')?.touched">
+                                            <span
+                                                *ngIf="form.get('nombre')?.hasError('required') && form.get('nombre')?.touched">
                                                 Campo requerido
                                             </span>
                                         </div>
 
                                         <div class="col-md-6 mb-4 pb-2">
                                             <div class="form-outline inputbox">
-                                                <input type="text" class="form-control-sm" formControlName="apellido" 
+                                                <input type="text" class="form-control-sm" formControlName="apellido"
                                                     required>
                                                 <label for="">Apellidos</label>
                                             </div>
 
-                                            <span *ngIf="form.get('apellido')?.hasError('required') && form.get('apellido')?.touched">
+                                            <span
+                                                *ngIf="form.get('apellido')?.hasError('required') && form.get('apellido')?.touched">
                                                 Campo requerido
                                             </span>
                                         </div>
+
 
                                         <div class="mb-4 pb-2">
                                             <select formControlName="genero" class="select">
@@ -73,18 +80,20 @@
                                         <h4 class="fw-normal mb-4">Información academica</h4>
 
                                         <div class="mb-4 pb-2">
-                                            <select class="select" formControlName="tipoDoc" >
-                                                <option *ngFor="let item of lstRoles" value="1">{{item.ROL_DESCRIPCION}}</option>
+                                            <select class="select" formControlName="tipoDoc">
+                                                <option *ngFor="let item of lstRoles" value="1">{{item.ROL_DESCRIPCION}}
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 mb-4 pb-2">
                                             <div class="form-outline inputbox">
-                                                <input type="email" class="form-control-sm" formControlName="correo" 
+                                                <input type="email" class="form-control-sm" formControlName="correo"
                                                     required>
                                                 <label for="">Correo electronico</label>
                                             </div>
 
-                                            <span *ngIf="form.get('correo')?.hasError('required') && form.get('correo')?.touched">
+                                            <span
+                                                *ngIf="form.get('correo')?.hasError('required') && form.get('correo')?.touched">
                                                 Campo requerido
                                             </span>
                                         </div>
@@ -92,13 +101,27 @@
                                         <div class="col-md-6 mb-4 pb-2">
                                             <div class="form-outline inputbox">
                                                 <input type="text" class="form-control-sm" formControlName="ultimoEst"
-                                                    required >
+                                                    required>
                                                 <label for="">Ultimo estudio</label>
                                             </div>
 
-                                            <span *ngIf="form.get('ultimoEst')?.hasError('required') && form.get('ultimoEst')?.touched">
+                                            <span
+                                                *ngIf="form.get('ultimoEst')?.hasError('required') && form.get('ultimoEst')?.touched">
                                                 Campo requerido
                                             </span>
+                                        </div>
+                                        <div class="col-md-6 mb-4 mt-6 pb-2 fechas">
+                                            <div class="form-outline inputbox">
+                                                <input type="date" class="fechas" formControlName="fechaInicio">
+                                                <label for="">Fecha de Inicio</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 mb-4s pb-2 fechas">
+                                            <div class="form-outline inputbox">
+                                                <input type="date" class="fechas" formControlName="fechaFin">
+                                                <label for="">Fecha de Fin</label>
+                                            </div>
                                         </div>
 
                                         <div class="col-md-6 mb-4 pb-2">
@@ -108,7 +131,10 @@
                                                 <label for="">Contraseña</label>
                                             </div>
 
-                                            <span *ngIf="form.get('contrasena')?.hasError('required') && form.get('contrasena')?.touched">
+
+
+                                            <span
+                                                *ngIf="form.get('contrasena')?.hasError('required') && form.get('contrasena')?.touched">
                                                 Campo requerido
                                             </span>
                                         </div>

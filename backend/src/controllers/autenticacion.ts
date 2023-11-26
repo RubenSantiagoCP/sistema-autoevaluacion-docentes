@@ -30,7 +30,6 @@ export const login = async (req: Request, res: Response) => {
           foto: usuario.USU_FOTO,
           correo: usuario.USU_CORREO,
           estado: usuario.USU_ESTADO,
-          rolId: usuario.USU_ROLID,
           tipoUsu: usuario.USU_TIPOUSUARIO,
         },
         "tu_secreto_secreto",

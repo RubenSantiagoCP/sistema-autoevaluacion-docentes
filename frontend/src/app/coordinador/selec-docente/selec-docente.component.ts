@@ -5,6 +5,7 @@ import { UserService } from '../../services/user.service';
 import { RolService } from '../../services/rol.service';
 import { Rol } from '../../../interfaces/rol';
 import { Usuario } from '../../../interfaces/sesion';
+import { DocenteService } from '../../services/docente.service';
 
 @Component({
   selector: 'app-selec-docente',
@@ -18,12 +19,10 @@ export class SelecDocenteComponent {
   lstRoles:Rol[] = [];
 
 
-  constructor(private usuarioService:UserService, private rolServicio:RolService){
+  constructor(private usuarioService:UserService, private rolServicio:RolService, private docenteService:DocenteService){
     this.obtenerDocentes();
     this.obtenerRoles();
   }
-
-
   
   obtenerDocentes() {
     this.usuarioService.getUsuarios().subscribe({
@@ -51,5 +50,8 @@ export class SelecDocenteComponent {
     return '';
   }
 
+  setDocenteSeleccionado(docente?: Usuario){
+    this.docenteService.setDocenteSeleccionado(docente);
+  }
 
 }

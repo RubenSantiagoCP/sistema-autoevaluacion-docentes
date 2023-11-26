@@ -72,7 +72,7 @@ export class GesDocenteComponent implements OnInit {
   setDocenteSeleccionado(id:number){
     this.docenteSeleccionado = this.listDocentes[id];
     this.docenteService.setDocenteSeleccionado(this.docenteSeleccionado);
-    this.docenteService.setRolDocenteSeleccionado(this.rolUsuario(""+this.docenteSeleccionado.USU_ROLID));
+    //this.docenteService.setRolDocenteSeleccionado(this.rolUsuario(""+this.docenteSeleccionado.USU_ROLID));
   }
 
   definirOperacion(operacion:number, docente:number){

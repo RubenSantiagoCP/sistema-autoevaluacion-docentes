@@ -8,6 +8,8 @@ import { Periodo } from '../../interfaces/periodo';
   providedIn: 'root'
 })
 export class PeriodoService {
+  periodoSeleccionado?: Periodo;
+
  // private myAppUrl
   myApiUrl:string = "api/periodos/";
   constructor(private http:HttpClient) { }
@@ -52,4 +54,12 @@ export class PeriodoService {
 
     return throwError(()=> new Error("Algo falló. Por favor intente nuevamente"));
   }
+
+  getPeriodoSeleccionado(){
+    return this.periodoSeleccionado;
+  }
+
+  setPeriodoSeleccionado(periodo?: Periodo){
+    this.periodoSeleccionado = periodo;
+  } 
 }

@@ -36,6 +36,12 @@ export class UserService {
     )
   }
 
+  getUsuarioByIdentificacion(identificacion: number){
+    return this.http.get<any>(environment.myAppUrl+this.myApiUrl+"ident/"+identificacion).pipe(
+      catchError(this.handleError)
+    )
+  }
+
   private handleError(error:HttpErrorResponse){
     if(error.status===0){
       console.log("Se ha producido un error", error.error);

@@ -2,7 +2,6 @@ import { Component,OnInit  } from '@angular/core';
 import { Docente } from '../../../interfaces/docente';
 import { EmailService } from '../../services/sendEmail.service';
 import { UserService } from '../../services/user.service';
-import { Usuario } from '../../../interfaces/usuario'
 
 
 @Component({

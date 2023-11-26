@@ -29,8 +29,8 @@ const Periodo = connection_1.default.define('periodo', {
         type: sequelize_1.DataTypes.INTEGER
     }
 }, {
-    createdAt: false, // Para no agregar las columnas a la base de datos
-    updatedAt: false, // Para no agregar las columnas a la base de datos
+    createdAt: false,
+    updatedAt: false,
     freezeTableName: true // El mismo nombre del  modelo al de la base de datos
 });
 exports.default = Periodo;

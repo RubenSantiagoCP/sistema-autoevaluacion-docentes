@@ -11,7 +11,7 @@ export class DocenteService {
   operacion?:number = 1;
   constructor() { }
 
-  setDocenteSeleccionado(usuarioSeleccionado:Usuario){
+  setDocenteSeleccionado(usuarioSeleccionado?:Usuario){
     this.docenteSeleccionado = usuarioSeleccionado;
   }
 

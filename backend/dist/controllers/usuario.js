@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUsuario = exports.createUsuario = exports.deleteUsuario = exports.getUsuario = exports.getUsuarios = void 0;
+exports.updateUsuario = exports.createUsuario = exports.deleteUsuario = exports.updateUsuarioEstadoById = exports.getUsuarioByIdentificacion = exports.getUsuario = exports.getUsuarios = void 0;
 const usuario_1 = __importDefault(require("../models/usuario"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 // Obtiene todos los usuarios
@@ -37,6 +37,64 @@ const getUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.getUsuario = getUsuario;
+// Obtiene un usuario por USR_IDENTIFICACION
+const getUsuarioByIdentificacion = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { identificacion } = req.params; // Obteniendo la identificación de req
+    const identificacionNumber = parseFloat(identificacion);
+    console.log('Identificación:', identificacionNumber);
+    try {
+        const usuario = yield usuario_1.default.findOne({
+            where: {
+                USR_IDENTIFICACION: identificacionNumber,
+            },
+        });
+        if (usuario) {
+            res.json(usuario);
+        }
+        else {
+            res.status(404).json({
+                msg: `No existe un usuario con la identificación ${identificacion}`,
+            });
+        }
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({
+            msg: 'Error interno del servidor',
+        });
+    }
+});
+exports.getUsuarioByIdentificacion = getUsuarioByIdentificacion;
+// Actualiza el estado de un usuario
+const updateUsuarioEstadoById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params; // Obteniendo el ID de req
+    const { nuevoEstado } = req.body; // El nuevo estado que llega en el cuerpo de la solicitud
+    console.log(id);
+    console.log(nuevoEstado);
+    try {
+        const [rowsUpdated, [updatedUsuario]] = yield usuario_1.default.update({ USU_ESTADO: nuevoEstado }, {
+            returning: true,
+            where: {
+                USU_ID: id,
+            },
+        });
+        if (rowsUpdated > 0) {
+            res.json(updatedUsuario);
+        }
+        else {
+            res.status(404).json({
+                msg: `No existe un usuario con el ID ${id}`,
+            });
+        }
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({
+            msg: 'Error interno del servidor',
+        });
+    }
+});
+exports.updateUsuarioEstadoById = updateUsuarioEstadoById;
 // Elimina un usuario
 const deleteUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params; // Obteniendo el id de req

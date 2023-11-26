@@ -11,7 +11,6 @@ export interface Usuario {
     USU_CLAVE: string;
     USU_CORREO: string;
     USU_ESTADO: number;
-    USU_ROLID: number;
     USU_TIPOUSUARIO: number;
   }
   

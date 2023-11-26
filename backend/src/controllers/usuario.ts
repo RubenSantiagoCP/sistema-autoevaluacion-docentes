@@ -25,6 +25,67 @@ export const getUsuario = async (req: Request, res: Response) => {
     }
 }
 
+// Obtiene un usuario por USR_IDENTIFICACION
+export const getUsuarioByIdentificacion = async (req: Request, res: Response) => {
+    const { identificacion } = req.params; // Obteniendo la identificación de req
+    const identificacionNumber = parseFloat(identificacion);
+    console.log('Identificación:', identificacionNumber);
+    try {
+        const usuario = await Usuario.findOne({
+            where: {
+                USR_IDENTIFICACION: identificacionNumber,
+            },
+        });
+
+        if (usuario) {
+            res.json(usuario);
+        } else {
+            res.status(404).json({
+                msg: `No existe un usuario con la identificación ${identificacion}`,
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            msg: 'Error interno del servidor',
+        });
+    }
+};
+
+// Actualiza el estado de un usuario
+export const updateUsuarioEstadoById = async (req: Request, res: Response) => {
+    const { id } = req.params; // Obteniendo el ID de req
+    const { nuevoEstado } = req.body; // El nuevo estado que llega en el cuerpo de la solicitud
+
+    console.log(id);
+    console.log(nuevoEstado);
+
+    try {
+        const [rowsUpdated, [updatedUsuario]] = await Usuario.update(
+            { USU_ESTADO: nuevoEstado },
+            {
+                returning: true,
+                where: {
+                    USU_ID: id,
+                },
+            }
+        );
+
+        if (rowsUpdated > 0) {
+            res.json(updatedUsuario);
+        } else {
+            res.status(404).json({
+                msg: `No existe un usuario con el ID ${id}`,
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            msg: 'Error interno del servidor',
+        });
+    }
+};
+
 // Elimina un usuario
 export const deleteUsuario = async (req: Request, res: Response) => {
     const { id } = req.params; // Obteniendo el id de req

@@ -17,11 +17,11 @@
         <tr *ngFor="let item of lstPeriodos">
           <td>{{ item.PER_NOMBRE }}</td>
           <td>{{ item.PER_SEMESTRE }}</td>
-          <td>{{ item.PER_FECHAFIN?.getFullYear}}</td>
-          <td>{{ item.PER_FECHAINICIO }}</td>
-          <td>{{ (item.PER_FECHAFIN)}}</td>
+          <td>{{ item.PER_FECHAINICIO | date:'yyyy' }}</td>
+          <td>{{ item.PER_FECHAINICIO | date:'yyyy-MM-dd' }}</td>
+          <td>{{ item.PER_FECHAFIN| date:'yyyy-MM-dd' }}</td>
           <td>
-            <button type="button" class="btn btn-seleccionar" routerLink="docente">
+            <button type="button" class="btn btn-seleccionar" (click)="setPeriodoSeleccionado(item)" routerLink="docente">
               <i class="bi bi-check2"></i>
               Seleccionar
             </button>

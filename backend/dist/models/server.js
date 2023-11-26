@@ -23,6 +23,7 @@ const tipoLabor_1 = __importDefault(require("../routes/tipoLabor"));
 const periodo_1 = __importDefault(require("../routes/periodo"));
 const notificacion_1 = __importDefault(require("../routes/notificacion"));
 const usunot_1 = __importDefault(require("../routes/usunot"));
+const userol_1 = __importDefault(require("../routes/userol"));
 const sendEmailRoutes_1 = __importDefault(require("../routes/sendEmailRoutes"));
 const connection_1 = __importDefault(require("../db/connection"));
 class Server {
@@ -59,6 +60,7 @@ class Server {
         this.app.use('/api/notificaciones', notificacion_1.default);
         this.app.use('/api/usunot', usunot_1.default);
         this.app.use('/api/sendEmail', sendEmailRoutes_1.default);
+        this.app.use('/api/userol', userol_1.default);
     }
     //
     midlewares() {
