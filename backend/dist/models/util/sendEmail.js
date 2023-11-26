@@ -12,17 +12,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendEmailToRector = exports.sendEmailToCordinator = exports.sendEmailToProfessor = void 0;
 const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
-    host: "smtp.forwardemail.net",
-    port: 465,
-    secure: true,
+    service: 'gmail',
     auth: {
-        // TODO: replace `user` and `pass` values from <https://forwardemail.net>
         user: "autoevaluacionesunicauca@gmail.com",
-        pass: "pyzibcpuxesqpbba",
-    },
+        pass: "pyzibcpuxesqpbba"
+    }
 });
 const sendEmailToProfessor = (user) => __awaiter(void 0, void 0, void 0, function* () {
     let content = `<h1>Se encuentra activa la autoevaluación</h1><br><p>Para realizarla ingrese al siguiente link:</p><br><a href='${URL}autoevaluaciones/login'>Realizar autoevaluación</a>`;
+    console.log("Correo enviado: " + user.USU_CORREO);
     let mailOptions = {
         from: "autoevaluacionesunicauca@gmail.com",
         to: user.USU_CORREO,
