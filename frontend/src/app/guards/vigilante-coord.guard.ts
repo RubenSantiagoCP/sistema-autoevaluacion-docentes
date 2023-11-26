@@ -14,20 +14,19 @@ export class VigilanteCoordGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    const isAllowed = this.cookieService.check('token_access');
+    let isAllowed = this.cookieService.check('token_access');
     const isAllowedUser = parseInt(this.cookieService.get("token_user"));
+    console.log("Hola mundo");
 
-
-    if (!isAllowed) {
+    if (!isAllowed && isAllowedUser!==1) {
       // Redirige a otra ruta o muestra un mensaje de error.
-      this.router.navigate(['/']);
+      this.router.navigate(['**']);
     }
 
+    
     if(isAllowedUser!==1){
-      isAllowed === false;
+      isAllowed = false;
     }
-
-   
 
     return isAllowed;
   }

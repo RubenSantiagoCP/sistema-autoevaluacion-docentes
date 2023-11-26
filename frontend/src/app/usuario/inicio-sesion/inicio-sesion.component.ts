@@ -14,7 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class InicioSesionComponent {
   rutaDestino: string = '';
   form: FormGroup;
-  userData1: any; // Declarar userData aquí
+  userData1?:any = ''; // Declarar userData aquí
 
   constructor(private fb: FormBuilder, private _sesionService: SesionService, private router:Router, private cookieService:CookieService ) {
     this.form = this.fb.group({
@@ -38,18 +38,17 @@ export class InicioSesionComponent {
       next: (userData) =>{
         console.log(userData);
         this.userData1= this.decodeToken(userData); 
-        this.cookieService.set('token_access', userData, 4, '/');
-        this.cookieService.set('token_user', this.userData1.USU_TIPOUSUARIO, 4, '/');
-        console.log(userData);
+        this.cookieService.set('token_access', userData, 4);
+        this.cookieService.set('token_user', ""+this.userData1?.tipoUsu, 4);
       },
       error:(errorData) =>{
         console.error(errorData);
       },
       complete: () =>{
-        if(this.userData1?.tipoUsu===1){
+        if(this.userData1?.tipoUsu===1 && this.userData1?.estado==1){
           this.router.navigateByUrl("/coordinador");
           console.log("entro");
-        }else if(this.userData1?.tipoUsu===2){
+        }else if(this.userData1?.tipoUsu===2 && this.userData1?.estado==1){
           this.router.navigateByUrl("/docente");
         }
       }  

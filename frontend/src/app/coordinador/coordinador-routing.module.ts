@@ -28,12 +28,12 @@ const routes: Routes = [
   {path: 'docentes/informacion', component: InfoDocenteComponent,  canActivate:[VigilanteCoordGuard]},
   {path: 'docentes/edit', component: AeDocenteComponent,  canActivate:[VigilanteCoordGuard]},
   {path: 'docentes/registrar', component: AeDocenteComponent,  canActivate:[VigilanteCoordGuard]},
-  {path: 'periodos/periodo', component: PeriodoComponent},
-  {path: 'periodos/edit/:id', component: PeriodoComponent},
+  {path: 'periodos/periodo', component: PeriodoComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'periodos/edit/:id', component: PeriodoComponent,  canActivate:[VigilanteCoordGuard]},
   {path: 'reporte', component: ReporteComponent,  canActivate:[VigilanteCoordGuard]},
   {path: 'revisar', component: RevisarAutoComponent,  canActivate:[VigilanteCoordGuard]},
   {path: 'revisar/items', component: RevisarItemsComponent,  canActivate:[VigilanteCoordGuard]},
-  {path: 'periodos', component: GesPeriodoComponent}
+  {path: 'periodos', component: GesPeriodoComponent,  canActivate:[VigilanteCoordGuard]}
 ];
 
 @NgModule({

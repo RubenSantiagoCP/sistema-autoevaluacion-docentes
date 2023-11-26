@@ -92,6 +92,7 @@ export class PeriodoComponent {
     };
 
     if (this.id !== 0) {
+      console.log("Entraaaaa!!!   editar!");
       //editar
       this.periodoService.updatePeriodo(this.id, periodo).subscribe(() => {
         console.log('Se actualizo correctamente el periodo')
@@ -100,6 +101,7 @@ export class PeriodoComponent {
       this.toastr.success('El periodo se actulizo con exito')
     } else {
       //Agregar
+      console.log("Entraaaaa!!!!");
       this.periodoService.addPeriodo(periodo).subscribe({
         next: () => {
           this.form.reset();

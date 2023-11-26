@@ -9,31 +9,25 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class VigilanteDocenteGuard implements CanActivate {
-
+  constructor(private router: Router, private cookieService:CookieService) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    const isAllowed = this.cookieService.check('token_access');
+    let isAllowed = this.cookieService.check('token_access');
     const isAllowedUser = parseInt(this.cookieService.get("token_user"));
+    console.log("Hola mundo "+ isAllowedUser);
 
-
-    if (!isAllowed) {
+    if (!isAllowed && isAllowedUser!==2) {
       // Redirige a otra ruta o muestra un mensaje de error.
-      this.router.navigate(['/']);
+      this.router.navigate(['**']);
     }
 
-    if(isAllowedUser!==2){
     
-      isAllowed === false;
+    if(isAllowedUser!==2){
+      isAllowed = false;
     }
-
-    console.log("entra weee "+isAllowedUser);
-
-   
 
     return isAllowed;
   }
-
-  constructor(private router: Router, private cookieService:CookieService) {}
 }

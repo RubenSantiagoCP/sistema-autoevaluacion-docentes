@@ -6,6 +6,7 @@ import { PrincipalComponent } from './principal/principal.component';
 import { InfoPersonalComponent } from './info-personal/info-personal.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RealizarAutoevComponent } from './realizar-autoev/realizar-autoev.component';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -18,6 +19,9 @@ import { RealizarAutoevComponent } from './realizar-autoev/realizar-autoev.compo
   imports: [
     CommonModule,
     DocenteRoutingModule
+  ],
+  providers : [
+    CookieService
   ]
 })
 export class DocenteModule { }

@@ -37,6 +37,7 @@ export class PeriodoService {
   }
 
   addPeriodo(periodo:Periodo){
+    console.log(periodo);
     return this.http.post(environment.myAppUrl+this.myApiUrl, periodo).pipe(
       catchError(this.handleError)
     )

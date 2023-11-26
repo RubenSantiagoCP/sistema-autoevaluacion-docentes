@@ -6,9 +6,9 @@ import { RealizarAutoevComponent } from './realizar-autoev/realizar-autoev.compo
 import { VigilanteDocenteGuard } from '../guards/vigilante-doc.guard';
 
 const routes: Routes = [
-  {path: '', component: PrincipalComponent, canActivate: [VigilanteDocenteGuard]},
-  {path: 'info', component: InfoPersonalComponent, canActivate: [VigilanteDocenteGuard]},
-  {path: 'autoevaluacion', component: RealizarAutoevComponent, canActivate: [VigilanteDocenteGuard]}
+  {path: '', component: PrincipalComponent},
+  {path: 'info', component: InfoPersonalComponent},
+  {path: 'autoevaluacion', component: RealizarAutoevComponent}
 ];
 
 @NgModule({

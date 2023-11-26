@@ -33,5 +33,6 @@ export class NavbarComponent implements OnInit{
     this.sesionService.logout();
     this.router.navigate(["/"]);
     this.cookieService.delete('token_access', '/');
+    this.cookieService.deleteAll();
   }
 }
