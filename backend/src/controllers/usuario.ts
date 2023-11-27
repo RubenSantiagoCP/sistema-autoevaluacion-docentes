@@ -81,6 +81,32 @@ export const getUsuarioByIdentificacion = async (req: Request, res: Response) =>
     }
 };
 
+export const getUsuarioByType = async (req: Request, res: Response) => {
+    const { type } = req.params; // Obteniendo la identificación de req
+
+    console.log('Tipo: :', type);
+    try {
+        const usuario = await Usuario.findAll({
+            where: {
+                USU_TIPOUSUARIO: type,
+            },
+        });
+
+        if (usuario) {
+            res.json(usuario);
+        } else {
+            res.status(404).json({
+                msg: `No existe un usuario con el tipo ${type}`,
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            msg: 'Error interno del servidor',
+        });
+    }
+};
+
 export const updateUsuarioEstadoById = async (req: Request, res: Response) => {
     const { id } = req.params; // Obteniendo el ID de req
     const { nuevoEstado } = req.body; // El nuevo estado que llega en el cuerpo de la solicitud

@@ -8,6 +8,7 @@ router.get('/ident/:identificacion', usuario_1.getUsuarioByIdentificacion);
 router.get('/estado/:id', usuario_1.updateUsuarioEstadoById);
 router.get('/:id', usuario_1.getUsuario);
 router.get('/', usuario_1.getUsuarios);
+router.get('/type/:type', usuario_1.getUsuarioByType);
 router.delete('/:id', usuario_1.deleteUsuario);
 router.post('/', usuario_1.createUsuario);
 router.put('/:id', usuario_1.updateUsuario);

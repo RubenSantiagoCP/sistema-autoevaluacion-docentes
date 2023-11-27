@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModuloAutoevComponent } from './modulo-autoev.component';
+import { RevisarAutoComponent } from './revisar-auto.component';
 
-describe('ModuloAutoevComponent', () => {
-  let component: ModuloAutoevComponent;
-  let fixture: ComponentFixture<ModuloAutoevComponent>;
+describe('RevisarAutoComponent', () => {
+  let component: RevisarAutoComponent;
+  let fixture: ComponentFixture<RevisarAutoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ModuloAutoevComponent]
+      declarations: [RevisarAutoComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ModuloAutoevComponent);
+    fixture = TestBed.createComponent(RevisarAutoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

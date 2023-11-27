@@ -1,0 +1,76 @@
+.title {
+    display: flex;
+    place-items: center;
+    margin: 20px 30px;
+    justify-content: space-between;
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    margin-bottom: 50px;
+  }
+  
+  .inactivar{
+    border-radius: 25px;
+  }
+  
+  .container{
+    /*height: 500px;*/
+    margin-top: 20px;
+    padding: 30px;
+  }
+  
+  .operaciones{
+    align-items: center;
+    place-items: center;
+    margin-left: 20px;
+  }
+  
+  section{
+    display: flex;
+    justify-content: center;
+    /*align-items: center;*/
+    min-height: 100vh;
+    width: 100%;
+  
+    background: transparent;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 40px;
+  }
+  
+  .form-box{
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    backdrop-filter: blur(20px);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .titulosT th {
+    background-color: transparent;
+    color: white;
+  }
+  
+  .cuerpoT td{
+    background-color: rgba(255, 255, 255, 0);
+    /*color: rgb(255, 255, 255);  Puedes cambiar el color del texto en el cuerpo si lo necesitas */
+    border: none;
+    color: white;
+  }
+  
+  .cuerpoT i{
+    color: rgb(255, 255, 255); /* Puedes cambiar el color del texto en el cuerpo si lo necesitas */
+    justify-content: center;
+    font-size: 15px;
+  }
+  
+  .btn{
+    background-color: #001C4D;
+    color: white;
+  }
+  

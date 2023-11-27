@@ -43,6 +43,12 @@ export class UserService {
     )
   }
 
+  getUserByType(type:number){
+    return this.http.get<any>(environment.myAppUrl+this.myApiUrl+"type/"+type).pipe(
+      catchError(this.handleError)
+    )
+  }
+
   updateEstadoUser(id?:number,usuario?:Usuario){
     return this.http.put(environment.myAppUrl+this.myApiUrl+"estado/"+id, usuario).pipe(
       catchError(this.handleError)

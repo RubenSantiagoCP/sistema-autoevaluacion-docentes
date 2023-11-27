@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: 'coordinador', loadChildren: () => import('./coordinador/coordinador.module').then(m=>m.CoordinadorModule), canActivate:[VigilanteCoordGuard]},
   {path: 'docente', loadChildren: () => import('./docente/docente.module').then(m=>m.DocenteModule), canActivate: [VigilanteDocenteGuard]},
   {path: 'decano', loadChildren: () => import('./decano/decano.module').then(m=>m.DecanoModule), canActivate: [VigilanteDecanoGuard]},
-  {path: '**', component: NotFoundComponent}
+  {path: '**', component: NotFoundComponent} 
 ];
 
 @NgModule({

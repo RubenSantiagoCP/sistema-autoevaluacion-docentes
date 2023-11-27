@@ -13,11 +13,11 @@ import { UserolService } from '../../services/userol.service';
 import { Userol } from '../../../interfaces/userol';
 
 @Component({
-  selector: 'app-item-evaluacion', 
-  templateUrl: './item-evaluacion.component.html',
-  styleUrl: './item-evaluacion.component.css',
+  selector: 'app-items',
+  templateUrl: './items.component.html',
+  styleUrl: './items.component.css'
 })
-export class ItemEvaluacionComponent {
+export class ItemsComponent {
   docente?:Usuario;
   periodo?: Periodo;
   lstEvaluaciones?: Evaluacion[] =[];
@@ -26,7 +26,7 @@ export class ItemEvaluacionComponent {
   lstUserRol?: Userol[] = [];
   useRol?: Userol;
 
-  constructor( private docenteService: DocenteService, private router: Router, private evaluacionService: EvaluacionService) {
+  constructor(private lstlabores: ItemService, private docenteService: DocenteService, private router: Router, private evaluacionService: EvaluacionService) {
     
     this.docente = evaluacionService.getDocente();
     this.periodo = evaluacionService.getPeriodo();
@@ -61,18 +61,14 @@ export class ItemEvaluacionComponent {
     });
   }
 
+  laboresDocente = this.lstlabores.getLabores();
+
   calcularHoras():number{
-    let horas = 0;
-    for(let eva of this.lstEvaluaciones || []){
-      let labor: Labor = this.obtenerInfoLabor(eva.LAB_ID);
-      let horasLabor:string = ""+ labor.LAB_HORAS;
-      horas = horas + parseInt(horasLabor);
-    }
-    return horas;
-  } 
+    return 1;
+  }
 
   obtenerEvaluaciones() {
-    this.evaluacionService.getEvaluacionesPeriodo(this.useRol?.USEROL_ID, this.periodo?.PER_ID).subscribe({
+    this.evaluacionService.getEvaluacionDocente(this.useRol?.USEROL_ID).subscribe({
       next: (periodosData) => {
         this.lstEvaluaciones = periodosData;
       },
@@ -123,5 +119,4 @@ export class ItemEvaluacionComponent {
       return "No valido";
     }
   }
-
 }

@@ -40,14 +40,12 @@ export class SelecDocenteComponent {
   }
 
   obtenerDocentes() {
-    for (let item of this.lstUseRol) {
-      let id = item.USU_ID;
-      this.usuarioService.getUser(id).subscribe({
+  
+      this.usuarioService.getUserByType(2).subscribe({
         next: (docenteData) => {
-          this.lstDocentes.push(docenteData);
+          this.lstDocentes = docenteData;
         },
       });
-    }
   }
 
   obtenerRoles() {

@@ -49,7 +49,7 @@ export class GesDocenteComponent implements OnInit {
   }
 
   obtenerDocentes() {
-    this.usuarioService.getUsuarios().subscribe({
+    this.usuarioService.getUserByType(2).subscribe({
       next: (docenteData) => {
         this.listDocentes = docenteData;
       },
@@ -60,6 +60,7 @@ export class GesDocenteComponent implements OnInit {
     this.rolServicio.getRoles().subscribe({
       next: (rolData) => {
           this.lstRoles = rolData;
+          console.log(rolData);
       },
     });
   }

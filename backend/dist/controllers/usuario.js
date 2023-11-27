@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUsuario = exports.createUsuario = exports.deleteUsuario = exports.updateUsuarioEstadoById = exports.getUsuarioByIdentificacion = exports.getUsuario = exports.getUsuarios = exports.getUsuarioDetallado = void 0;
+exports.updateUsuario = exports.createUsuario = exports.deleteUsuario = exports.updateUsuarioEstadoById = exports.getUsuarioByType = exports.getUsuarioByIdentificacion = exports.getUsuario = exports.getUsuarios = exports.getUsuarioDetallado = void 0;
 const usuario_1 = __importDefault(require("../models/usuario"));
 const userol_1 = __importDefault(require("../models/userol"));
 const evaluacion_1 = __importDefault(require("../models/evaluacion"));
@@ -92,6 +92,32 @@ const getUsuarioByIdentificacion = (req, res) => __awaiter(void 0, void 0, void 
     }
 });
 exports.getUsuarioByIdentificacion = getUsuarioByIdentificacion;
+const getUsuarioByType = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { type } = req.params; // Obteniendo la identificación de req
+    console.log('Tipo: :', type);
+    try {
+        const usuario = yield usuario_1.default.findAll({
+            where: {
+                USU_TIPOUSUARIO: type,
+            },
+        });
+        if (usuario) {
+            res.json(usuario);
+        }
+        else {
+            res.status(404).json({
+                msg: `No existe un usuario con el tipo ${type}`,
+            });
+        }
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({
+            msg: 'Error interno del servidor',
+        });
+    }
+});
+exports.getUsuarioByType = getUsuarioByType;
 const updateUsuarioEstadoById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params; // Obteniendo el ID de req
     const { nuevoEstado } = req.body; // El nuevo estado que llega en el cuerpo de la solicitud

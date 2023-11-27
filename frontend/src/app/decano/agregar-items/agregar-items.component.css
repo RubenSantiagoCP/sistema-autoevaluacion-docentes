@@ -7,32 +7,17 @@
     font-weight: bold;
   }
   
-  .inactivar{
-    border-radius: 25px;
-  }
-  
   .container{
-    /*height: 500px;*/
     margin-top: 20px;
     padding: 30px;
-  }
-  
-  .operaciones{
-    align-items: center;
-    place-items: center;
-    margin-left: 20px;
   }
   
   section{
     display: flex;
     justify-content: center;
-    /*align-items: center;*/
     min-height: 100vh;
     width: 100%;
-  
     background: transparent;
-    background-position: center;
-    background-size: cover;
   }
   
   .form-box{
@@ -56,28 +41,18 @@
   
   .cuerpoT td{
     background-color: rgba(255, 255, 255, 0);
-    /*color: rgb(255, 255, 255);  Puedes cambiar el color del texto en el cuerpo si lo necesitas */
     border: none;
     color: white;
   }
   
   .cuerpoT i{
-    color: rgb(255, 255, 255); /* Puedes cambiar el color del texto en el cuerpo si lo necesitas */
+    color: rgb(255, 255, 255); 
     justify-content: center;
     font-size: 15px;
   }
   
-  h4{
-    color: red;
-  }
-  
   .title .btn{
     background-color: #001C4D;
-    color: white;
-  }
-  
-  .inactivar{
-    background-color: #880d1b;
     color: white;
   }
   
@@ -120,3 +95,36 @@
     color: white;
   }
   
+  .tituloD{
+    color: aqua;
+  }
+  
+  .columna{
+    display: flex;
+    width: 500px;
+  }
+  
+  .columna label{
+    width: 200px;
+    padding: 20px;
+  }
+  
+  .columna input {
+    border: none;
+    border-bottom: 1px solid #ccc; /* Añade una línea en la parte inferior */
+    margin-bottom: -10px; /* Agrega un espacio para la línea */
+  }
+  
+  .checkbox{
+    width: 20px;
+  }
+  
+  .info-labor{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  h3{
+    text-align: center;
+  }

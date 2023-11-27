@@ -1,13 +1,24 @@
-import { Component,OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Docente } from '../../../interfaces/docente';
 import { EmailService } from '../../services/sendEmail.service';
 import { UserService } from '../../services/userDetallado.service';
 import { EvaluacionService } from '../../services/evaluacion.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioDetallado } from '../../../interfaces/usuarioDetallado';
 import { UserNotificacion } from '../../../interfaces/usunot';
 import { PeriodoService } from '../../services/periodo.service';
+
 import { NotificacionService } from '../../services/notificacion.service';
+
+import { DocenteService } from '../../services/docente.service';
+import { Periodo } from '../../../interfaces/periodo';
+import { Evaluacion } from '../../../interfaces/evaluacion';
+import { Labor } from '../../../interfaces/labor';
+import { TipoLabor } from '../../../interfaces/tipoLabor';
+import { UserolService } from '../../services/userol.service';
+import { Userol } from '../../../interfaces/usuarioDetallado';
+import { Usuario } from '../../../interfaces/sesion';
+import { info } from 'console';
 
 
 @Component({
@@ -16,23 +27,63 @@ import { NotificacionService } from '../../services/notificacion.service';
   styleUrl: './revisar-auto.component.css',
 })
 export class RevisarAutoComponent implements OnInit {
-  constructor(private emailService: EmailService,private userService: UserService, private periodoService : PeriodoService, private notificacionService : NotificacionService) {}
+
   opcion: number = 1;
   listDocentes: UsuarioDetallado[] = [];
   notificaciones: UserNotificacion[] = [];
   
+
+  docente1?: Usuario;
+  periodo?: Periodo;
+  lstEvaluaciones?: Evaluacion[] = [];
+  lstLabores?: Labor[] = [];
+  lstTipoLabores?: TipoLabor[] = [];
+  lstUserRol?: Userol[] = [];
+  useRol?: Userol;
+
+  constructor(
+    private emailService: EmailService,
+    private userService: UserService,
+    private periodoService: PeriodoService,
+    private docenteService: DocenteService,
+    private router: Router,
+    private evaluacionService: EvaluacionService,
+    private notificacionService: NotificacionService;
+  ) {
+    this.ngOnInit();
+    this.periodo = evaluacionService.getPeriodo();
+    this.lstLabores = this.obtenerLabores();
+    this.lstTipoLabores = this.obtenerTiposLabor();
+    this.useRol = docenteService.getUseRolSelecionado();
+  }
+
+
 
   ngOnInit() {
     this.cargarUsuarios();
     //this.evaluacionService.getReporte();
   }
 
+  tablasVisibles: boolean[] = [];
+
+  mostrarTablas(index: number): void {
+    this.tablasVisibles[index] = true;
+  }
+
+  ocultarTablas(index: number): void {
+    this.tablasVisibles[index] = false;
+  }
+
+  ocultarTodo() {
+    for (let i = 0; i < this.tablasVisibles.length; i++) {
+      this.tablasVisibles[i] = false;
+    }
+  }
+
   private cargarUsuarios() {
     this.userService.getUsuarioDetallado().subscribe({
-      next: (usuarios) => this.listDocentes = usuarios,
-      error: (error) => console.error('Error al obtener usuarios', error)
-      
-      
+      next: (usuarios) => (this.listDocentes = usuarios),
+      error: (error) => console.error('Error al obtener usuarios', error),
     });
   }
   private cargarNotificaciones() {
@@ -45,61 +96,124 @@ export class RevisarAutoComponent implements OnInit {
   lstDocentesMostrados: UsuarioDetallado[] = [];
 
   filterDocentes() {
-    const usuario: UsuarioDetallado = this.listDocentes[1];
+    this.lstDocentesMostrados = [];
+    this.cargarUsuarios();
+    console.log(this.listDocentes);
 
-// Accediendo al primer UserRol si existe
-if (usuario.userols && usuario.userols.length > 0) {
-    const primerUserRol = usuario.userols[0];
-    console.log(primerUserRol);
-
-    // Accediendo a las evaluaciones del primer UserRol si existen
-    if (primerUserRol.evaluacions && primerUserRol.evaluacions.length > 0) {
-        const primeraEvaluacion = primerUserRol.evaluacions[0];
-        console.log(primeraEvaluacion);
-    }
-}
-    
-   // console.log(this.listDocentes[1].Userol);
     this.lstDocentesMostrados.splice(0, this.lstDocentesMostrados.length);
 
     for (let i = 0; i < this.listDocentes.length; i++) {
       const docente = this.listDocentes[i];
-    
+
       if (docente.USU_TIPOUSUARIO === 2) {
         for (let j = 0; docente.userols && j < docente.userols.length; j++) {
           const userol = docente.userols[j];
-    
-          for (let k = 0; userol.evaluacions && k < userol.evaluacions.length; k++) {
+          let evaluacionesTer: Evaluacion[] = [];
+          let evaluacionesNoTer: Evaluacion[] = [];
+
+          for (
+            let k = 0;
+            userol.evaluacions && k < userol.evaluacions.length;
+            k++
+          ) {
             const evaluacion = userol.evaluacions[k];
-    
-            if (this.opcion === 1 && evaluacion.EVA_ESTADO === 1) {
-              this.lstDocentesMostrados.push(docente);
-              break; 
-            } else if (this.opcion === 2 && evaluacion.EVA_ESTADO === 2) {
-              this.lstDocentesMostrados.push(docente);
-              break; 
+            if (evaluacion.PER_ID === this.periodo?.PER_ID) {
+       
+              if (evaluacion.EVA_ESTADO === 2) {
+                evaluacionesTer.push(evaluacion);
+              } else if (evaluacion.EVA_ESTADO === 1) {
+                evaluacionesNoTer.push(evaluacion);
+              }
             }
+          }
+
+          if (evaluacionesTer.length > 0 || evaluacionesNoTer.length > 0) {
+            console.log("Periodo "+ this.periodo?.PER_NOMBRE);
+            if (this.opcion === 1) {
+              userol.evaluacions = evaluacionesTer;
+            } else {
+              userol.evaluacions = evaluacionesNoTer;
+            }
+
+            this.lstDocentesMostrados.push(docente);
           }
         }
       }
     }
   }
-  
 
   sendEmailsToDisplayedTeachers() {
-    if (Array.isArray(this.lstDocentesMostrados) && this.lstDocentesMostrados.length > 0) {
-      this.emailService.sendEmailsToProfessors(this.lstDocentesMostrados).subscribe({
-        next: () => console.log('Correos enviados con éxito a todos los docentes'),
-        error: (error) => console.error('Error al enviar correos', error)
-      });
+    if (
+      Array.isArray(this.lstDocentesMostrados) &&
+      this.lstDocentesMostrados.length > 0
+    ) {
+      this.emailService
+        .sendEmailsToProfessors(this.lstDocentesMostrados)
+        .subscribe({
+          next: () =>
+            console.log('Correos enviados con éxito a todos los docentes'),
+          error: (error) => console.error('Error al enviar correos', error),
+        });
     } else {
       console.error('No hay docentes para enviar correos');
     }
   }
-  
-  onButtonClick(option:number) {
+
+  onButtonClick(option: number) {
     this.opcion = option;
     this.filterDocentes();
   }
 
+  obtenerLabores(): any {
+    this.evaluacionService.getLstLabores().subscribe({
+      next: (periodosData) => {
+        this.lstLabores = periodosData;
+      },
+    });
+  }
+
+  obtenerTiposLabor(): any {
+    this.evaluacionService.getLstTipoLabores().subscribe({
+      next: (periodosData) => {
+        this.lstTipoLabores = periodosData;
+      },
+    });
+  }
+
+  obtenerUseRol() {
+    this.evaluacionService.getLstUserol().subscribe({
+      next: (periodosData) => {
+        this.lstUserRol = periodosData;
+      },
+    });
+  }
+
+  obtenerInfoLabor(id: number): any {
+    return this.lstLabores?.find((labor) => labor.LAB_ID === id);
+  }
+
+  obtenerInfoTipoLabor(id: number) {
+    return this.lstTipoLabores?.find((labor) => labor.TL_ID === id);
+  }
+
+  definirEstado(estado: number) {
+    if (estado === 1) {
+      return 'En ejecucion';
+    } else if (estado === 2) {
+      return 'Terminado';
+    } else if (estado === 3) {
+      return 'Cerrado';
+    } else {
+      return 'No valido';
+    }
+  }
+
+  infoEvaluaciones(userol?: Userol): any {
+    let lstEvaluaciones: Evaluacion[] = [];
+    for (let eva of userol?.evaluacions || []) {
+      lstEvaluaciones.push(eva);
+    }
+
+    return lstEvaluaciones;
+  }
 }

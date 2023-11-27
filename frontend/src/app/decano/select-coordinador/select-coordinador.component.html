@@ -1,1 +1,29 @@
-<p>select-coordinador works!</p>
+
+<app-navbar class="componente-superior"></app-navbar>
+
+<section>
+  <div class="container form-box">
+    <button type="button" class="btn btn-secondary" routerLink="/decano/modulo">Volver</button>
+    <h1 class="title">Seleccione el docente</h1>
+    
+    <table class="table">
+      <!-- Encabezado de la tabla -->
+      <thead class="titulosT">
+        <tr>
+          <th>Nombre</th>
+          <th>Id</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="cuerpoT">
+        <!-- Fila de la tabla con filtrado -->
+        <tr *ngFor="let docente of lstDocentes">
+          <td>{{docente.USU_NOMBRE}}</td>
+          <td>{{docente.USR_IDENTIFICACION}}</td>
+          <td>
+            <button routerLink="/decano/modulo/coordinador/items" type="button" (click)="setDocenteSeleccionado(docente)" class="btn btn-primary">Seleccionar</button>
+          </td>
+        </tr>
+      </tbody>
+
+

@@ -40,7 +40,9 @@ export class ModuloAutoevComponent {
       nuevaRuta = '/coordinador/modulo/docente'; // Modifica según tu estructura de rutas
     } else if (rutaActual === 'revisar') {
       nuevaRuta = '/coordinador/revisar/items'; // Modifica según tu estructura de rutas
-    } else {
+    } else if (rutaActual === 'reporte') {
+      nuevaRuta = '/coordinador/reporte/docentes'; // Modifica según tu estructura de rutas
+    }else {
       nuevaRuta = '/docente'; // Ruta por defecto si no estás en una ruta específica
     }
 

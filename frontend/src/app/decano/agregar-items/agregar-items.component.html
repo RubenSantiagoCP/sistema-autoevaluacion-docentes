@@ -1,0 +1,101 @@
+<app-navbar class="componente-superior"></app-navbar>
+<section>
+
+  <div class="container form-box">
+    <div class="parte-superior" *ngIf="!seleccionLabor">
+      <button type="button" class="btn btn-secondary" routerLink="/decano/modulo/coordinador/items">Volver</button>
+      <h1 class="mt-4 title">Seleccione la labor</h1>
+      <form class="form-inline mt-3">
+        <input type="text" name="campo-busqueda" class="form-control mb-2 mr-sm-2" id="busqueda"
+          placeholder="Ingrese el nombre de la labor" [(ngModel)]="filtroNombre">
+      </form>
+      <select id="opciones" [(ngModel)]="filtroTipoLabor">
+        <option value="0">Sin filtro</option>
+        <option *ngFor="let item of lstTipoLabores" [value]="item.TL_ID">{{ item.TL_DESCRIPCION }}</option>
+      </select>
+
+    </div>
+   
+
+    <div class="table-container mt-4" *ngIf="!seleccionLabor">
+      <table class="table">
+        <!-- Encabezado de la tabla -->
+        <thead class="titulosT">
+          <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Codigo</th>
+            <th>Tipo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="cuerpoT">
+          <!-- Fila de la tabla con filtrado -->
+          <tr *ngFor="let item of lstLabores | filterByNombreLabor:filtroNombre | filterByTipoLabor: filtroTipoLabor; let i = index">
+            <td>{{ item.LAB_ID }}</td>
+            <td>{{ item.LAB_NOMBRE}}</td>
+            <td>{{ tipoLaborCodigo( item.TL_ID )}}</td>
+            <td>{{tipoLaborDescripcion( item.TL_ID)}}</td>
+            <td>
+              <button type="button" class="btn btn-primary" (click)="mostrarInfo(item)">Seleccionar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="info-item mt-4 transition info-labor" id="desplegable" *ngIf="seleccionLabor">
+      <form action="">
+        <div class="form-group">
+          <h3 class="title">Agregar labor</h3>
+          <div class="columna ">
+            <label class="tituloD" for="nombre">Nombre labor:</label>
+            <input type="text"  value="{{itemSeleccionado?.LAB_NOMBRE}}" disabled>
+          </div>
+
+          <div class="columna ">
+            <label class="tituloD" for="tipo">Tipo labor:</label>
+            <input type="text" value="{{tipoLaborDescripcion(itemSeleccionado?.TL_ID)}}" disabled>
+          </div>
+
+          <div class="columna ">
+            <label class="tituloD" for="horas">Horas</label>
+            <input type="text" disabled value={{itemSeleccionado?.LAB_HORAS}}>
+          </div>
+
+          <div class="columna ">
+            <label class="tituloD" for="descripcion">Descripcion: </label>
+            <input type="text" disabled value="Ingenieria de Sistemas Obligatoria">
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <div class="columna ">
+            <label class="tituloD" for="fecha Inicio">Fecha de inicio: </label>
+            <input type="text" value="14/08/2023" disabled>
+          </div>
+          
+          <div class="columna ">
+            <label class="tituloD" for="fecha Inicio">Fecha fin: </label>
+            <input type="text" value="12/12/2023" disabled>
+          </div>
+          
+          <div class="columna ">
+            <label class="tituloD" for="estado">Estado </label>
+            <input type="text" value="En ejecución" disabled>
+          </div>
+          
+          <div class="columna ">
+            <label class="tituloD" for="Evaluacion">Evaluacion </label>
+            <input type="text" value="0" disabled>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-primary" (click)="agregarItem()">Agregar</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+</section>
