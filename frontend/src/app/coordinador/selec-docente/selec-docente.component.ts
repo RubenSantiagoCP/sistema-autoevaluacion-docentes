@@ -6,52 +6,73 @@ import { RolService } from '../../services/rol.service';
 import { Rol } from '../../../interfaces/rol';
 import { Usuario } from '../../../interfaces/sesion';
 import { DocenteService } from '../../services/docente.service';
+import { UserolService } from '../../services/userol.service';
+import { Userol } from '../../../interfaces/userol';
 
 @Component({
   selector: 'app-selec-docente',
   templateUrl: './selec-docente.component.html',
-  styleUrl: './selec-docente.component.css'
+  styleUrl: './selec-docente.component.css',
 })
 export class SelecDocenteComponent {
   filtroNombre: string = '';
-  lstDocentes:Usuario[] = [
-  ]
-  lstRoles:Rol[] = [];
+  lstDocentes: Usuario[] = [];
+  lstRoles: Rol[] = [];
+  lstUseRol: Userol[] = [];
 
-
-  constructor(private usuarioService:UserService, private rolServicio:RolService, private docenteService:DocenteService){
-    this.obtenerDocentes();
-    this.obtenerRoles();
+  constructor(
+    private usuarioService: UserService,
+    private rolServicio: RolService,
+    private docenteService: DocenteService,
+    private userolService: UserolService
+  ) {
+    this.obtenerUseRoles();
   }
-  
-  obtenerDocentes() {
-    this.usuarioService.getUsuarios().subscribe({
+
+  obtenerUseRoles() {
+    this.userolService.getUseRoles().subscribe({
       next: (docenteData) => {
-        this.lstDocentes = docenteData;
+        this.lstUseRol = docenteData;
+        this.obtenerDocentes();
+        this.obtenerRoles();
       },
     });
   }
 
-  obtenerRoles(){
+  obtenerDocentes() {
+    for (let item of this.lstUseRol) {
+      let id = item.USU_ID;
+      this.usuarioService.getUser(id).subscribe({
+        next: (docenteData) => {
+          this.lstDocentes.push(docenteData);
+        },
+      });
+    }
+  }
+
+  obtenerRoles() {
     this.rolServicio.getRoles().subscribe({
       next: (rolData) => {
-          this.lstRoles = rolData;
+        this.lstRoles = rolData;
+
       },
     });
   }
 
-  rolUsuario(id:string):any{
-    for(let item of this.lstRoles  ){
-        if(item.ROL_ID === parseInt(id)){
-          console.log(item.ROL_ID)
-          return item.ROL_DESCRIPCION;
-        }
+  rolUsuario(docente: Usuario): any {
+    let usurol:any = this.lstUseRol.find(objeto => objeto.USU_ID === docente.USU_ID)
+    for (let item of this.lstRoles) {
+      if (item.ROL_ID === usurol.ROL_ID) {
+        console.log(item.ROL_ID);
+        return item.ROL_DESCRIPCION;
+      }
     }
     return '';
   }
 
-  setDocenteSeleccionado(docente?: Usuario){
+  setDocenteSeleccionado(docente?: Usuario) {
     this.docenteService.setDocenteSeleccionado(docente);
+    let userol:any = this.lstUseRol.find(objeto => objeto.USU_ID === docente?.USU_ID);
+    this.docenteService.setUseRolSeleccionado(userol);
   }
-
 }

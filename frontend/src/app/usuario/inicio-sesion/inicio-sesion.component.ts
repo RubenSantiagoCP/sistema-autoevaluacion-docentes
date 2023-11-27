@@ -15,6 +15,8 @@ export class InicioSesionComponent {
   rutaDestino: string = '';
   form: FormGroup;
   userData1?:any = ''; // Declarar userData aquí
+  credencialesIncorrectas: boolean = false;
+  usuarioActivo: boolean = true;
 
   constructor(private fb: FormBuilder, private _sesionService: SesionService, private router:Router, private cookieService:CookieService ) {
     this.form = this.fb.group({
@@ -42,7 +44,13 @@ export class InicioSesionComponent {
         this.cookieService.set('token_user', ""+this.userData1?.tipoUsu, 4);
       },
       error:(errorData) =>{
-        console.error(errorData);
+        this.credencialesIncorrectas = true;
+        if (errorData.status === 401) {
+          this.credencialesIncorrectas = true;
+        } else {
+          //alert('Se produjo un error. Por favor, inténtelo más tarde.');
+          console.log(errorData);
+        }
       },
       complete: () =>{
         if(this.userData1?.tipoUsu===1 && this.userData1?.estado==1){
@@ -50,6 +58,8 @@ export class InicioSesionComponent {
           console.log("entro");
         }else if(this.userData1?.tipoUsu===2 && this.userData1?.estado==1){
           this.router.navigateByUrl("/docente");
+        }else{
+          this.usuarioActivo = false;
         }
       }  
     }

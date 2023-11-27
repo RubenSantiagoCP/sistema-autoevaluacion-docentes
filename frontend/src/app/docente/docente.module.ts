@@ -7,6 +7,8 @@ import { InfoPersonalComponent } from './info-personal/info-personal.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RealizarAutoevComponent } from './realizar-autoev/realizar-autoev.component';
 import { CookieService } from 'ngx-cookie-service';
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { CookieService } from 'ngx-cookie-service';
   ],
   imports: [
     CommonModule,
-    DocenteRoutingModule
+    DocenteRoutingModule,
+    FormsModule,
+
   ],
   providers : [
     CookieService

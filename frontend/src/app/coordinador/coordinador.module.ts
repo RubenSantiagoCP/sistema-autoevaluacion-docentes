@@ -22,6 +22,7 @@ import { ReporteComponent } from './reporte/reporte.component';
 import { FilterByNombreLabor } from './agregar-items/FilterByNameLabor';
 import { InfoDocenteComponent } from './info-docente/info-docente.component';
 import { GesPeriodoComponent } from './ges.periodo/ges.periodo.component';
+import { FilterByTipoLabor } from './agregar-items/FilterByTipyeLabor';
 @NgModule({
   declarations: [
     PrincipalComponent,
@@ -40,7 +41,8 @@ import { GesPeriodoComponent } from './ges.periodo/ges.periodo.component';
     ReporteComponent,
     FilterByNombreLabor,
     InfoDocenteComponent,
-    GesPeriodoComponent
+    GesPeriodoComponent,
+    FilterByTipoLabor
   ],
   imports: [
     CommonModule,

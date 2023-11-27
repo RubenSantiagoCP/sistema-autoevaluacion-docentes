@@ -118,3 +118,13 @@ input{
 .checkbox{
   width: 20px;
 }
+
+.info-labor{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h3{
+  text-align: center;
+}

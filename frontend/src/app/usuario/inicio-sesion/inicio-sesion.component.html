@@ -19,6 +19,8 @@
             <input type="password" formControlName="password" required>
             <label for="password">Contraseña</label>
           </div>
+          <span *ngIf="credencialesIncorrectas">Credenciales Incorrectas.</span>
+          <span *ngIf="!usuarioActivo">Uusario Inactivo</span>
           <button type="submit">Ingresar</button>
         </form>
       </div>

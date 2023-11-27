@@ -7,16 +7,6 @@
     <h1 class="title">Seleccione el docente</h1>
     <form class="form-inline">
       <input type="text" name="campo-busqueda" class="form-control mb-2 mr-sm-2" id="busqueda" placeholder="Ingrese el nombre del docente" [(ngModel)]="filtroNombre">
-    </form>
-
-            <form class="form-inline">
-            <div class="container-search">
-                <i class="bi bi-search"></i>
-                <input type="text" name="campo-busqueda" class="form-control mb-2 mr-sm-2" id="busqueda"
-                    placeholder="Ingrese el nombre del docente" [(ngModel)]="filtroNombre">
-            </div>
-
-        </form>
   
     <table class="table">
       <!-- Encabezado de la tabla -->
@@ -33,7 +23,7 @@
         <tr *ngFor="let docente of lstDocentes | filterByNombre:filtroNombre">
           <td>{{docente.USU_NOMBRE}}</td>
           <td>{{docente.USR_IDENTIFICACION}}</td>
-          <td>{{rolUsuario(docente.USU_ROLID)}}</td>
+          <td>{{rolUsuario(docente)}}</td>
           <td>
             <button routerLink="/coordinador/modulo/docente/items" type="button" (click)="setDocenteSeleccionado(docente)" class="btn btn-primary">Seleccionar</button>
           </td>

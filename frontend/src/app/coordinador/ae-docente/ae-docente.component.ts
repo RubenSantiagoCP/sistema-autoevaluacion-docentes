@@ -21,6 +21,7 @@ export class AeDocenteComponent {
   operacion: string = 'Agregar ';
   lstRoles: Rol[] = [];
   docenteSeleccionado?: Usuario;
+  usuarioCreada:number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -82,13 +83,17 @@ export class AeDocenteComponent {
       USU_FOTO: '',
     };
 
+      let idUsuario: number = usuario.USR_IDENTIFICACION;
+
     this.usuarioService.addUsuario(usuario).subscribe({
       next: () => {
-        this.addUserol(this.form.value.identificacion);
-        this.form.reset();
+        this.prueba(idUsuario);
       },
-    });
+    }
+      
+    );
 
+    console.log("Id del usuario: "+ idUsuario);
     
     this.toastr.success('El docente fue registrado con exito');
   }
@@ -102,11 +107,10 @@ export class AeDocenteComponent {
   }
 
   addUserol(identificacion: number){
-    console.log(this.prueba(identificacion));
 
     const userol: Userol = {
       ROL_ID: this.form.value.tipoDoc,
-      USU_ID: this.prueba(identificacion),
+      USU_ID: identificacion,
       UR_FECHAINICIO: this.form.value.fechaInicio,
       UR_FECHAFIN: this.form.value.fechaFin,
     }
@@ -118,15 +122,15 @@ export class AeDocenteComponent {
     });
   }
 
-  prueba(identificacion: number):any{
-    let usuario: any;
-
+  prueba(identificacion: number){
+    let valueId:number= 0;
     this.usuarioService.getUsuarioByIdentificacion(identificacion).subscribe({
       next:(userData) => {
         console.log(userData);
-        usuario = userData;
+        this.addUserol(userData.USU_ID);
       }
     });
-    return usuario.USU_ID;
+    console.log(valueId);
+    return valueId;
   }
 }

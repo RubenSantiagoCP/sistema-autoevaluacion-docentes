@@ -2,6 +2,8 @@ import { Component,OnInit  } from '@angular/core';
 import { Docente } from '../../../interfaces/docente';
 import { EmailService } from '../../services/sendEmail.service';
 import { UserService } from '../../services/user.service';
+import { EvaluacionService } from '../../services/evaluacion.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -10,12 +12,13 @@ import { UserService } from '../../services/user.service';
   styleUrl: './revisar-auto.component.css',
 })
 export class RevisarAutoComponent implements OnInit {
-  constructor(private emailService: EmailService,private userService: UserService) {}
+  constructor(private emailService: EmailService,private userService: UserService, private evaluacionService: EvaluacionService) {}
   opcion: number = 1;
   listDocentes: Docente[] = [];
 
   ngOnInit() {
     this.cargarUsuarios();
+    this.evaluacionService.getReporte();
   }
 
   private cargarUsuarios() {
@@ -24,30 +27,6 @@ export class RevisarAutoComponent implements OnInit {
       error: (error) => console.error('Error al obtener usuarios', error)
     });
   }
-  /*listDocentes: Docente[] = [
-    {
-      id: 1,
-      identificacion: 1002806392,
-      nombre: 'Naren',
-      apellido: 'Imbachi',
-      genero: 'Hombre',
-      estudio: 'pregrado',
-      correo: 'nimbachi@unicauca.edu.co',
-      estado: 1,
-      rol: 'Docencia',
-    },
-    {
-      id: 2,
-      identificacion: 1002806392,
-      nombre: 'Ruben',
-      apellido: 'Cruz',
-      genero: 'Hombre',
-      estudio: 'pregrado',
-      correo: 'rscruz@unicauca.edu.co',
-      estado: 2,
-      rol: 'Asesoria',
-    },
-  ];*/
 
   lstDocentesMostrados: Docente[] = [];
 

@@ -31,8 +31,9 @@ const routes: Routes = [
   {path: 'periodos/periodo', component: PeriodoComponent,  canActivate:[VigilanteCoordGuard]},
   {path: 'periodos/edit/:id', component: PeriodoComponent,  canActivate:[VigilanteCoordGuard]},
   {path: 'reporte', component: ReporteComponent,  canActivate:[VigilanteCoordGuard]},
-  {path: 'revisar', component: RevisarAutoComponent,  canActivate:[VigilanteCoordGuard]},
-  {path: 'revisar/items', component: RevisarItemsComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'revisar/items', component: RevisarAutoComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'revisar/items/item', component: RevisarItemsComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'revisar', component: ModuloAutoevComponent,  canActivate:[VigilanteCoordGuard]},
   {path: 'periodos', component: GesPeriodoComponent,  canActivate:[VigilanteCoordGuard]}
 ];
 

@@ -16,6 +16,9 @@ export class SesionService {
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean> (false);
   currentUserData: BehaviorSubject<string> = new BehaviorSubject<string> ("");
   currentUserDataFull: BehaviorSubject<any> = new BehaviorSubject<any> ({});
+  // En la sección de variables del servicio
+  credencialesIncorrectas: boolean = false;
+
   
   constructor(@Inject(PLATFORM_ID) private platformId: any, private http: HttpClient) {
     if (isPlatformBrowser(this.platformId)) {
@@ -46,8 +49,12 @@ export class SesionService {
 
   
   private handleError(error:HttpErrorResponse){
+    console.log(error);
     if(error.status===0){
       console.log("Se ha producido un error", error.error);
+    }else if(error.status===401){
+      this.credencialesIncorrectas = true;
+      console.log(error);
     }else{
       console.error("Backend retornó el código de estado ", error.status, error.error);
     }

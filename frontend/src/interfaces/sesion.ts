@@ -12,6 +12,7 @@ export interface Usuario {
     USU_CORREO: string;
     USU_ESTADO: number;
     USU_TIPOUSUARIO: number;
+    USU_ROLID?:number;
   }
   
   // Define el tipo Sesion con la propiedad 'token' y 'usuario'

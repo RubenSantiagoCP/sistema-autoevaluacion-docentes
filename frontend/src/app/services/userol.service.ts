@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Userol } from '../../interfaces/userol';
 
@@ -14,6 +14,18 @@ export class UserolService {
 
   saveUserol(userol: Userol){
     return this.http.post(environment.myAppUrl+this.myApiUrl, userol).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  getUserol(id:number):Observable<any>{
+    return this.http.get<any>(environment.myAppUrl+this.myApiUrl+id).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  getUseRoles():Observable<any>{
+    return this.http.get<any>(environment.myAppUrl+this.myApiUrl).pipe(
       catchError(this.handleError)
     )
   }

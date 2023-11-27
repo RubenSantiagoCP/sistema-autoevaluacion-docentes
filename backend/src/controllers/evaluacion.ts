@@ -82,3 +82,29 @@ export const updateEvaluacion = async (req: Request, res: Response) => {
         })
     }
 }
+
+export const getEvaluacionByUseRol = async (req: Request, res: Response) => {
+    const { userol } = req.params; // Obteniendo la identificación de req
+  
+    try {
+      const evaluacion = await Evaluacion.findAll({
+        where: {
+            USEROL_ID: userol,
+        },
+      });
+  
+      if (evaluacion.length > 0) {
+        res.json(evaluacion);
+      } else {
+        res.status(404).json({
+          msg: `No existen evaluaciones para el usuario con la identificación ${userol}`,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        msg: 'Error interno del servidor',
+      });
+    }
+  };
+  

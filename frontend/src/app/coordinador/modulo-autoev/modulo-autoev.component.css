@@ -34,6 +34,7 @@ section{
   background: transparent;
   background-position: center;
   background-size: cover;
+  margin-bottom: 40px;
 }
 
 .form-box{

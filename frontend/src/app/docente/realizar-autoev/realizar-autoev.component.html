@@ -25,10 +25,11 @@
             </thead>
             <tbody class="cuerpoT">
                 <!-- Fila de la tabla con filtrado -->
-                <tr *ngFor="let item of laboresDocente; let i = index">
+                <tr *ngFor="let item of lstEvaluaciones; let i = index">
                     <td class="infoPrincipal">{{i+1}}</td>
-                    <td class="infoPrincipal">{{ item.name}}</td>
-                    <td class="infoPrincipal">{{ item.estado}}</td>
+                    <td class="infoPrincipal">{{ obtenerInfoLabor(item.LAB_ID).LAB_NOMBRE}}</td>
+                    <td class="infoPrincipal">{{ obtenerInfoLabor(item.LAB_ID).LAB_NOMBRE}}</td>
+                    <td class="infoPrincipal">{{definirEstado( item.EVA_ESTADO)}}</td>
                     <td>
                         <button type="button" class="btn" (click)="mostrarTablas(i)">
                             <i class="bi bi-plus-circle"></i>
@@ -41,19 +42,15 @@
                             <table class="table table-datos-adicionales">
                                 <tr>
                                     <td class="columnaTD">Tipo labor</td>
-                                    <td class="infoPrincipal">{{item.tipo}}</td>
+                                    <td class="infoPrincipal">{{obtenerInfoTipoLabor(obtenerInfoLabor(item.LAB_ID).TL_ID)?.TL_DESCRIPCION}}</td>
                                 </tr>
                                 <tr>
                                     <td class="columnaTD">Horas</td>
-                                    <td class="infoPrincipal">{{item.horas}}</td>
+                                    <td class="infoPrincipal">{{obtenerInfoLabor(item.LAB_ID).LAB_HORAS}}</td>
                                 </tr>
                                 <tr>
                                     <td class="columnaTD">Descripción</td>
-                                    <td class="infoPrincipal">{{item.Descripcion}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="columnaTD">Acto</td>
-                                    <td class="infoPrincipal">{{item.acto}}</td>
+                                    <td class="infoPrincipal">Ingenieria de Sistemas Obligatoria 2023</td>
                                 </tr>
                             </table>
                         </div>
@@ -61,24 +58,27 @@
                             <table class="table table-datos-adicionales">
                                 <tr>
                                     <td class="columnaTD">Fecha de Inicio</td>
-                                    <td class="infoPrincipal">{{item.FechaInicio}}</td>
+                                    <td class="infoPrincipal">{{periodo?.PER_FECHAINICIO  | date:'yyyy-MM-dd'}}</td>
                                 </tr>
                                 <tr>
                                     <td class="columnaTD">Fecha Fin</td>
-                                    <td class="infoPrincipal">{{item.fechaFin}}</td>
+                                    <td class="infoPrincipal">{{periodo?.PER_FECHAFIN  | date:'yyyy-MM-dd'}}</td>
                                 </tr>
                                 <tr>
                                     <td class="columnaTD">Resultados</td>
                                     <td class="infoPrincipal">
-                                        <input type="text">
+                                      <input type="text" [(ngModel)]="resultados">
                                     </td>
-                                </tr>
-                                <tr>
+                                  </tr>
+                                  <tr>
                                     <td class="columnaTD">Evaluación</td>
                                     <td class="infoPrincipal">
-                                        <input type="number">
+                                      <input type="number" [(ngModel)]="evaluacion" min="0" max="100">
                                     </td>
-                                </tr>
+                                  </tr>
+                                  <div class="bootn-enviar">
+                                    <button type="button" class="btn btn-success mb-4" routerLink="/coordinador/modulo/docente/items/add" (click)="realizarAutoevaluacion(item)">Guardar</button>
+                                </div>
                             </table>
                         </div>
                         <button type="button" class="btn btn-secondary" (click)="ocultarTablas(i)">Ocultar</button>
@@ -90,10 +90,6 @@
         <div class="parte-inferior">
             <div class="sugerencias">
                 <input type="text" placeholder="Ingrese alguna sugerencia">
-            </div>
-
-            <div class="bootn-enviar">
-                <button type="button" class="btn btn-success mb-4" routerLink="/coordinador/modulo/docente/items/add">Realizar autoevaluacion</button>
             </div>
         </div>
     </div>
