@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SesionService } from '../../services/sesion.service';
 import { Router } from '@angular/router';
+import { NotificacionService } from '../../services/notificacion.service';
+import { Usunot } from '../../../interfaces/usunot';
 
 @Component({
   selector: 'app-navbar',
@@ -10,9 +12,20 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit{
   notificaciones_active: boolean = false; 
   data_user?:any = '';
+  notificaciones:any[] = [];
 
-  constructor(private sesionService:SesionService, private router:Router){
-
+  constructor(private sesionService:SesionService, private router:Router, private notificacionService:NotificacionService){
+    this.ngOnInit();
+    this.cargarNotificaciones();
+  }
+  cargarNotificaciones(){
+    let id = this.data_user.id;
+    this.notificacionService.getnotificacionesbyid(id
+      ).subscribe({
+      next: (notificaciones) => {this.notificaciones = notificaciones;console.log(notificaciones);},
+      error: (error) => console.error('Error al obtener notificaciones', error)
+    });
+    
   }
 
   setNotificaciones(){

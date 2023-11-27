@@ -5,7 +5,9 @@ import { UserService } from '../../services/userDetallado.service';
 import { EvaluacionService } from '../../services/evaluacion.service';
 import { ActivatedRoute } from '@angular/router';
 import { UsuarioDetallado } from '../../../interfaces/usuarioDetallado';
+import { UserNotificacion } from '../../../interfaces/usunot';
 import { PeriodoService } from '../../services/periodo.service';
+import { NotificacionService } from '../../services/notificacion.service';
 
 
 @Component({
@@ -14,10 +16,10 @@ import { PeriodoService } from '../../services/periodo.service';
   styleUrl: './revisar-auto.component.css',
 })
 export class RevisarAutoComponent implements OnInit {
-  constructor(private emailService: EmailService,private userService: UserService, private periodoService : PeriodoService) {}
+  constructor(private emailService: EmailService,private userService: UserService, private periodoService : PeriodoService, private notificacionService : NotificacionService) {}
   opcion: number = 1;
   listDocentes: UsuarioDetallado[] = [];
-
+  notificaciones: UserNotificacion[] = [];
   
 
   ngOnInit() {
@@ -31,6 +33,12 @@ export class RevisarAutoComponent implements OnInit {
       error: (error) => console.error('Error al obtener usuarios', error)
       
       
+    });
+  }
+  private cargarNotificaciones() {
+    this.notificacionService.getnotificaciones().subscribe({
+      next: (notificaciones) => this.notificaciones = notificaciones,
+      error: (error) => console.error('Error al obtener usuarios', error)
     });
   }
 

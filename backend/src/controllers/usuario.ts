@@ -4,6 +4,7 @@ import UserRol from '../models/userol';
 import Evaluacion from '../models/evaluacion';
 import bcrypt from 'bcrypt';
 
+
 export const getUsuarioDetallado = async (req: Request, res: Response) => {
     try{
         const usuarios = await Usuario.findAll({
