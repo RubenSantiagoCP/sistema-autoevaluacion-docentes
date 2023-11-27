@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { EvaluacionService } from '../../services/evaluacion.service';
 import { UserolService } from '../../services/userol.service';
 import { SesionService } from '../../services/sesion.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-realizar-autoev',
   templateUrl: './realizar-autoev.component.html',
@@ -27,7 +28,7 @@ export class RealizarAutoevComponent implements OnInit{
   resultados:string = "";
   evaluacion:number = 0;
 
-  constructor( private lstlabores: ItemService, private docenteService: DocenteService, private aRouter: ActivatedRoute, private evaluacionService: EvaluacionService, private userolService: UserolService, private sesionService: SesionService) {
+  constructor( private lstlabores: ItemService, private docenteService: DocenteService, private aRouter: ActivatedRoute, private evaluacionService: EvaluacionService, private userolService: UserolService, private sesionService: SesionService,  private toastr: ToastrService) {
     this.ngOnInit();
     this.evaluacionService.setDocente(this.docente);
     console.log(this.docente);
@@ -87,7 +88,7 @@ export class RealizarAutoevComponent implements OnInit{
               if(lstusuroles[i].USU_ID===this.docente?.id){
                 console.log("entra");
                 this.docenteService.setUseRolSeleccionado(lstusuroles[i]);
-                this.evaluacionService.getEvaluacionDocente(lstusuroles[i].USEROL_ID).subscribe({
+                this.evaluacionService.getEvaluacionesPeriodo(lstusuroles[i].USEROL_ID, this.periodo?.PER_ID).subscribe({
                   next: (periodosData) => {
                     this.lstEvaluaciones = periodosData;
                   },
@@ -146,13 +147,14 @@ export class RealizarAutoevComponent implements OnInit{
   realizarAutoevaluacion(item:Evaluacion){
     item.EVA_RESULTADO = this.resultados;
     item.EVA_PUNTAJE = this.evaluacion;
+    item.EVA_ESTADO = 2;
 
     this.evaluacionService.editEvaluacion(item).subscribe({
       next: () => {
-      
+        
       }
     })
    
-    
+    this.toastr.success('Se realizo la evluacion con exito');
   }
 }

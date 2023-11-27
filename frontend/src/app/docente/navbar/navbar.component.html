@@ -6,9 +6,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <!-- Parte izquierda con foto y nombre -->
-        <a routerLink="/coordinador/info" class="navbar-brand">
+        <a routerLink="/docente/info" class="navbar-brand">
   
-          <img src="../../../assets/images/info-personal/francisco obando.jpg" alt="foto-perfil">
+          <img src="../../../assets/images/info-personal/149071.png" alt="foto-perfil">
           {{data_user.nombre}} {{data_user.apellido}}
   
         </a>
@@ -17,11 +17,9 @@
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/docente/autoevaluacion">Realizar autoevaluacion</a>
+            <a class="nav-link" routerLink="/docente/autoevaluacion">Autoevaluacion</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/coordinador/revisar" href="#">Revisar autoevaluaciones</a>
-          </li>
+
           <li class="nav-item">
             <a class="nav-link" (click)="setNotificaciones()">
               <i class="bi bi-bell-fill"></i>

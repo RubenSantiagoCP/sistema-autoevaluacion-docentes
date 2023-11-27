@@ -1,0 +1,33 @@
+<app-navbar class="componente-superior"></app-navbar>
+<section class="main">
+  <div class="container form-box">
+    <h1 class="text-center title">Elija el periodo académico: </h1>
+    <table class="table">
+      <thead class="titulosT">
+        <tr class="fila-encab">
+          <th>Nombre</th>
+          <th>Semestre</th>
+          <th>Año</th>
+          <th>Fecha de Inicio</th>
+          <th>Fecha Fin</th>
+          <th>Seleccionar</th>
+        </tr>
+      </thead>
+      <tbody class="cuerpoT">
+        <tr *ngFor="let item of lstPeriodos">
+          <td>{{ item.PER_NOMBRE }}</td>
+          <td>{{ item.PER_SEMESTRE }}</td>
+          <td>{{ item.PER_FECHAINICIO | date:'yyyy' }}</td>
+          <td>{{ item.PER_FECHAINICIO | date:'yyyy-MM-dd' }}</td>
+          <td>{{ item.PER_FECHAFIN| date:'yyyy-MM-dd' }}</td>
+          <td>
+            <button type="button" class="btn btn-seleccionar" (click)="setPeriodoSeleccionado(item)" >
+              <i class="bi bi-check2"></i>
+              Seleccionar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>  
+</section>

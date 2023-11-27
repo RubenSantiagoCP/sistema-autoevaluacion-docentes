@@ -31,7 +31,7 @@
                 <tr *ngFor="let docente of listDocentes | filterByNombre:filtroNombre; let i = index">
                     <td>{{docente.USU_NOMBRE}}</td>
                     <td>{{docente.USR_IDENTIFICACION}}</td>
-                    <td>{{rolUsuario(docente.USU_ROLID)}}</td>
+                    <td>{{rolUsuario(docente)}}</td>
                     <td>
                         <button (click)="inactivarDoc(docente)" type="button" class="btn inactivar"> {{definirInactivar(docente.USU_ESTADO)}}
                         </button>

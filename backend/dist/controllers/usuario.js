@@ -65,21 +65,25 @@ const getUsuarioByIdentificacion = (req, res) => __awaiter(void 0, void 0, void 
     }
 });
 exports.getUsuarioByIdentificacion = getUsuarioByIdentificacion;
-// Actualiza el estado de un usuario
 const updateUsuarioEstadoById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params; // Obteniendo el ID de req
     const { nuevoEstado } = req.body; // El nuevo estado que llega en el cuerpo de la solicitud
     console.log(id);
     console.log(nuevoEstado);
     try {
-        const [rowsUpdated, [updatedUsuario]] = yield usuario_1.default.update({ USU_ESTADO: nuevoEstado }, {
-            returning: true,
+        console.log('Intentando actualizar el estado del usuario...');
+        const [affectedCount] = yield usuario_1.default.update({ USU_ESTADO: nuevoEstado }, {
             where: {
                 USU_ID: id,
             },
         });
-        if (rowsUpdated > 0) {
-            res.json(updatedUsuario);
+        console.log('Filas actualizadas:', affectedCount);
+        if (affectedCount > 0) {
+            const updatedUsuario = yield usuario_1.default.findByPk(id);
+            res.json({
+                msg: `Usuario con el ID ${id} actualizado exitosamente`,
+                usuarioActualizado: updatedUsuario || null,
+            });
         }
         else {
             res.status(404).json({
@@ -88,6 +92,7 @@ const updateUsuarioEstadoById = (req, res) => __awaiter(void 0, void 0, void 0, 
         }
     }
     catch (error) {
+        console.error('Error durante la actualización del estado:', error);
         console.error(error);
         res.status(500).json({
             msg: 'Error interno del servidor',

@@ -6,6 +6,8 @@ import { Usuario } from '../../../interfaces/sesion';
 import { RolService } from '../../services/rol.service';
 import { Rol } from '../../../interfaces/rol';
 import { DocenteService } from '../../services/docente.service';
+import { Userol } from '../../../interfaces/userol';
+import { UserolService } from '../../services/userol.service';
 
 @Component({
   selector: 'app-ges-docente',
@@ -17,17 +19,19 @@ export class GesDocenteComponent implements OnInit {
   filtroNombre: string = "";
   listDocentes: Usuario[] = [
   ]
+  lstUsuRoles: Userol [] = [];
   docenteSeleccionado?:Usuario;
 
   lstRoles:Rol[] = [];
   
-  constructor(private toastr: ToastrService, private usuarioService:UserService, private rolServicio:RolService, private docenteService:DocenteService) {
+  constructor(private toastr: ToastrService, private usuarioService:UserService, private rolServicio:RolService, private docenteService:DocenteService, private useRolService: UserolService) {
     
    }
 
    ngOnInit(): void {
     this.obtenerDocentes();
     this.obtenerRoles();
+    this.obtenerUseRoles();
    }
 
 
@@ -35,12 +39,13 @@ export class GesDocenteComponent implements OnInit {
   inactivarDoc(docente:Usuario){
     if(docente.USU_ESTADO===1){
       docente.USU_ESTADO = 2;
+      this.toastr.warning('El docente fue inactivado con exito', 'Docente inactivado')
     }else{
       docente.USU_ESTADO = 1;
+      this.toastr.warning('El docente fue activado con exito', 'Docente activado')
     }
-    this.usuarioService.editUsuario(docente).subscribe({
+    this.usuarioService.updateEstadoUser(docente.USU_ID, docente).subscribe({
     });
-    this.toastr.warning('El docente fue inactivado con exito', 'Docente inactivado')
   }
 
   obtenerDocentes() {
@@ -59,14 +64,42 @@ export class GesDocenteComponent implements OnInit {
     });
   }
 
-  rolUsuario(id:string):any{
-    for(let item of this.lstRoles  ){
-        if(item.ROL_ID === parseInt(id)){
-          console.log(item.ROL_ID)
-          return item.ROL_DESCRIPCION;
+  obtenerUseRoles(){
+    this.useRolService.getUseRoles().subscribe({
+      next: (rolData) => {
+          this.lstUsuRoles = rolData;
+      },
+    });
+  }
+
+  rolUsuario(docente:Usuario):any{
+    console.log(docente);  
+    let respuesta: Userol = this.rolUsuarioDescripcion(docente.USU_ID);
+    if(respuesta){
+      for(let item of this.lstRoles  ){
+
+        if(respuesta.ROL_ID!==undefined){
+         
+          if(item.ROL_ID === respuesta.ROL_ID){
+            console.log("entra x3");
+            console.log(item.ROL_DESCRIPCION)
+            return item.ROL_DESCRIPCION;
+          } 
         }
+          
+      }
     }
+   
     return '';
+  }
+
+  rolUsuarioDescripcion(id?:number):any{
+    for(let userol of this.lstUsuRoles){
+      if(userol.USU_ID=== id){
+        console.log("entra");
+        return userol;
+      }
+    }
   }
 
   setDocenteSeleccionado(id:number){

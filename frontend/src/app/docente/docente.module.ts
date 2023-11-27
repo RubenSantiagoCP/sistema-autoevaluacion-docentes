@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RealizarAutoevComponent } from './realizar-autoev/realizar-autoev.component';
 import { CookieService } from 'ngx-cookie-service';
 import { FormsModule } from '@angular/forms';
+import { SelecPeriodoComponent } from './selec-periodo/selec-periodo.component';
 
 
 
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     PrincipalComponent,
     InfoPersonalComponent,
     NavbarComponent,
-    RealizarAutoevComponent
+    RealizarAutoevComponent,
+    SelecPeriodoComponent
   ],
   imports: [
     CommonModule,

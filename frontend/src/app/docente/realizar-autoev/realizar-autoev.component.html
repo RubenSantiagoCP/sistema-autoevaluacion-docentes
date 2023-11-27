@@ -7,7 +7,7 @@
                     <div class="d-flex flex-column botones-principales">
 
                         <button type="button" class="btn btn-secondary mb-4" (click)="ocultarTodo()">Ocultar Detalles</button>
-                        <button type="button" class="btn btn-primary" routerLink="/coordinador/modulo/docente/">Volver</button>
+                        <button type="button" class="btn btn-primary" routerLink="/docente/autoevaluacion">Volver</button>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 <tr *ngFor="let item of lstEvaluaciones; let i = index">
                     <td class="infoPrincipal">{{i+1}}</td>
                     <td class="infoPrincipal">{{ obtenerInfoLabor(item.LAB_ID).LAB_NOMBRE}}</td>
-                    <td class="infoPrincipal">{{ obtenerInfoLabor(item.LAB_ID).LAB_NOMBRE}}</td>
+                    
                     <td class="infoPrincipal">{{definirEstado( item.EVA_ESTADO)}}</td>
                     <td>
                         <button type="button" class="btn" (click)="mostrarTablas(i)">
@@ -56,32 +56,35 @@
                         </div>
                         <div class="tabla col-md-6">
                             <table class="table table-datos-adicionales">
-                                <tr>
-                                    <td class="columnaTD">Fecha de Inicio</td>
-                                    <td class="infoPrincipal">{{periodo?.PER_FECHAINICIO  | date:'yyyy-MM-dd'}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="columnaTD">Fecha Fin</td>
-                                    <td class="infoPrincipal">{{periodo?.PER_FECHAFIN  | date:'yyyy-MM-dd'}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="columnaTD">Resultados</td>
-                                    <td class="infoPrincipal">
-                                      <input type="text" [(ngModel)]="resultados">
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td class="columnaTD">Evaluación</td>
-                                    <td class="infoPrincipal">
-                                      <input type="number" [(ngModel)]="evaluacion" min="0" max="100">
-                                    </td>
-                                  </tr>
-                                  <div class="bootn-enviar">
-                                    <button type="button" class="btn btn-success mb-4" routerLink="/coordinador/modulo/docente/items/add" (click)="realizarAutoevaluacion(item)">Guardar</button>
-                                </div>
+                              <tr>
+                                <td class="columnaTD">Fecha de Inicio</td>
+                                <td class="infoPrincipal">{{periodo?.PER_FECHAINICIO | date:'yyyy-MM-dd'}}</td>
+                              </tr>
+                              <tr>
+                                <td class="columnaTD">Fecha Fin</td>
+                                <td class="infoPrincipal">{{periodo?.PER_FECHAFIN | date:'yyyy-MM-dd'}}</td>
+                              </tr>
+                              <tr>
+                                <td class="columnaTD">Resultados</td>
+                                <td class="infoPrincipal">
+                                  <input type="text" class="form-control" [(ngModel)]="resultados"  *ngIf="item.EVA_ESTADO===1;">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="columnaTD">Evaluación</td>
+                                <td class="infoPrincipal">
+                                  <input type="number" class="form-control" [(ngModel)]="evaluacion" min="0" max="100" *ngIf="item.EVA_ESTADO===1;">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td colspan="2" class="bootn-enviar">
+                                  <button *ngIf="item.EVA_ESTADO===1" type="button" class="btn btn-success mb-4" routerLink="/coordinador/modulo/docente/items/add" (click)="realizarAutoevaluacion(item)">Guardar</button>
+                                </td>
+                              </tr>
                             </table>
-                        </div>
-                        <button type="button" class="btn btn-secondary" (click)="ocultarTablas(i)">Ocultar</button>
+                          </div>
+                          
+                        <button type="button" class="btn btn-secondary" (click)="ocultarTablas(i)" >Ocultar</button>
                     </div>
                 </tr>
             </tbody>

@@ -3,12 +3,13 @@ import { Usuario } from '../../../interfaces/sesion';
 import { UserService } from '../../services/user.service';
 import { SesionService } from '../../services/sesion.service';
 
+
 @Component({
   selector: 'app-info-personal',
   templateUrl: './info-personal.component.html',
   styleUrl: './info-personal.component.css'
 })
-export class InfoPersonalComponent implements OnInit{
+export class InfoPersonalComponent {
   user?:Usuario;
   errorMessage: string = "";
   idUsuario?:number;
@@ -17,8 +18,6 @@ export class InfoPersonalComponent implements OnInit{
   constructor(private userService:UserService, private sesionService:SesionService){
     this.ngOnInit();
     let id = parseInt( this.data_user.id);
-  
-
     this.userService.getUser(id).subscribe({
       next: (userData) =>{
         this.user = userData;
@@ -40,6 +39,7 @@ export class InfoPersonalComponent implements OnInit{
     })
   }
 
+  
   diccionarioGenero(genero?:string){
     if(genero=== "M"){
       return "Masculino"

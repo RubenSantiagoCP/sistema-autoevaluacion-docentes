@@ -52,7 +52,6 @@ export const getUsuarioByIdentificacion = async (req: Request, res: Response) =>
     }
 };
 
-// Actualiza el estado de un usuario
 export const updateUsuarioEstadoById = async (req: Request, res: Response) => {
     const { id } = req.params; // Obteniendo el ID de req
     const { nuevoEstado } = req.body; // El nuevo estado que llega en el cuerpo de la solicitud
@@ -61,30 +60,41 @@ export const updateUsuarioEstadoById = async (req: Request, res: Response) => {
     console.log(nuevoEstado);
 
     try {
-        const [rowsUpdated, [updatedUsuario]] = await Usuario.update(
+        console.log('Intentando actualizar el estado del usuario...');
+        const [affectedCount] = await Usuario.update(
             { USU_ESTADO: nuevoEstado },
             {
-                returning: true,
                 where: {
                     USU_ID: id,
                 },
             }
         );
 
-        if (rowsUpdated > 0) {
-            res.json(updatedUsuario);
+        console.log('Filas actualizadas:', affectedCount);
+        
+        if (affectedCount > 0) {
+            const updatedUsuario = await Usuario.findByPk(id);
+            res.json({
+                msg: `Usuario con el ID ${id} actualizado exitosamente`,
+                usuarioActualizado: updatedUsuario || null,
+            });
+            
         } else {
             res.status(404).json({
                 msg: `No existe un usuario con el ID ${id}`,
             });
+            
         }
+        
     } catch (error) {
+        console.error('Error durante la actualización del estado:', error);
         console.error(error);
         res.status(500).json({
             msg: 'Error interno del servidor',
         });
-    }
+    }    
 };
+
 
 // Elimina un usuario
 export const deleteUsuario = async (req: Request, res: Response) => {
@@ -161,3 +171,5 @@ export const updateUsuario = async (req: Request, res: Response) => {
         })
     }
 }
+
+

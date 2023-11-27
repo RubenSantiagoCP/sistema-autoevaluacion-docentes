@@ -42,6 +42,12 @@ export class UserService {
     )
   }
 
+  updateEstadoUser(id?:number,usuario?:Usuario){
+    return this.http.put(environment.myAppUrl+this.myApiUrl+"estado/"+id, usuario).pipe(
+      catchError(this.handleError)
+    )
+  }
+
   private handleError(error:HttpErrorResponse){
     if(error.status===0){
       console.log("Se ha producido un error", error.error);

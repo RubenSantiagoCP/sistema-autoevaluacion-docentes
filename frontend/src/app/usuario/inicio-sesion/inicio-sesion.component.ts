@@ -58,6 +58,8 @@ export class InicioSesionComponent {
           console.log("entro");
         }else if(this.userData1?.tipoUsu===2 && this.userData1?.estado==1){
           this.router.navigateByUrl("/docente");
+        }else if(this.userData1?.tipoUsu===3 && this.userData1?.estado==1){
+          this.router.navigateByUrl("/decano");
         }else{
           this.usuarioActivo = false;
         }

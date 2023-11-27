@@ -4,11 +4,14 @@ import { PrincipalComponent } from './principal/principal.component';
 import { InfoPersonalComponent } from './info-personal/info-personal.component';
 import { RealizarAutoevComponent } from './realizar-autoev/realizar-autoev.component';
 import { VigilanteDocenteGuard } from '../guards/vigilante-doc.guard';
+import { SelecPeriodoComponent } from './selec-periodo/selec-periodo.component';
+
 
 const routes: Routes = [
   {path: '', component: PrincipalComponent},
   {path: 'info', component: InfoPersonalComponent},
-  {path: 'autoevaluacion', component: RealizarAutoevComponent}
+  {path: 'autoevaluacion', component: SelecPeriodoComponent},
+  {path: 'autoevaluacion/realizar', component: RealizarAutoevComponent},
 ];
 
 @NgModule({

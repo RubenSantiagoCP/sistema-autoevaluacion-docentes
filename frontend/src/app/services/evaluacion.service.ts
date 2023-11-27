@@ -61,6 +61,12 @@ export class EvaluacionService {
       .pipe(catchError(this.handleError));
   }
 
+  getEvaluacionesPeriodo(userol?:number, periodo?:number){
+    return this.http
+    .get<any>(environment.myAppUrl + this.myApiUrl+periodo+"/"+userol)
+    .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.log('Se ha producido un error', error.error);

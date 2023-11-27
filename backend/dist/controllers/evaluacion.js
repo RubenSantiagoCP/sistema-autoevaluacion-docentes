@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getEvaluacionByUseRol = exports.updateEvaluacion = exports.createEvaluacion = exports.deleteEvaluacion = exports.getEvaluacion = exports.getEvaluaciones = void 0;
+exports.getEvaluacionByPeriodoUser = exports.getEvaluacionByUseRol = exports.updateEvaluacion = exports.createEvaluacion = exports.deleteEvaluacion = exports.getEvaluacion = exports.getEvaluaciones = void 0;
 const evaluacion_1 = __importDefault(require("../models/evaluacion"));
 // Obtiene todas las evaluaciones
 const getEvaluaciones = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -120,3 +120,29 @@ const getEvaluacionByUseRol = (req, res) => __awaiter(void 0, void 0, void 0, fu
     }
 });
 exports.getEvaluacionByUseRol = getEvaluacionByUseRol;
+const getEvaluacionByPeriodoUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { userol, periodo } = req.params; // Obteniendo la identificación de req
+    try {
+        const evaluacion = yield evaluacion_1.default.findAll({
+            where: {
+                USEROL_ID: userol,
+                PER_ID: periodo,
+            },
+        });
+        if (evaluacion.length > 0) {
+            res.json(evaluacion);
+        }
+        else {
+            res.status(404).json({
+                msg: `No existen evaluaciones para el usuario con la identificación ${userol}`,
+            });
+        }
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({
+            msg: 'Error interno del servidor',
+        });
+    }
+});
+exports.getEvaluacionByPeriodoUser = getEvaluacionByPeriodoUser;
