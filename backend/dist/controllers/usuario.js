@@ -12,9 +12,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUsuario = exports.createUsuario = exports.deleteUsuario = exports.updateUsuarioEstadoById = exports.getUsuarioByIdentificacion = exports.getUsuario = exports.getUsuarios = void 0;
+exports.updateUsuario = exports.createUsuario = exports.deleteUsuario = exports.updateUsuarioEstadoById = exports.getUsuarioByIdentificacion = exports.getUsuario = exports.getUsuarios = exports.getUsuarioDetallado = void 0;
 const usuario_1 = __importDefault(require("../models/usuario"));
+const userol_1 = __importDefault(require("../models/userol"));
+const evaluacion_1 = __importDefault(require("../models/evaluacion"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const getUsuarioDetallado = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const usuarios = yield usuario_1.default.findAll({
+            include: [
+                {
+                    model: userol_1.default,
+                    as: 'userol',
+                },
+                {
+                    model: evaluacion_1.default,
+                    as: 'evaluacion',
+                },
+            ],
+        });
+        res.json(usuarios);
+    }
+    catch (error) {
+        console.log(error);
+        res.json({
+            msg: 'Ocurrio un error, comuniquese con asd'
+        });
+    }
+});
+exports.getUsuarioDetallado = getUsuarioDetallado;
 // Obtiene todos los usuarios
 const getUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // se usa Usuario para tomar del modelo sequalize el metodo findAll() y guarda los usuarios en la lista

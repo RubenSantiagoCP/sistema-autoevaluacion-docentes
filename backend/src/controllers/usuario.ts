@@ -1,6 +1,32 @@
 import { Request, Response } from 'express';
 import Usuario from '../models/usuario';
+import UserRol from '../models/userol';
+import Evaluacion from '../models/evaluacion';
 import bcrypt from 'bcrypt';
+
+export const getUsuarioDetallado = async (req: Request, res: Response) => {
+    try{
+        const usuarios = await Usuario.findAll({
+            include: [
+                {
+                    model: UserRol,
+                    as: 'userol',
+                },
+                {
+                    model: Evaluacion,
+                    as: 'evaluacion',
+                },
+            ],
+        });
+    res.json(usuarios);
+    }catch(error){
+        console.log(error);
+        res.json({
+            msg: 'Ocurrio un error, comuniquese con asd'
+        })
+    }
+}
+
 
 // Obtiene todos los usuarios
 export const getUsuarios = async (req: Request, res: Response) => {
@@ -161,3 +187,4 @@ export const updateUsuario = async (req: Request, res: Response) => {
         })
     }
 }
+

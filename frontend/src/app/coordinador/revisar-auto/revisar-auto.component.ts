@@ -22,7 +22,7 @@ export class RevisarAutoComponent implements OnInit {
   }
 
   private cargarUsuarios() {
-    this.userService.getUsuarios().subscribe({
+    this.userService.getUsuarioDetallado().subscribe({
       next: (usuarios) => this.listDocentes = usuarios,
       error: (error) => console.error('Error al obtener usuarios', error)
     });

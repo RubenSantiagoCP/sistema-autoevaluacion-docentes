@@ -42,6 +42,11 @@ export class UserService {
     )
   }
 
+  getUsuarioDetallado():Observable<any>{
+    return this.http.get<any>(environment.myAppUrl+this.myApiUrl+"detallado/").pipe(
+      catchError(this.handleError)
+    )
+  }
   private handleError(error:HttpErrorResponse){
     if(error.status===0){
       console.log("Se ha producido un error", error.error);
