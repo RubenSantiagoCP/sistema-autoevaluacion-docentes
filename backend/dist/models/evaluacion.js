@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize"); // Para el tipo de datos
 const connection_1 = __importDefault(require("../db/connection")); // Conexion sequalize
+const userol_1 = __importDefault(require("./userol"));
 // Definir el modelo evaluacion que representa la tabla en la base de datos
 const Evaluacion = connection_1.default.define('evaluacion', {
     EVA_ID: {
@@ -37,6 +38,9 @@ const Evaluacion = connection_1.default.define('evaluacion', {
 }, {
     createdAt: false, // Para no agregar las columnas a la base de datos
     updatedAt: false, // Para no agregar las columnas a la base de datos
-    freezeTableName: true // El mismo nombre del  modelo al de la base de datos
+    freezeTableName: true, // El mismo nombre del  modelo al de la base de datos
+    modelName: 'evaluacion'
 });
+Evaluacion.belongsTo(userol_1.default, { foreignKey: 'USEROL_ID' });
+userol_1.default.hasMany(Evaluacion, { foreignKey: 'USEROL_ID' });
 exports.default = Evaluacion;

@@ -20,18 +20,19 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const getUsuarioDetallado = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const usuarios = yield usuario_1.default.findAll({
-            include: [
-                {
+            include: [{
                     model: userol_1.default,
-                    as: 'userol',
-                },
-                {
-                    model: evaluacion_1.default,
-                    as: 'evaluacion',
-                },
-            ],
+                    include: [{
+                            model: evaluacion_1.default,
+                        }]
+                }],
+        })
+            .then((usuarios) => {
+            res.json(usuarios);
+        })
+            .catch((error) => {
+            console.error('Error al realizar INNER JOIN:', error);
         });
-        res.json(usuarios);
     }
     catch (error) {
         console.log(error);

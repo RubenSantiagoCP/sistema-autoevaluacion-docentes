@@ -51,6 +51,7 @@ const Usuario = connection_1.default.define('usuario', {
 }, {
     createdAt: false, // Para no agregar las columnas a la base de datos
     updatedAt: false, // Para no agregar las columnas a la base de datos
-    freezeTableName: true // El mismo nombre del  modelo al de la base de datos
+    freezeTableName: true, // El mismo nombre del  modelo al de la base de datos
+    modelName: 'usuario'
 });
 exports.default = Usuario;

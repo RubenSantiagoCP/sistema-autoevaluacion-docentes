@@ -7,18 +7,20 @@ import bcrypt from 'bcrypt';
 export const getUsuarioDetallado = async (req: Request, res: Response) => {
     try{
         const usuarios = await Usuario.findAll({
-            include: [
-                {
-                    model: UserRol,
-                    as: 'userol',
-                },
-                {
-                    model: Evaluacion,
-                    as: 'evaluacion',
-                },
-            ],
-        });
-    res.json(usuarios);
+            include: [{
+              model: UserRol,
+              include: [{
+                model: Evaluacion,
+              }]
+            }],
+          })
+            .then((usuarios) => {
+              res.json(usuarios);   
+            })
+            .catch((error) => {
+              console.error('Error al realizar INNER JOIN:', error);
+            });
+          
     }catch(error){
         console.log(error);
         res.json({

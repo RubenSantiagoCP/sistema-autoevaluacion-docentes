@@ -2,6 +2,7 @@ import { DataTypes, Model } from 'sequelize' // Para el tipo de datos
 import db from '../db/connection'; // Conexion sequalize
 
 // Definir el modelo usuario que representa la tabla en la base de datos
+
 class UsuarioModel extends Model {
     // Definición de propiedades del modelo
     public USU_ID!: number;
@@ -17,7 +18,6 @@ class UsuarioModel extends Model {
     public USU_ESTADO!: number;
     public USU_TIPOUSUARIO!: number; //
   }
-
 const Usuario = db.define<UsuarioModel>('usuario', {
     USU_ID: {
         type: DataTypes.INTEGER,
@@ -61,7 +61,8 @@ const Usuario = db.define<UsuarioModel>('usuario', {
 }, {
     createdAt: false, // Para no agregar las columnas a la base de datos
     updatedAt: false, // Para no agregar las columnas a la base de datos
-    freezeTableName: true // El mismo nombre del  modelo al de la base de datos
+    freezeTableName: true, // El mismo nombre del  modelo al de la base de datos
+    modelName: 'usuario'
+    
 });
-
 export default Usuario;
