@@ -4,6 +4,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { isPlatformBrowser } from '@angular/common'; 
 import { Usuario } from '../../interfaces/sesion';
+import { UsuarioDetallado } from '../../interfaces/usuarioDetallado';
 @Injectable({
   providedIn: 'root'
 })
