@@ -40,7 +40,9 @@ export class SelectPeriodoComponent {
       nuevaRuta = '/decano/modulo/coordinador'; // Modifica según tu estructura de rutas
     } else if (rutaActual === 'revisar') {
       nuevaRuta = '/decano/revisar/items'; // Modifica según tu estructura de rutas
-    } else {
+    } else if (rutaActual === 'reporte') { 
+      nuevaRuta = '/decano/reporte/items'; // Modifica según tu estructura de rutas
+     } else {
       nuevaRuta = '/docente'; // Ruta por defecto si no estás en una ruta específica
     }
 

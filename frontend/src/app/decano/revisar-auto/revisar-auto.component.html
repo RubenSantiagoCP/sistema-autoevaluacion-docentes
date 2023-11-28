@@ -1,1 +1,104 @@
-<p>revisar-auto works!</p>
+<app-navbar class="componente-superior"></app-navbar>
+<section>
+    <div class="container form-box">
+        <h1 class="title">
+            Revisar autoevaluaciones
+        </h1>
+        <div class="botones">
+            <button class="btn" (click)="onButtonClick(1)">
+                Evaluaciones terminadas
+            </button>
+            <button class="btn" (click)="onButtonClick(2)">
+                Evaluaciones no terminadas
+            </button>
+            <button class="btn" (click)="sendEmailsToDisplayedTeachers()">
+                Enviar notificaciones
+            </button>
+        </div>
+
+        <div class="contenido">
+            <table class="table" *ngIf="lstDocentesMostrados.length > 0">
+                <thead class="titulosT">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Tipo de docente</th>
+                        <th scope="col">Detalles</th>
+                    </tr>
+                </thead>
+                <tbody class="cuerpoT">
+                    <tr *ngFor="let docente of lstDocentesMostrados; let i = index">
+                        <td>{{docente.USR_IDENTIFICACION}}</td>
+                        <td>{{docente.USU_NOMBRE}}</td>
+                        <td>{{docente.USU_TIPOUSUARIO}}</td>
+                        <td>
+                            <div class="operaciones">
+                                <button type="button" class="btn" (click)="mostrarTablas(i)">
+                                    <i class="bi bi-plus-circle"></i>
+                                </button>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div *ngIf="tablasVisibles[i]" class="row">
+                                <div class="container-informacion-rows"
+                                    *ngFor="let item of infoEvaluaciones(docente?.userols?.[0])">
+                                    <div class="tabla col-md-6">
+                                        <table class="table table-datos-adicionales">
+                                            <tr>
+                                                <td class="columnaTD">Tipo labor</td>
+                                                <td class="infoPrincipal">
+                                                    {{obtenerInfoTipoLabor(obtenerInfoLabor(item.LAB_ID).TL_ID)?.TL_DESCRIPCION}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="columnaTD">Horas</td>
+                                                <td class="infoPrincipal">{{obtenerInfoLabor(item.LAB_ID).LAB_HORAS}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="columnaTD">Descripción</td>
+                                                <td class="infoPrincipal">Ingenieria de Sistemas Obligatoria 2023</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="tabla col-md-6">
+                                        <table class="table table-datos-adicionales">
+                                            <tr>
+                                                <td class="columnaTD">Fecha de Inicio</td>
+                                                <td class="infoPrincipal">{{periodo?.PER_FECHAINICIO |
+                                                    date:'yyyy-MM-dd'}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="columnaTD">Fecha Fin</td>
+                                                <td class="infoPrincipal">{{periodo?.PER_FECHAFIN | date:'yyyy-MM-dd'}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="columnaTD">Resultados</td>
+                                                <td class="infoPrincipal">{{item.EVA_RESULTADO}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="columnaTD">Evaluación</td>
+                                                <td class="infoPrincipal">{{item.EVA_PUNTAJE}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <hr style="color: white;">
+
+                                </div>
+                                <button type="button" class="btn btn-secondary"
+                                    (click)="ocultarTablas(i)">Ocultar</button>
+                            </div>
+
+
+
+
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

@@ -1,1 +1,36 @@
-<p>reporte works!</p>
+<app-navbar class="componente-superior"></app-navbar>
+
+<section>
+  <div class="container">
+    <div class="form-box">
+      <div class="titulo">
+        <h2>Reporte de autoevaluaciones</h2>
+        <hr>
+      </div>
+  
+
+      <table class="table table-sm">
+        <thead class="titulosT">
+          <tr>
+            <th>Nombre docente</th>
+            <th>Identificación</th>
+            <th>Rol</th>
+            <th>Terminadas</th>
+            <th>No terminadas</th>
+            <th>Porcentaje</th>
+          </tr>
+        </thead>
+        <tbody class="cuerpoT">
+          <tr *ngFor="let reporte of lstReportes">
+            <td>{{ reporte.nombreUsu }}</td>
+            <td>{{ reporte.idUsuario }}</td>
+            <td>{{ reporte.rolUsuario }}</td>
+            <td>{{ reporte.evaluacionTerminada }}</td>
+            <td>{{ reporte.evaluacionNoTerminada }}</td>
+            <td>{{porcentaje(reporte)}} %</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

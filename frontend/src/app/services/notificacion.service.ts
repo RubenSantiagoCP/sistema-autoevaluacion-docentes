@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { UserNotificacion } from '../../interfaces/usunot';
+import { UserNotificacion, Usunot } from '../../interfaces/usunot';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class NotificacionService {
       catchError(this.handleError)
     )
   }
-  createNotificacion(notificacion: UserNotificacion){
+  createNotificacion(notificacion?: Usunot){
     return this.http.post(environment.myAppUrl+this.myApiUrl, notificacion).pipe(
       catchError(this.handleError)
     )

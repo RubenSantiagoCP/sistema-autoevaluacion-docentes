@@ -3,6 +3,7 @@ import { SesionService } from '../../services/sesion.service';
 import { Router } from '@angular/router';
 import { NotificacionService } from '../../services/notificacion.service';
 import { Usunot } from '../../../interfaces/usunot';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,7 @@ export class NavbarComponent implements OnInit{
   data_user?:any = '';
   notificaciones:any[] = [];
 
-  constructor(private sesionService:SesionService, private router:Router, private notificacionService:NotificacionService){
+  constructor(private sesionService:SesionService, private router:Router, private cookieService:CookieService, private notificacionService:NotificacionService){
     this.ngOnInit();
     this.cargarNotificaciones();
   }
@@ -27,9 +28,9 @@ export class NavbarComponent implements OnInit{
     });
     
   }
-
   setNotificaciones(){
     this.notificaciones_active = !this.notificaciones_active; 
+    this.cargarNotificaciones();
   }
 
   ngOnInit(){

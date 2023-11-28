@@ -5,7 +5,7 @@ import { UserService } from '../../services/userDetallado.service';
 import { EvaluacionService } from '../../services/evaluacion.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioDetallado } from '../../../interfaces/usuarioDetallado';
-import { UserNotificacion } from '../../../interfaces/usunot';
+import { UserNotificacion, Usunot } from '../../../interfaces/usunot';
 import { PeriodoService } from '../../services/periodo.service';
 
 import { NotificacionService } from '../../services/notificacion.service';
@@ -19,6 +19,8 @@ import { UserolService } from '../../services/userol.service';
 import { Userol } from '../../../interfaces/usuarioDetallado';
 import { Usuario } from '../../../interfaces/sesion';
 import { info } from 'console';
+import { subscribe } from 'diagnostics_channel';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -48,7 +50,8 @@ export class RevisarAutoComponent implements OnInit {
     private docenteService: DocenteService,
     private router: Router,
     private evaluacionService: EvaluacionService,
-    private notificacionService: NotificacionService;
+    private notificacionService: NotificacionService,
+    private toastr: ToastrService
   ) {
     this.ngOnInit();
     this.periodo = evaluacionService.getPeriodo();
@@ -143,15 +146,32 @@ export class RevisarAutoComponent implements OnInit {
   }
 
   sendEmailsToDisplayedTeachers() {
-    if (
+    if ( 
       Array.isArray(this.lstDocentesMostrados) &&
       this.lstDocentesMostrados.length > 0
     ) {
+      this.toastr.success('Correos de notificación enviado.');
       this.emailService
         .sendEmailsToProfessors(this.lstDocentesMostrados)
         .subscribe({
-          next: () =>
-            console.log('Correos enviados con éxito a todos los docentes'),
+          next: () => {
+            console.log('Correos enviados con éxito a todos los docentes');
+           for(let docente of this.lstDocentesMostrados){
+            let fecha:Date = new Date();
+            let notificacion:Usunot = {
+              NOT_ID: 1,
+              USU_ID: docente.USU_ID || 1,
+              USUNOT_ESTADO: 1,
+              USUNOT_FECHA: fecha
+            }
+            this.notificacionService.createNotificacion(notificacion).subscribe({
+              next: () =>{
+
+              }
+            })}
+           },
+           
+            
           error: (error) => console.error('Error al enviar correos', error),
         });
     } else {

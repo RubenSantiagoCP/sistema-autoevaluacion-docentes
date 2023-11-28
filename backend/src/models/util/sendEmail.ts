@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
 });
 
 export const sendEmailToProfessor = async (user: any) => {
-  let content: string = `<h1>Se encuentra activa la autoevaluación</h1><br><p>Para realizarla ingrese al siguiente link:</p><br><a href='${URL}autoevaluaciones/login'>Realizar autoevaluación</a>`;
+  let content: string = `<h1>Se encuentra activa la autoevaluación</h1><br><p>Se han actualizado las auto evaluaciones</p>`;
   console.log("Correo enviado: " + user.USU_CORREO);
   let mailOptions = {
     from: "autoevaluacionesunicauca@gmail.com",

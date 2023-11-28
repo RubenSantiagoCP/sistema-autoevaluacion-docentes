@@ -21,12 +21,10 @@ const Notificacion = connection_1.default.define('notificacion', {
         type: sequelize_1.DataTypes.STRING
     }
 }, {
-
-    createdAt: false, // Para no agregar las columnas a la base de datos
-    updatedAt: false, // Para no agregar las columnas a la base de datos
-    freezeTableName: true, // El mismo nombre del  modelo al de la base de datos
+    createdAt: false,
+    updatedAt: false,
+    freezeTableName: true,
     modelName: 'notificacion'
-
 });
 Notificacion.hasMany(usunot_1.default, { foreignKey: 'NOT_ID' });
 usunot_1.default.belongsTo(Notificacion, { foreignKey: 'NOT_ID' });

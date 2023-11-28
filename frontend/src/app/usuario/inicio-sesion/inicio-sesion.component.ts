@@ -53,12 +53,12 @@ export class InicioSesionComponent {
         }
       },
       complete: () =>{
-        if(this.userData1?.tipoUsu===1 && this.userData1?.estado==1){
+        if(this.userData1?.tipoUsu===1 && this.userData1?.estado===1){
           this.router.navigateByUrl("/coordinador");
           console.log("entro");
-        }else if(this.userData1?.tipoUsu===2 && this.userData1?.estado==1){
+        }else if(this.userData1?.tipoUsu===2 && this.userData1?.estado===1){
           this.router.navigateByUrl("/docente");
-        }else if(this.userData1?.tipoUsu===3 && this.userData1?.estado==1){
+        }else if(this.userData1?.tipoUsu===3 && this.userData1?.estado===1){
           this.router.navigateByUrl("/decano");
         }else{
           this.usuarioActivo = false;

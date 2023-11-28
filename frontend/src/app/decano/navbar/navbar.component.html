@@ -45,23 +45,22 @@
       <hr>
     </div>
   
-    <div class="contenido">
+    <div class="contenido" *ngFor="let not of notificaciones">
       <div class="icon-perfil">
-        <img src="../../../assets/images/info-personal/francisco obando.jpg" alt="img-perfil">
+        <img src="../../../assets/images/info-personal/149071.png" alt="img-perfil">
       </div>
   
       <div class="informacion">
-        <h5>Francisco Obando</h5>
+        <h5>Coordinador</h5>
         <p class="descripcion-notificacion">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum.
+          {{not.notificacion.NOT_DESCRIPCION}}
         </p>
         <p class="not-fecha">
-          21/11/2023
+          {{not.NOT_FECHA | date:'yyyy-MM-dd'}}
         </p>
       </div>
     </div>
   </div>
-  
   <script>
     // Mueve el script al final del body
     document.addEventListener("DOMContentLoaded", function() {

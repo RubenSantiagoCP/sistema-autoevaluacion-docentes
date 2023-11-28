@@ -16,6 +16,7 @@ import { ReporteComponent } from './reporte/reporte.component';
 import { InfoDocenteComponent } from './info-docente/info-docente.component';
 import { VigilanteCoordGuard } from '../guards/vigilante-coord.guard';
 import { GesPeriodoComponent } from './ges.periodo/ges.periodo.component';
+import { RealizarAutoComponent } from './realizar-auto/realizar-auto.component';
 
 const routes: Routes = [
   {path: '', component: PrincipalComponent ,  canActivate:[VigilanteCoordGuard]},
@@ -35,7 +36,9 @@ const routes: Routes = [
   {path: 'revisar/items', component: RevisarAutoComponent,  canActivate:[VigilanteCoordGuard]},
   {path: 'revisar/items/item', component: RevisarItemsComponent,  canActivate:[VigilanteCoordGuard]},
   {path: 'revisar', component: ModuloAutoevComponent,  canActivate:[VigilanteCoordGuard]},
-  {path: 'periodos', component: GesPeriodoComponent,  canActivate:[VigilanteCoordGuard]}
+  {path: 'periodos', component: GesPeriodoComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'autoevaluacion', component: ModuloAutoevComponent,  canActivate:[VigilanteCoordGuard]},
+  {path: 'autoevaluacion/realizar', component: RealizarAutoComponent,  canActivate:[VigilanteCoordGuard]}
 ];
 
 @NgModule({

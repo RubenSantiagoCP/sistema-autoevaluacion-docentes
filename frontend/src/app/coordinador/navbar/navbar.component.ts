@@ -32,6 +32,7 @@ export class NavbarComponent implements OnInit{
 
   setNotificaciones(){
     this.notificaciones_active = !this.notificaciones_active; 
+    this.cargarNotificaciones();
   }
 
   ngOnInit(){
